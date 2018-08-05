@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Commands/Commands.iml" filepath="$PROJECT_DIR$/Commands/Commands.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PluginLoader.iml" filepath="$PROJECT_DIR$/PluginLoader.iml" />
+    </modules>
+  </component>
+</project>
