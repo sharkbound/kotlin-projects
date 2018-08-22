@@ -1,0 +1,10 @@
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<BorderPane fx:controller="Controller"
+            xmlns:fx="http://javafx.com/fxml">
+
+    <HBox alignment="BOTTOM_CENTER">
+        <TextField fx:id="text" onKeyPressed="#textFieldKeyPress" alignment="BOTTOM_CENTER"/>
+    </HBox>
+</BorderPane>
