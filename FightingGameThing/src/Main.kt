@@ -9,6 +9,4 @@ fun main(args: Array<String>) {
 
     val fight = Fight(f1, f2)
     println(fight.fight())
-    println(fight.fight())
-    println(fight.fight())
 }
