@@ -45,25 +45,3 @@ class Fighter(override val name: String,
     override fun toString() = "Fighter { $name $hp }"
 }
 
-class Dummy : Entity<Dummy> {
-    override val name: String
-        get() = "Dummy"
-
-    override var baseDefence: Double
-        get() = -1.0
-        set(value) {}
-
-    override var baseAttack: Double
-        get() = -1.0
-        set(value) {}
-
-    override var hp: Double
-        get() = -1.0
-        set(value) {}
-
-    override var speed: Double
-        get() = -1.0
-        set(value) {}
-
-    override fun copy(): Dummy = Dummy()
-}
