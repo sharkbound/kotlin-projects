@@ -1,7 +1,7 @@
 class Deck(var owner: String) {
     val cards = arrayListOf<Card>()
     val totalValue get() = cards.sumBy { it.value }
-    val hasBusted get() = totalValue > 21
+    val busted get() = totalValue > 21
 
     fun fill(): Deck {
         cards.clear()
@@ -16,13 +16,12 @@ class Deck(var owner: String) {
         return this
     }
 
-    fun pop(): Card = cards.pop()
-
     fun hit(drawDeck: Deck) {
-        cards.add(drawDeck.pop())
+        cards.add(drawDeck.cards.pop())
     }
 
     fun show(skipLast: Boolean = true) {
-        println(cards.joinToString(", "))
+        val printingCards = if (skipLast) cards.take(cards.lastIndex) else cards
+        println(printingCards.joinToString(", "))
     }
 }

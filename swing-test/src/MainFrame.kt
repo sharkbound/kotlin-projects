@@ -15,17 +15,14 @@ class MainFrame(title: String = "Main Window") : JFrame(title) {
         size = dim
         defaultCloseOperation = JFrame.EXIT_ON_CLOSE
 
-        addListeners()
         addElements()
+        addListeners()
         configureElements()
 
         isVisible = true
     }
 
     private fun configureElements() {
-        clickMe.addActionListener() {
-            clickMe.text = (++count).toString()
-        }
         clickMe.size = Dimension(100, 1000)
     }
 
@@ -34,5 +31,8 @@ class MainFrame(title: String = "Main Window") : JFrame(title) {
     }
 
     private fun addListeners() {
+        clickMe.addActionListener() {
+            clickMe.text = (++count).toString()
+        }
     }
 }
