@@ -1,0 +1,1 @@
+val String.isRegisteredCommand get() = toLowerCase() in commands
