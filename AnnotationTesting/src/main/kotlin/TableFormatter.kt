@@ -7,7 +7,7 @@ fun main() {
 
     val headers = listOf<String>()
 
-    println(format(listOf("name", "age", "interests", "What?"), data))
+    println(format(listOf("name", "age", "interests"), data))
 }
 
 const val SPACER = "  "
@@ -35,7 +35,7 @@ fun format(headers: List<String>, rows: List<Row>): String = buildString {
     for (row in rows) {
         append(buildString {
             for (i in 0 until maxRowCount) {
-                append(row.data.getOrElse(i) { "" }.padEnd(maxRowLengths.getValue(i)))
+                append(row.data.getOrElse(i) { "" }.padEnd(maxRowLengths[i] ?: maxRowLengths.values.max() ?: 0))
                 append(SPACER)
             }
         }.trim())
