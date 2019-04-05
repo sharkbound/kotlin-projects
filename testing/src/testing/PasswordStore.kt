@@ -1,3 +1,5 @@
+package testing
+
 class MissingValueException(override val message: String) : Exception(message)
 
 class Store<TKey, TValue>(vararg _pairs: Pair<TKey, TValue>) {

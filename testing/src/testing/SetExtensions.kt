@@ -1,3 +1,5 @@
+package testing
+
 infix fun <T> Set<T>.xor(other: Set<T>): Set<T> {
     return (this + other)
         .asSequence()
