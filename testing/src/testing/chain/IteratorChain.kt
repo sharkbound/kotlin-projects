@@ -1,4 +1,4 @@
-package testing
+package testing.chain
 
 class IteratorChain<T>(iterables: List<Iterable<T>>) : Iterator<T> {
     private val iterator = kotlin.sequences.iterator {

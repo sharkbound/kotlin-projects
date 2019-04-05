@@ -1,4 +1,4 @@
-package testing
+package testing.chain
 
 class Chain<T>(iterables: List<Iterable<T>>) : Iterable<T> {
     private val values = iterables.flatten()
