@@ -1,8 +1,20 @@
 package testing
 
-import testing.chain.Chain
+import testing.chain.ChainMap
 
 fun main() {
-    val itChain = Chain(listOf(1..10, 11..20)) + (1..10) + listOf("LOL", -1, .4)
-    println(itChain)
+    val map = ChainMap(
+        listOf(
+            mapOf(
+                "times" to 1,
+                "age" to 17
+            ),
+            mapOf(
+                "name" to 1912931028,
+                "love" to -1
+            )
+        )
+    )
+
+    println(map["love1"])
 }
