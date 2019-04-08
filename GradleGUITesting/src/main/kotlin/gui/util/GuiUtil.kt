@@ -1,4 +1,4 @@
-package gui
+package gui.util
 
 import java.awt.Point
 import java.awt.Toolkit
