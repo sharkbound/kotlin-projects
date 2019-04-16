@@ -8,8 +8,7 @@ import javax.swing.JFrame
 class KeyBoardQuitListener(
     private val frame: JFrame,
     private val exitPredicate: KeyEvent.() -> Boolean = { keyCode == KeyEvent.VK_ESCAPE }
-) :
-    KeyListener {
+) : KeyListener {
     override fun keyTyped(e: KeyEvent?) {
     }
 
