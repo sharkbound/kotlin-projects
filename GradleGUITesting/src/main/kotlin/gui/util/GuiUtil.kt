@@ -1,6 +1,8 @@
 package gui.util
 
+import gui.listeners.KeyboardQuitListener
 import java.awt.*
+import javax.swing.JComponent
 import javax.swing.JFrame
 
 fun buildEmptyFrame(title: String, width: Int = 600, height: Int = 600): JFrame {
@@ -25,5 +27,24 @@ fun <T : Component> T.makeDark(): T {
 
 fun JFrame.exitOnClose(): JFrame {
     defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+    return this
+}
+
+fun GridBagConstraints.configure(
+    weightX: Double = 1.0,
+    weightY: Double = 1.0,
+    fill: Int = GridBagConstraints.BOTH,
+    x: Int = 0,
+    y: Int = 0
+): GridBagConstraints = apply {
+    weightx = weightX
+    weighty = weightY
+    this.fill = fill
+    gridx = x
+    gridy = y
+}
+
+fun <T : JComponent> T.addKeyboardQuitListener(quitFrame: JFrame): T {
+    addKeyListener(KeyboardQuitListener(quitFrame))
     return this
 }

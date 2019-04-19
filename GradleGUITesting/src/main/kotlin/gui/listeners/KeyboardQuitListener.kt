@@ -3,19 +3,19 @@ package gui.listeners
 import close
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
+import javax.swing.JComponent
 import javax.swing.JFrame
 
-class KeyBoardQuitListener(
-    private val frame: JFrame,
+class KeyboardQuitListener(
+    private val quitFrame: JFrame,
     private val exitPredicate: KeyEvent.() -> Boolean = { keyCode == KeyEvent.VK_ESCAPE }
 ) : KeyListener {
     override fun keyTyped(e: KeyEvent?) {
     }
 
     override fun keyPressed(e: KeyEvent?) {
-        if (e == null) return
-        if (e.exitPredicate()) {
-            frame.close()
+        if (e?.exitPredicate() == true) {
+            quitFrame.close()
         }
     }
 

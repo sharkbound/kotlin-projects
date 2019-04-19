@@ -1,11 +1,15 @@
 package gui.data
 
 import java.awt.Color
+import java.awt.event.KeyEvent
 import java.nio.file.Path
+import javax.swing.KeyStroke
 
 object Globals {
     val dataConfigPath = Path.of("configs/test.json")!!
     val dataConfigPathStr = dataConfigPath.toString()
+    val escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE.toChar())
+    val quitEventMapName = "close_app"
 }
 
 object Colors {

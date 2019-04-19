@@ -4,4 +4,3 @@ fun main() {
     val frame = MainFrame()
     frame.run()
 }
-
