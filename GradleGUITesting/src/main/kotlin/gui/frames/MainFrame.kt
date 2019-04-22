@@ -36,8 +36,8 @@ class MainFrame(w: Int = 600, h: Int = 600, title: String = "Hello World!") : JF
     private fun configureComponents() {
         textField.border = EmptyBorder(0, 10, 0, 10)
         textField.isEditable = false
-        textField.addKeyboardQuitListener(this)
-        inputField.addKeyboardQuitListener(this)
+//        textField.addKeyboardQuitListener(this)
+//        inputField.addKeyboardQuitListener(this)
     }
 
     private fun addAllComponentListeners() {
@@ -55,7 +55,7 @@ class MainFrame(w: Int = 600, h: Int = 600, title: String = "Hello World!") : JF
         contentPanel.add(textField, GridBagConstraints().configure())
         contentPanel.add(
             inputField,
-            GridBagConstraints().apply { weightx = 1.0; weightx = 0.0; gridy = 1; fill = GridBagConstraints.HORIZONTAL }
+            GridBagConstraints().apply { weightx = 1.0; weightx = .0; gridy = 1; fill = GridBagConstraints.HORIZONTAL }
         )
         add(contentPanel, GridBagConstraints().apply { weightx = 1.0; weighty = 1.0; fill = GridBagConstraints.BOTH })
     }
