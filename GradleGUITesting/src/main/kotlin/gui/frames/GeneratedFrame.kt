@@ -20,8 +20,8 @@ class GeneratedFrame : JFrame() {
 
     private val contentPane: JPanel
     private val textField: JTextField
-    private val textField_1: JTextField
-    private val textField_2: JTextField
+    private val textField1: JTextField
+    private val textField2: JTextField
 
     /**
      * Create the frame.
@@ -110,15 +110,15 @@ class GeneratedFrame : JFrame() {
         gbc_btnSelectImage.gridy = 2
         panel.add(btnSelectImage, gbc_btnSelectImage)
 
-        textField_1 = JTextField()
+        textField1 = JTextField()
         val gbc_textField_1 = GridBagConstraints()
         gbc_textField_1.insets = Insets(0, 0, 5, 0)
         gbc_textField_1.gridwidth = 5
         gbc_textField_1.fill = GridBagConstraints.HORIZONTAL
         gbc_textField_1.gridx = 2
         gbc_textField_1.gridy = 2
-        panel.add(textField_1, gbc_textField_1)
-        textField_1.columns = 10
+        panel.add(textField1, gbc_textField_1)
+        textField1.columns = 10
 
         val lblNewLabel_1 = JLabel("price")
         lblNewLabel_1.horizontalAlignment = SwingConstants.CENTER
@@ -129,15 +129,15 @@ class GeneratedFrame : JFrame() {
         gbc_lblNewLabel_1.gridy = 3
         panel.add(lblNewLabel_1, gbc_lblNewLabel_1)
 
-        textField_2 = JTextField()
+        textField2 = JTextField()
         val gbc_textField_2 = GridBagConstraints()
         gbc_textField_2.gridwidth = 6
         gbc_textField_2.insets = Insets(0, 0, 5, 5)
         gbc_textField_2.fill = GridBagConstraints.HORIZONTAL
         gbc_textField_2.gridx = 1
         gbc_textField_2.gridy = 3
-        panel.add(textField_2, gbc_textField_2)
-        textField_2.columns = 10
+        panel.add(textField2, gbc_textField_2)
+        textField2.columns = 10
 
         val panel_1 = JPanel()
         rightPanel.add(panel_1, BorderLayout.SOUTH)

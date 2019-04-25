@@ -7,7 +7,7 @@ import java.awt.Dimension
 import java.awt.FlowLayout
 import javax.swing.*
 
-class TestingFrame : JFrame() {
+class BorderLayoutTestingFrame : JFrame() {
     private val nameField = JTextField()
     private val emailField = JTextField()
     private val doneButton = JButton("done")
@@ -33,7 +33,7 @@ class TestingFrame : JFrame() {
 
         panel = JPanel()
         panel.layout = FlowLayout(0)
-        panel.add( BorderLayout.SOUTH, doneButton)
+        panel.add(BorderLayout.SOUTH, doneButton)
         add(BorderLayout.CENTER, panel)
 
         pack()
@@ -41,7 +41,7 @@ class TestingFrame : JFrame() {
 }
 
 fun main() {
-    val frame = TestingFrame()
+    val frame = BorderLayoutTestingFrame()
     frame.exitOnClose()
     frame.location = centerJFrame(frame)
     frame.isVisible = true

@@ -2,21 +2,21 @@ package gui.frames
 
 import close
 import gui.data.Globals
-import gui.extensions.times
-import gui.listeners.KeyboardQuitListener
-import gui.util.*
-import java.awt.Font
+import gui.util.configure
+import gui.util.exitOnClose
+import gui.util.r
+import gui.util.randomColor
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
-import java.awt.event.*
+import java.awt.event.ActionEvent
+import java.awt.event.MouseAdapter
+import java.awt.event.MouseEvent
 import javax.swing.*
 import javax.swing.border.EmptyBorder
 import javax.swing.event.DocumentEvent
 import javax.swing.event.DocumentListener
-import javax.swing.text.DefaultStyledDocument
 import javax.swing.text.SimpleAttributeSet
 import javax.swing.text.StyleConstants
-import javax.swing.text.StyleContext
 
 class MainFrame(w: Int = 600, h: Int = 600, title: String = "ColorNote++") : JFrame(title) {
     private val inputField = JTextField()
