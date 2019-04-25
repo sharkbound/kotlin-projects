@@ -84,14 +84,10 @@ class MainFrame(w: Int = 600, h: Int = 600, title: String = "ColorNote++") : JFr
                                 StyleConstants.setUnderline(set, r.nextBoolean())
                             }, true
                         )
-
                     }
                 }
-
             }
-
         })
-
     }
 
     private fun addAllComponents() {
