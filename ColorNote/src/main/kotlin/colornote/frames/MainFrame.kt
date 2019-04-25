@@ -98,6 +98,7 @@ class MainFrame(w: Int = 600, h: Int = 600, title: String = "ColorNote++") : JFr
             GridBagConstraints().apply { weightx = 1.0; weightx = .0; gridy = 1; fill = GridBagConstraints.HORIZONTAL }
         )
 
+
         textField.addMouseListener(object : MouseAdapter() {
             override fun mousePressed(e: MouseEvent?) {
                 requireNotNull(e)
