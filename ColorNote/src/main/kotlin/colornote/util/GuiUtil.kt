@@ -1,6 +1,6 @@
-package gui.util
+package colornote.util
 
-import gui.listeners.KeyboardQuitListener
+import colornote.listeners.KeyboardQuitListener
 import java.awt.*
 import javax.swing.JComponent
 import javax.swing.JFrame

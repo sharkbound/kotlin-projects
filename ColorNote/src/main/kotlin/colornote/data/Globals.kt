@@ -1,4 +1,4 @@
-package gui.data
+package colornote.data
 
 import java.awt.Color
 import java.awt.event.KeyEvent

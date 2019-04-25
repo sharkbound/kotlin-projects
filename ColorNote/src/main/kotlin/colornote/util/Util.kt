@@ -1,4 +1,4 @@
-package gui.util
+package colornote.util
 
 import java.awt.Color
 import java.util.concurrent.ThreadLocalRandom

@@ -1,11 +1,11 @@
-package gui.frames
+package colornote.frames
 
 import close
-import gui.data.Globals
-import gui.util.configure
-import gui.util.exitOnClose
-import gui.util.r
-import gui.util.randomColor
+import colornote.data.Globals
+import colornote.util.configure
+import colornote.util.exitOnClose
+import colornote.util.r
+import colornote.util.randomColor
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import java.awt.event.ActionEvent
@@ -95,14 +95,12 @@ class MainFrame(w: Int = 600, h: Int = 600, title: String = "ColorNote++") : JFr
     }
 
     private fun addAllComponents() {
+        add(contentPanel, GridBagConstraints().apply { weightx = 1.0; weighty = 1.0; fill = GridBagConstraints.BOTH })
         contentPanel.add(JScrollPane(textField), GridBagConstraints().configure())
-
         contentPanel.add(
             inputField,
             GridBagConstraints().apply { weightx = 1.0; weightx = .0; gridy = 1; fill = GridBagConstraints.HORIZONTAL }
         )
-
-        add(contentPanel, GridBagConstraints().apply { weightx = 1.0; weighty = 1.0; fill = GridBagConstraints.BOTH })
 
         textField.addMouseListener(object : MouseAdapter() {
             override fun mousePressed(e: MouseEvent?) {

@@ -1,9 +1,8 @@
-package gui.listeners
+package colornote.listeners
 
 import close
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
-import javax.swing.JComponent
 import javax.swing.JFrame
 
 class KeyboardQuitListener(
