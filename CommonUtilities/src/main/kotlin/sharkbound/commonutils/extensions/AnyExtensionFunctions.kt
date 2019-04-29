@@ -1,4 +1,4 @@
-package sharkbound.commonutils
+package sharkbound.commonutils.extensions
 
 /**
  * if the receiver is null, the block is called

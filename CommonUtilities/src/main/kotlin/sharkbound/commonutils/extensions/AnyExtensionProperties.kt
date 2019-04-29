@@ -1,4 +1,4 @@
-package sharkbound.commonutils
+package sharkbound.commonutils.extensions
 
 /**
  * returns a boolean indicating if the receiver is null

@@ -1,4 +1,4 @@
-package sharkbound.commonutils
+package sharkbound.commonutils.extensions
 
 /**
  *  ensures a key exists before doing any operations
