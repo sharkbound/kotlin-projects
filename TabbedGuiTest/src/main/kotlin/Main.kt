@@ -20,12 +20,22 @@ fun main() {
 private fun MainForm.addEventListeners() {
     colorBar.addMouseListener(object : MouseAdapter() {
         override fun mouseClicked(e: MouseEvent?) {
-            colorBar.background = JColorChooser.showDialog(colorBar, "Choose a new color", Color.red)
+            colorBar.background = JColorChooser.showDialog(null, "Choose a color", Color.red)
         }
     })
 
     addButton.addActionListener {
+        parseSize(itemSizeInput.text,
+            onSuccess = {
+                itemPane.add(ItemPane(text = itemNameInput.text, color = colorBar.background, w = width, h = height))
+                itemNameInput.text = ""
+                itemPane.repaint()
+                itemPane.revalidate()
+            },
+            onFailure = {
 
+            }
+        )
     }
 }
 
