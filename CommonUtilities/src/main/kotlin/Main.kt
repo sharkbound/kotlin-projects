@@ -1,7 +1,9 @@
 @file:JvmName("KotlinCommonUtilTestingMain")
 
-private fun main() {
+import sharkbound.commonutils.extensions.ifKeyAbsent
 
+private fun main() {
+    val m = mutableMapOf<String, Int>()
 }
 
 

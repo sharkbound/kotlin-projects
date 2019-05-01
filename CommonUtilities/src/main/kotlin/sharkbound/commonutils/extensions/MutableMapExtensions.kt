@@ -22,3 +22,39 @@ inline fun <K, V> MutableMap<K, V>.ensureKey(
         put(key, ifPresent(getValue(key)))
     }
 }
+
+/**
+ * takes a key and [block], if the key is present the block is called with the value associated with the key as its parameter,
+ *  if the [block] returns a non-null value, the key is set to the [block]'s return value
+ *
+ *  @param key the key to use
+ *  @param block a function that takes [V] as its parameter, and returns a nullable [V]
+ */
+inline fun <K, V> MutableMap<K, V>.ifKeyPresent(key: K, block: (V) -> V?) {
+    if (key !in this) return
+    this[key] = block(getValue(key)) ?: return
+}
+
+/**
+ * takes a key and [block], if the key is present the block is called with the value associated with the key as its receiver,
+ *  if the [block] returns a non-null value, the key is set to the [block]'s return value
+ *
+ *  @param key the key to use
+ *  @param block a function called with [V] as its receiver, and returns a nullable [V]
+ */
+inline fun <K, V> MutableMap<K, V>.useIfKeyPresent(key: K, block: V.() -> V?) {
+    if (key !in this) return
+    this[key] = getValue(key).block() ?: return
+}
+
+/**
+ * takes a key and [block], if the key is absent the block is called with the absent key as its parameter,
+ *  if the [block] returns a non-null value, the key is set to the [block]'s return value
+ *
+ *  @param key the key to use
+ *  @param block a function called with [K] as its parameter, and returns a nullable [V]
+ */
+inline fun <K, V> MutableMap<K, V>.ifKeyAbsent(key: K, block: (K) -> V?) {
+    if (key in this) return
+    this[key] = block(key) ?: return
+}
