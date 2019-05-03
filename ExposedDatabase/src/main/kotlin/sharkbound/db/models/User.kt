@@ -1,4 +1,4 @@
-package sharkbound.db
+package sharkbound.db.models
 
 import org.jetbrains.exposed.sql.Table
 
