@@ -43,3 +43,4 @@ ctrl + shift + alt + S      : open project specific settings
 ctrl + shift + A            : open action search (lets you find keybinding for actions, and let you text search for actions)
 alt + <number>              : jump to windows bound to that number, pressing again minimizes that window (ex: alt+1 jumps to project view)
 ctrl + ctrl                 : run anything (run configurations/gradle or maven task/executable in PATH/ect)
+ctrl + alt + shift + insert : create scratch file (temporary file to test code)
