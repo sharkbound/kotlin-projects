@@ -27,7 +27,8 @@ ctrl + shift + space        : open smart auto complete (displays items based on 
 ctrl + alt + space          : open class / global auto complete, pressing again will search static members in objects/classes
 alt + insert                : generate code
 ctrl + alt + insert         : new file in current directory
-                            :
+shift + f6                  : rename symbol/file/package/ect
+
 PROJECT VIEW
 alt + insert                : new file
 
