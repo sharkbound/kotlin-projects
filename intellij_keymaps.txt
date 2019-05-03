@@ -1,3 +1,6 @@
+ESSENTIAL
+alt + enter                 : quick action / fixes
+
 
 FORMATTING
 ctrl + alt + L              : auto format code
