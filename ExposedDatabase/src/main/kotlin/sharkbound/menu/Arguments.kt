@@ -1,6 +1,6 @@
 package sharkbound.menu
 
-class CallArgs(val args: List<String>) {
+class Arguments(val args: List<String>) {
     val length = args.size
 
     inline fun ifArgExist(index: Int, block: (String) -> Unit) {
@@ -18,4 +18,7 @@ class CallArgs(val args: List<String>) {
     inline fun safeArg(index: Int, default: () -> String): String = args.getOrElse(index) { default() }
 
     fun safeArg(index: Int, default: String): String = args.getOrElse(index) { default }
+    override fun toString(): String {
+        return "Arguments $args"
+    }
 }

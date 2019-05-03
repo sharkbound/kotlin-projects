@@ -19,6 +19,7 @@ dependencies {
     compile 'org.jetbrains.exposed:exposed:0.13.6'
     // NOTE: this connector jar is from MySQL community installer
     compile files("libs/mysql-connector-java-8.0.16.jar")
+    compile files("libs/CommonUtilities-1.0.jar")
 }
 
 compileKotlin {

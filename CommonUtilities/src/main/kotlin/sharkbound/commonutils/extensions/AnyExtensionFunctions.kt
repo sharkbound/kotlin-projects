@@ -21,3 +21,12 @@ inline fun <T> T?.ifNotNull(block: (T) -> Unit) {
         block(this)
     }
 }
+
+
+/**
+ * if the receiver is null, the [default] is called and its value is returned, else, [this] is returned
+ *
+ * @param default function that returns [T]
+ * @return [this] if [this] if not null, else the return value from [default]
+ */
+inline fun <T> T?.orDefault(default: () -> T) = this ?: default()

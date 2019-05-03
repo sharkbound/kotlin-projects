@@ -1,5 +1,7 @@
 package sharkbound.commonutils.extensions
 
+import sharkbound.commonutils.util.flatten
+
 /**
  *  XOR's both sets, removes elements present in both sets, adds elements in one set but not the other.
  *
@@ -24,7 +26,6 @@ infix fun <T> MutableSet<T>.xor(other: Set<T>) {
  * @return new set that contains elements that are in one set but not the other
  */
 infix fun <T> Set<T>.xor(other: Set<T>): Set<T> =
-    sharkbound.commonutils.util.flatten(this, other)
-        .asSequence()
+    flatten(this, other)
         .filter { (it in this) xor (it in other) }
         .toSet()

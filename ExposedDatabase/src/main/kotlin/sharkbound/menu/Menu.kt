@@ -1,5 +1,5 @@
 package sharkbound.menu
 
 open class Menu {
-    val options = mutableMapOf<String, >()
+    val options = mutableMapOf<String, MenuOption>()
 }
