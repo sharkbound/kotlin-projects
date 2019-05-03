@@ -1,43 +1,45 @@
 
 FORMATTING
-ctrl + alt + L      		: auto format code
-ctrl + alt + O      		: optimize imports (removes unused imports)
-								
+ctrl + alt + L              : auto format code
+ctrl + alt + O              : optimize imports (removes unused imports)
+                                
 INFO
-ctrl + P            		: view parameters and overloads for function (when cursor is inside of its ())
-ctrl + shift + P    		: view resulting type of a call chain where the cursor is
-ctrl + Q            		: view quick documentation
-ctrl + shift + I    		: view quick source (aka the the code itself where it is declared)
-ctrl + f12          		: view current file structure (also lets you jump to items in current file with filtering if you start typing)
-								
+ctrl + P                    : view parameters and overloads for function (when cursor is inside of its ())
+ctrl + shift + P            : view resulting type of a call chain where the cursor is
+ctrl + Q                    : view quick documentation
+ctrl + shift + I            : view quick source (aka the the code itself where it is declared)
+ctrl + f12                  : view current file structure (also lets you jump to items in current file with filtering if you start typing)
+                                
 WINDOWS
-ctrl + shift + f12  		: hide / show all open panels
-								
+ctrl + shift + f12          : hide / show all open panels
+                                
 RUNNING
-shift + f10         		: run last run configuration / file
-ctrl + shift + f10  		: run current file (if it has a valid entry point) 
+shift + f10                 : run last run configuration / file
+ctrl + shift + f10          : run current file (if it has a valid entry point) 
 shift + f9                  : debug last run configuration / file 
-								
+                                
 CODE                     
-ctrl + B            		: jump to source for symbol / function under cursor
-ctrl + LEFT CLICK   		: SAME AS CTRL + B
-alt + f7            		: view usages of the symbol / function under cursor
-ctrl + space        		: open auto complete
-ctrl + shift + space		: open smart auto complete (displays items based on current context)
-ctrl + alt + space   		: open class / global auto complete, pressing again will search static members in objects/classes
-                    		:
+ctrl + B                    : jump to source for symbol / function under cursor
+ctrl + LEFT CLICK           : SAME AS CTRL + B
+alt + f7                    : view usages of the symbol / function under cursor
+ctrl + space                : open auto complete
+ctrl + shift + space        : open smart auto complete (displays items based on current context)
+ctrl + alt + space          : open class / global auto complete, pressing again will search static members in objects/classes
+alt + insert                : generate code
+ctrl + alt + insert         : new file in current directory
+                            :
+PROJECT VIEW
+alt + insert                : new file
+
+NAVIGATION
+ctrl + N                    : search/jump-to class by name
+ctrl + shift + N            : search/jump-to file by name
+ctrl + shift + alt + N      : search/jump-to symbol by name (includes files/classes)
+shift + shift               : search everything (files/symbols/classes/actions/ect)
 
 IDE
-ctrl + alt + S      		: open settings
+ctrl + alt + S              : open settings
 ctrl + shift + alt + S      : open project specific settings
-ctrl + shift + A    		: open action search (lets you find keybinding for actions, and let you text search for actions)
-alt + <number>        		: jump to windows bound to that number, pressing again minimizes that window (ex: alt+1 jumps to project view)
-                    		:
-                    		:
-                    		:
-                    		:
-                    		:
-                    		:
-                    		:
-                    		:
-                    		:
+ctrl + shift + A            : open action search (lets you find keybinding for actions, and let you text search for actions)
+alt + <number>              : jump to windows bound to that number, pressing again minimizes that window (ex: alt+1 jumps to project view)
+ctrl + ctrl                 : run anything (run configurations/gradle or maven task/executable in PATH/ect)
