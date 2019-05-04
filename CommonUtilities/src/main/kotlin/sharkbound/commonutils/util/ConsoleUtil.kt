@@ -55,7 +55,7 @@ inline fun askFloat(prompt: String, predicate: (Float) -> Boolean = { true }): F
     }).toFloat()
 }
 
-/**
+/***
  * prompts the user for a [Long], reads from stdin, if the value passes the predicate check, the value is returned
  *
  * @param prompt the string to ask the user
@@ -66,4 +66,11 @@ inline fun askLong(prompt: String, predicate: (Long) -> Boolean = { true }): Lon
     return ask(prompt, predicate = {
         it.toLongOrNull()?.let(predicate) ?: false
     }).toLong()
+}
+
+/**
+ * waits for the user to press enter in the console
+ */
+fun pause() {
+    ask("press enter to continue")
 }
