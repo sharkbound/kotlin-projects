@@ -71,6 +71,10 @@ inline fun askLong(prompt: String, predicate: (Long) -> Boolean = { true }): Lon
 /**
  * waits for the user to press enter in the console
  */
-fun pause() {
-    ask("press enter to continue")
+fun pause(putEmptyLine: Boolean = true) {
+    var msg = "press enter to continue"
+    if (putEmptyLine) {
+        msg = "\n" + msg
+    }
+    ask(msg)
 }
