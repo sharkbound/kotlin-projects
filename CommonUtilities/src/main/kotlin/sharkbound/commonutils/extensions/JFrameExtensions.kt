@@ -17,6 +17,7 @@ import javax.swing.JFrame
  * @param pack if true, the windows is packed to be as small as possible [size]
  * @param location location to show the window at, cannot be used with [center]
  * @param center if true, the window will be shown, cannot be used with [location]
+ * @param content the contentPane of the JFrame
  */
 fun JFrame.showFrame(
     closeOperation: JFrameCloseOperation? = null,
@@ -53,7 +54,11 @@ fun JFrame.showFrame(
     isVisible = true
 }
 
-
+/**
+ * dispatches WindowEvent(source, WindowEvent.WINDOW_CLOSING) to the receiving frame
+ *
+ * @param source the source of the close event
+ */
 fun JFrame.sendCloseEvent(source: Window = this) {
     dispatchEvent(WindowEvent(source, WindowEvent.WINDOW_CLOSING))
 }

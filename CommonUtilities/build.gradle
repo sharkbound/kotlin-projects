@@ -24,12 +24,7 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-task buildJar(type: Jar) {
-    manifest {
-        attributes 'Implementation-Title': 'Common Utilities for my projects in kotlin',
-                'Implementation-Version': version
-    }
-    baseName = 'CommonUtilities'
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
+jar {
+    // include sources in the built jar file
+    from sourceSets.main.allSource
 }
