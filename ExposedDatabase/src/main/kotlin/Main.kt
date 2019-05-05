@@ -1,7 +1,9 @@
 import sharkbound.db.util.connect
-import sharkbound.util.parseArguments
+import sharkbound.menu.Manager
+import sharkbound.menu.menus.mainMenu
 
 
-fun main() {
+suspend fun main() {
     connect()
+    Manager.run(mainMenu)
 }

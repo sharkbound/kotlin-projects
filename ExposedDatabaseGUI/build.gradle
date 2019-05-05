@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.31'
+}
+
+group 'ExposedDatabaseGUI'
+version '1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url "https://dl.bintray.com/kotlin/exposed" }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'org.jetbrains.exposed:exposed:0.13.6'
+    // NOTE: this connector jar is from MySQL community installer
+    compile files("libs/mysql-connector-java-8.0.16.jar")
+    compile files("libs/CommonUtilities-1.0.jar")
+    compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.0")
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}

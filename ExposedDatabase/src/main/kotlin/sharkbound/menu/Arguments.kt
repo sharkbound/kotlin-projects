@@ -2,6 +2,8 @@ package sharkbound.menu
 
 class Arguments(val args: List<String>) {
     val length = args.size
+    val first = args.getOrElse(0) { "" }
+    val hasFirst = !first.isBlank()
 
     inline fun ifArgExist(index: Int, block: (String) -> Unit) {
         if (index < length) {
