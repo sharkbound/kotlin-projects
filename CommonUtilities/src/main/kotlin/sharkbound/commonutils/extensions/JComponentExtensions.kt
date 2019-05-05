@@ -6,7 +6,7 @@ import javax.swing.AbstractAction
 import javax.swing.JComponent
 import javax.swing.KeyStroke
 
-inline fun <T : JComponent> T.registerKeyStroke(
+inline fun JComponent.registerKeyStroke(
     key: String,
     keyStroke: KeyStroke,
     context: JComponentKeyStrokeContext = JComponentKeyStrokeContext.WHEN_IN_FOCUSED_WINDOW,
