@@ -1,12 +1,12 @@
 package sharkbound.commonutils.extensions
 
-import sharkbound.commonutils.JComponentKeyStrokeContext
+import sharkbound.commonutils.enums.JComponentKeyStrokeContext
 import java.awt.event.ActionEvent
 import javax.swing.AbstractAction
 import javax.swing.JComponent
 import javax.swing.KeyStroke
 
-inline fun JComponent.registerKeyStroke(
+inline fun <T : JComponent> T.registerKeyStroke(
     key: String,
     keyStroke: KeyStroke,
     context: JComponentKeyStrokeContext = JComponentKeyStrokeContext.WHEN_IN_FOCUSED_WINDOW,

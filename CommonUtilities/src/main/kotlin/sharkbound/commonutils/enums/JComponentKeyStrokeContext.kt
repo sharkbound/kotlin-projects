@@ -1,4 +1,4 @@
-package sharkbound.commonutils
+package sharkbound.commonutils.enums
 
 import javax.swing.JComponent
 

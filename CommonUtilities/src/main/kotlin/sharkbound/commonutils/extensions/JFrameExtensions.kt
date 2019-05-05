@@ -1,11 +1,10 @@
 package sharkbound.commonutils.extensions
 
-import sharkbound.commonutils.JFrameCloseOperation
+import sharkbound.commonutils.enums.JFrameCloseOperation
 import java.awt.Container
 import java.awt.Dimension
 import java.awt.Point
 import java.lang.IllegalArgumentException
-import javax.swing.JComponent
 import javax.swing.JFrame
 
 fun JFrame.showFrame(
