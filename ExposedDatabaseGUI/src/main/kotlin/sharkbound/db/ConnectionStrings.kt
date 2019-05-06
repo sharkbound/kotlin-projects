@@ -1,6 +1,6 @@
 package sharkbound.db
 
 object ConnectionStrings {
-    const val connectionString = "jdbc:mysql://root:root@localhost/exposed_db"
-    const val connectionDriver = "com.mysql.cj.jdbc.Driver"
+    const val connection = "jdbc:mysql://root:root@localhost/exposed_db"
+    const val driver = "com.mysql.cj.jdbc.Driver"
 }

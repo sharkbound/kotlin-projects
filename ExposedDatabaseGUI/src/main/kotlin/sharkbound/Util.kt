@@ -8,7 +8,7 @@ import sharkbound.db.ConnectionStrings
 import sharkbound.db.models.Users
 
 fun connectToDatabase() {
-    Database.connect(ConnectionStrings.connectionString, ConnectionStrings.connectionDriver)
+    Database.connect(ConnectionStrings.connection, ConnectionStrings.driver)
     runBlocking {
         transaction {
             SchemaUtils.create(Users)
