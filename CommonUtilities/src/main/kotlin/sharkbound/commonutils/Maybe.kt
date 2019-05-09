@@ -7,8 +7,9 @@ class Maybe<T>(private val _value: T? = null) {
     val hasValue: Boolean = _value != null
     val value: T by lazy { _value ?: throw NoValueException() }
 
-    infix fun matches(other: T) = _value == other
-    infix fun notMatches(other: T) = _value != other
+    infix fun matches(other: T): Boolean = _value == other
+    infix fun notMatches(other: T): Boolean = _value != other
+    inline fun matches(predicate: (T) -> Boolean): Boolean = valueOrNull != null && predicate(value)
 
     inline infix fun ifValueIsNull(ifNull: () -> Unit) {
         if (valueOrNull == null) {
