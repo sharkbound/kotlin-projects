@@ -1,6 +1,7 @@
 package sharkbound.commonutils
 
 import sharkbound.commonutils.exceptions.NoValueException
+import sharkbound.commonutils.extensions.asMaybe
 
 class Maybe<T>(private val _value: T? = null) {
     val valueOrNull: T? = _value
@@ -34,6 +35,13 @@ class Maybe<T>(private val _value: T? = null) {
         if (!matches(other)) {
             block()
         }
+    }
+
+    inline infix fun <R> map(operation: (T) -> R): Maybe<R> {
+        if (valueOrNull == null) {
+            return Maybe()
+        }
+        return operation(value).asMaybe
     }
 
     inline fun matchesOrDefault(other: T, default: () -> T): T = if (matches(other)) other else default()
