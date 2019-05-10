@@ -4,26 +4,26 @@ import org.junit.Assert
 import org.junit.Test
 import sharkbound.commonutils.exceptions.ValueNotSetException
 import sharkbound.commonutils.maybeOf
-import sharkbound.commonutils.nullMaybe
+import sharkbound.commonutils.emptyMaybe
 
 internal class TestMaybe {
 
     @Test
     fun testGetValueOrNull() {
-        Assert.assertEquals(null, nullMaybe<Int>().valueOrNull)
+        Assert.assertEquals(null, emptyMaybe<Int>().valueOrNull)
         Assert.assertEquals(1, maybeOf(1).valueOrNull)
     }
 
     @Test
     fun testGetHasValue() {
-        Assert.assertTrue(maybeOf(1).hasValue)
-        Assert.assertFalse(nullMaybe<Int>().hasValue)
+        Assert.assertTrue(maybeOf(1).isPresent)
+        Assert.assertFalse(emptyMaybe<Int>().isPresent)
     }
 
     @Test
     fun testGetValue() {
         try {
-            nullMaybe<Int>().value
+            emptyMaybe<Int>().value
             assert(false) { "Maybe with no value should raise ValueNotSetException on .value being accessed" }
         } catch (e: ValueNotSetException) {
 
