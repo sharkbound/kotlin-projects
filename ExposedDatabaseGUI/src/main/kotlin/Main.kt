@@ -15,7 +15,7 @@ fun main() {
     connectToDatabase()
     val frame = JFrame()
     val buttons = listOf(ChoiceButton("kick him"), ChoiceButton("eat him"), ChoiceButton("gift him"))
-    val pane = ChoicePanel("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", buttons)
+    val pane = ChoicePanel("HEADER HERE", buttons)
     pane.registerKeyStroke("quit", KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true)) {
         frame.sendCloseEvent()
     }
