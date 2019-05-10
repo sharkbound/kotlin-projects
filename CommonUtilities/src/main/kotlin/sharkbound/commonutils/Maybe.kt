@@ -113,15 +113,11 @@ class Maybe<T>(private val _value: T? = null) {
     infix fun orDefault(default: T): T = valueOrNull ?: default
     inline infix fun orDefault(default: () -> T): T = valueOrNull ?: default()
 
-    override fun toString(): String = "Maybe<$_value>"
-    override fun equals(other: Any?): Boolean {
-        if (other == null) {
-            return false
-        }
-        if (other is Maybe<*>) {
-            return hasValue && other.hasValue && value == other.value
-        }
-        return hasValue && value == other
+    override fun toString(): String = "Maybe{ $_value }"
+    override fun equals(other: Any?): Boolean = when (other) {
+        null -> false
+        is Maybe<*> -> hasValue && other.hasValue && value == other.value
+        else -> hasValue && value == other
     }
 
     override fun hashCode(): Int {
