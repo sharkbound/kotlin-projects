@@ -9,7 +9,7 @@ import sharkbound.commonutils.util.flatten
  *
  *  @param other the set the to XOR the receiver with
  */
-infix fun <T> MutableSet<T>.xor(other: Set<T>) {
+infix fun <T> MutableSet<T>.mutableXor(other: Set<T>) {
     for (value in other) {
         if (contains(value)) {
             remove(value)

@@ -2,7 +2,7 @@
 
 package sharkbound.commonutils
 
-import sharkbound.commonutils.exceptions.ValueNotSetException
+import sharkbound.commonutils.exceptions.MaybeValueNotSetException
 import sharkbound.commonutils.extensions.toMaybe
 
 class Maybe<T>(private val _value: T? = null) {
@@ -28,11 +28,11 @@ class Maybe<T>(private val _value: T? = null) {
     val isAbsent: Boolean = _value == null
 
     /**
-     * gets the value if it is present (not null), throws [ValueNotSetException] if the value is absent (null)
+     * gets the value if it is present (not null), throws [MaybeValueNotSetException] if the value is absent (null)
      *
-     * @throws ValueNotSetException if the value is absent (null)
+     * @throws MaybeValueNotSetException if the value is absent (null)
      */
-    val value: T by lazy { _value ?: throw ValueNotSetException() }
+    val value: T by lazy { _value ?: throw MaybeValueNotSetException() }
 
     /**
      * checks if the value matches [other]
@@ -69,7 +69,7 @@ class Maybe<T>(private val _value: T? = null) {
      *
      * if the value is absent(null) false is returned
      *
-     * @return true if the value does not match or is not equal to [predicate] else false
+     * @return true if value is present and [predicate] returns false, else false
      */
     inline infix fun notMatches(predicate: (T) -> Boolean): Boolean =
         isPresent && !predicate(value)
@@ -133,45 +133,80 @@ class Maybe<T>(private val _value: T? = null) {
      *  then returns it as a new maybe
      *
      *  if the value is absent(null), a empty maybe is returned
+     *
+     *  @return maybe with the value returned from [operation] if the value is present, else a a empty maybe
      */
-    inline infix fun <R> mapIfPresent(operation: (T) -> R?): Maybe<R?> =
+    inline infix fun <R> mapIfPresent(operation: (T) -> R): Maybe<R> =
         if (isPresent) operation(value).toMaybe else emptyMaybe()
 
     /**
      *  if the value is absent(null) a new maybe is returned that contains the value from calling [operation]
      *
      *  if the value is present, a empty maybe is returned
+     *
+     *  @return maybe with the value returned from [operation] if the value is absent, else a a empty maybe
      */
-    inline infix fun <R> mapIfAbsent(operation: () -> R?): Maybe<R?> =
+    inline infix fun <R> mapIfAbsent(operation: () -> R): Maybe<R> =
         if (isAbsent) operation().toMaybe else emptyMaybe()
 
     /**
      * returns a new maybe from the result of calling [operation] with [valueOrNull]
+     *
+     * @return maybe containing the result from calling [operation] with [valueOrNull]
      */
-    inline infix fun <R> map(operation: (T?) -> R?): Maybe<R?> = operation(valueOrNull).toMaybe
+    inline infix fun <R> map(operation: (T?) -> R): Maybe<R> =
+        operation(valueOrNull).toMaybe
 
     /**
-     * returns the current maybe if the filter returns True, else a empty maybe
+     * applies [operation] to [valueOrNull], if it returns a non-null value, that value is returned as a maybe
+     *
+     * if [operation] returns null, [default] is called, and its value is returned as a new maybe
+     *
+     * @return maybe containing the return value from [operation] if it it was not null, else a maybe containing the value returned from [default]
      */
-    inline fun filter(predicate: (T) -> Boolean): Maybe<T> =
+    inline fun <R> mapOrDefault(default: () -> R, operation: (T?) -> R?): Maybe<R> =
+        (operation(valueOrNull) ?: default()).toMaybe
+
+    /**
+     * applies [operation] to [valueOrNull], if it returns a non-null value, that value is returned as a maybe
+     *
+     * if [operation] returns null, [default] is returned as a new maybe
+     *
+     * @return maybe containing the return value from [operation] if it it was not null, else a maybe containing the [default]
+     */
+    inline fun <R> mapOrDefault(default: R, operation: (T?) -> R?): Maybe<R> =
+        (operation(valueOrNull) ?: default).toMaybe
+
+    /**
+     * returns the current maybe if the [predicate] returns True, else a empty maybe
+     *
+     * @return current maybe if value is present and [predicate] returns true else a empty maybe
+     */
+    inline infix fun filter(predicate: (T) -> Boolean): Maybe<T> =
         if (isPresent && predicate(value)) this else emptyMaybe()
 
     /**
      * returns the current maybe if the value is present(not null) and the predicate returns true
      * else returns a new maybe with the value returned from [default]
+     *
+     * @return current maybe if value is present and [predicate] returns true, else a maybe containing the value returned from [default]
      */
     inline fun filterOrDefault(predicate: (T) -> Boolean, default: () -> T): Maybe<T> =
         if (isPresent && predicate(value)) this else default().toMaybe
 
     /**
      * returns the current maybe if the filter returns false, else a empty maybe
+     *
+     * @return current maybe if value is present and [predicate] returns false, else a empty maybe
      */
-    inline fun filterNot(predicate: (T) -> Boolean): Maybe<T> =
+    inline infix fun filterNot(predicate: (T) -> Boolean): Maybe<T> =
         if (isPresent && !predicate(value)) this else emptyMaybe()
 
     /**
      * returns the current maybe if the value is present(not null) and the predicate returns false
      * else returns a new maybe with the value returned from [default]
+     *
+     * @return current maybe if value is present and [predicate] returns false, else a maybe that contains the value returned from [default]
      */
     inline fun filterNotOrDefault(predicate: (T) -> Boolean, default: () -> T): Maybe<T> =
         if (isPresent && !predicate(value)) this else default().toMaybe
@@ -179,6 +214,8 @@ class Maybe<T>(private val _value: T? = null) {
     /**
      * if the value is present(not null) and the value matches [other], the current value is returned
      * else the return value from [default] is returned
+     *
+     * @return [value] if value is present and it equals [other], else [default]
      */
     inline fun matchesOrDefault(other: T, default: () -> T): T =
         if (matches(other)) value else default()
@@ -186,6 +223,8 @@ class Maybe<T>(private val _value: T? = null) {
     /**
      * if the value is present(not null) and [predicate] returns true, the current value is returned
      * else the return value from [default] is returned
+     *
+     *  @return [value] if value is present and [predicate] returns true, else [default]
      */
     inline fun matchesOrDefault(predicate: (T) -> Boolean, default: () -> T): T =
         if (isPresent && predicate(value)) value else default()
@@ -193,6 +232,8 @@ class Maybe<T>(private val _value: T? = null) {
     /**
      * if the value is present(not null) and the value matches [other], the current value is returned
      * else [default] is returned
+     *
+     *  @return [value] if value is present and it equals [other], else [default]
      */
     fun matchesOrDefault(other: T, default: T): T =
         if (matches(other)) value else default
@@ -200,6 +241,8 @@ class Maybe<T>(private val _value: T? = null) {
     /**
      * if the value is present(not null) and the value does not match [other], the current value is returned,
      * else [default] is returned
+     *
+     *  @return [value] if value is present and it does not equals [other], else [default]
      */
     fun notMatchesOrDefault(other: T, default: T): T =
         if (isPresent && !matches(other)) value else default
@@ -207,6 +250,8 @@ class Maybe<T>(private val _value: T? = null) {
     /**
      * if the value is present(not null) and the value does not match [other], the current value is returned,
      * else return value from [default] is returned
+     *
+     * @return [value] if value is present and it does not equals [other], else [default]
      */
     inline fun notMatchesOrDefault(other: T, default: () -> T): T =
         if (isPresent && !matches(other)) value else default()
@@ -214,6 +259,8 @@ class Maybe<T>(private val _value: T? = null) {
     /**
      * if the value is present(not null) and [predicate] return false, the current value is returned,
      * else return value from [default] is returned
+     *
+     * @return [value] if value is present and [predicate] returns false, else [default]
      */
     inline fun notMatchesOrDefault(predicate: (T) -> Boolean, default: () -> T): T =
         if (isPresent && !predicate(value)) value else default()
@@ -221,6 +268,8 @@ class Maybe<T>(private val _value: T? = null) {
     /**
      * if the value is present(not null) the current value is returned,
      * else [default] is returned
+     *
+     * @return [value] if [value] is [isPresent] else [default]
      */
     infix fun orDefault(default: T): T =
         valueOrNull ?: default
@@ -228,6 +277,8 @@ class Maybe<T>(private val _value: T? = null) {
     /**
      * if the value is present(not null) the current value is returned,
      * else the return value from [default] is returned
+     *
+     * @return [value] if [value] is [isPresent] else [default]
      */
     inline infix fun orDefault(default: () -> T): T =
         valueOrNull ?: default()

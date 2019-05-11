@@ -7,7 +7,7 @@ package sharkbound.commonutils.extensions
  * @param block a function called with [V] as its parameter
  */
 inline fun <K, V> Map<K, V>.ifKeyPresent(key: K, block: (V) -> Unit) {
-    if (key !in this) return
+    if (!contains(key)) return
     block(getValue(key))
 }
 
@@ -18,6 +18,6 @@ inline fun <K, V> Map<K, V>.ifKeyPresent(key: K, block: (V) -> Unit) {
  * @param block a function called with [V] as its receiver
  */
 inline fun <K, V> Map<K, V>.useIfKeyPresent(key: K, block: V.() -> Unit) {
-    if (key !in this) return
+    if (!contains(key)) return
     getValue(key).block()
 }
