@@ -1,6 +1,5 @@
 package sharkbound.ui
 
-import sharkbound.commonutils.maybeOf
 import java.awt.BorderLayout
 import java.awt.FlowLayout
 import javax.swing.JButton
