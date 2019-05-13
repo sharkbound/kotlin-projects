@@ -1,5 +1,6 @@
 ESSENTIAL
 alt + enter                 : quick action / fixes
+ctrl + Q 					: quick docs on current object under the cursor
 
 
 FORMATTING
