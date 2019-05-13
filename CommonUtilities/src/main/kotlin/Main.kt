@@ -1,5 +1,10 @@
 @file:JvmName("KotlinCommonUtilTestingMain")
 
-private fun main() {
+import sharkbound.commonutils.util.suppressException
+import java.lang.IllegalArgumentException
 
+private fun main() {
+    suppressException<IllegalArgumentException> {
+        throw Exception()
+    }
 }
