@@ -1,5 +1,6 @@
 package sharkbound.ui
 
+import sharkbound.commonutils.extensions.sendCloseEvent
 import java.awt.GridBagLayout
 import java.awt.event.KeyEvent
 import java.awt.event.WindowAdapter
@@ -41,7 +42,7 @@ open class QuestionDialog<R>(open val owner: JFrame, val cancelOnEscape: Boolean
      * triggered when the dialog is closed
      */
     open fun onCancel(e: WindowEvent?) {
-
+        sendCloseEvent()
     }
 
     /**

@@ -16,8 +16,8 @@ fun newGridBagContraint(
     weightY: Double = 1.0,
     height: Int = 1,
     width: Int = 1,
-    anchor: Int = 0,
-    insets: Insets? = null,
+    anchor: Int = GridBagConstraints.CENTER,
+    insets: Insets = Insets(0, 0, 0, 0),
     padX: Int = 0,
     padY: Int = 0,
     fill: GridBagFill = GridBagFill.HORIZONTAL
