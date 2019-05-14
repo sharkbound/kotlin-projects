@@ -1,10 +1,7 @@
 package sharkbound.commonutils.extensions
 
 import sharkbound.commonutils.enums.JFrameCloseOperation
-import java.awt.Container
-import java.awt.Dimension
-import java.awt.Point
-import java.awt.Window
+import java.awt.*
 import java.awt.event.WindowEvent
 import java.lang.IllegalArgumentException
 import javax.swing.JFrame
@@ -60,5 +57,14 @@ fun JFrame.showFrame(
  * @param source the source of the close event
  */
 fun JFrame.sendCloseEvent(source: Window = this) {
+    dispatchEvent(WindowEvent(source, WindowEvent.WINDOW_CLOSING))
+}
+
+/**
+ * dispatches WindowEvent(source, WindowEvent.WINDOW_CLOSING) to the receiving dialog
+ *
+ * @param source the source of the close event
+ */
+fun Dialog.sendCloseEvent(source: Window = this) {
     dispatchEvent(WindowEvent(source, WindowEvent.WINDOW_CLOSING))
 }

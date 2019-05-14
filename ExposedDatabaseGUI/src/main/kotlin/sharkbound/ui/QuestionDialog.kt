@@ -1,15 +1,13 @@
 package sharkbound.ui
 
 import java.awt.GridBagLayout
+import java.awt.event.KeyEvent
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
-import javax.swing.JDialog
-import javax.swing.JFrame
-import javax.swing.JPanel
-import javax.swing.WindowConstants
+import javax.swing.*
 
 @Suppress("LeakingThis")
-open class QuestionDialog<R>(open val owner: JFrame) : JDialog(owner) {
+open class QuestionDialog<R>(open val owner: JFrame, val cancelOnEscape: Boolean = true) : JDialog(owner) {
     protected val panel = JPanel(GridBagLayout())
 
     init {
@@ -24,6 +22,17 @@ open class QuestionDialog<R>(open val owner: JFrame) : JDialog(owner) {
                 onCancel(e)
             }
         })
+
+        if (cancelOnEscape) {
+            panel.registerKeyboardAction(
+                {
+                    onCancel(null)
+                    dispose()
+                },
+                KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
+                JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT
+            )
+        }
 
         add(panel)
     }
