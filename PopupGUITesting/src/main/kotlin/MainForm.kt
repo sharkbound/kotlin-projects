@@ -1,15 +1,19 @@
 import sharkbound.commonutils.enums.GridBagFill
+import sharkbound.commonutils.extensions.sendCloseEvent
 import sharkbound.commonutils.util.newGridBagContraint
+import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import java.awt.Insets
-import javax.swing.JButton
-import javax.swing.JFrame
+import java.awt.event.KeyEvent
+import javax.swing.*
 
 class MainForm : JFrame("Popup GUI Test") {
     val click: JButton
+    val pane: JPanel
 
     init {
-        layout = GridBagLayout()
+        pane = JPanel(GridBagLayout())
+
 
         click = JButton("click").apply {
             addActionListener {
@@ -17,6 +21,15 @@ class MainForm : JFrame("Popup GUI Test") {
             }
         }
 
-        add(click, newGridBagContraint(1, 1, fill = GridBagFill.BOTH))
+        pane.add(click)
+        GridBagConstraints().let {
+            it.fill
+        }
+
+        pane.registerKeyboardAction({
+            sendCloseEvent()
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW)
+
+        add(pane)
     }
 }
