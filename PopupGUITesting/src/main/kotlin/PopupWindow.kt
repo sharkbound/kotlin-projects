@@ -12,6 +12,7 @@ import javax.swing.WindowConstants
 
 class PopupWindow(owner: Window) : JDialog(owner) {
     val panel = JPanel(GridBagLayout())
+    val value = 1
 
     init {
         add(panel)
@@ -21,7 +22,7 @@ class PopupWindow(owner: Window) : JDialog(owner) {
             }
         }, createGridBagContraint(fill = GridBagFill.BOTH))
         modalityType = ModalityType.APPLICATION_MODAL
-        defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
+        defaultCloseOperation = WindowConstants.HIDE_ON_CLOSE
 
         setLocationRelativeTo(null)
         setSize(300, 300)

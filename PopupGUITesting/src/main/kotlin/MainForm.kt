@@ -10,7 +10,7 @@ class MainForm : JFrame("Popup GUI Test") {
     val pane: JPanel = JPanel(GridBagLayout())
     val click: JButton = JButton("open window").apply {
         addActionListener {
-            PopupWindow(this@MainForm)
+            println(PopupWindow(this@MainForm).value)
         }
     }
 
