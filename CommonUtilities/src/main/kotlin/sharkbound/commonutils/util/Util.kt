@@ -32,4 +32,3 @@ fun <T> flatten(vararg iterators: Iterator<T>) = sequence {
     iterators.forEach { yieldAll(it) }
 }
 
-

@@ -12,7 +12,6 @@ import javax.swing.WindowConstants
 
 class PopupWindow(owner: Window) : JDialog(owner) {
     val panel = JPanel(GridBagLayout())
-    val value = 1
 
     init {
         add(panel)
