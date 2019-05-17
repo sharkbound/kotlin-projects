@@ -1,6 +1,8 @@
 package sharkbound.commonutils.extensions
 
 import sharkbound.commonutils.enums.JComponentKeyStrokeContext
+import java.awt.Dimension
+import java.awt.Rectangle
 import java.awt.event.ActionEvent
 import javax.swing.AbstractAction
 import javax.swing.JComponent
@@ -18,4 +20,18 @@ inline fun JComponent.registerKeyStroke(
             action(e)
         }
     })
+}
+
+/**
+ * places a JComponent at a absolute position, layout must be null to work
+ */
+fun <T : JComponent> T.place(
+    x: Int,
+    y: Int,
+    width: Int = this.preferredSize.width,
+    height: Int = this.preferredSize.height,
+    preferredSize: Dimension = this.preferredSize
+): T = apply {
+    bounds = Rectangle(x, y, width, height)
+    this.preferredSize = preferredSize
 }
