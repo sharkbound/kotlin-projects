@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.31'
+}
+
+group 'MigSwing'
+version '1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile files('libs/CommonUtilities-1.0.jar')
+//    compile "com.miglayout:miglayout:3.7.2:swing@jar"
+    compile files("libs/miglayout-swing-5.3-20190509.220032-170.jar")
+    compile files("libs/miglayout-core-5.3-20190509.220015-170.jar")
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
