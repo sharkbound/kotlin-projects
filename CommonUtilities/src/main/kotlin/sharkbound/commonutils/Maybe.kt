@@ -285,27 +285,43 @@ class Maybe<T>(value: T? = null) {
         valueOrNull ?: default()
 
     /**
-     * operator alias to [filter]
+     * operator (*) alias to [filter]
      *
      * @see filter
      */
     operator fun times(predicate: (T) -> Boolean): Maybe<T> = filter(predicate)
 
     /**
-     * operator alias to [mapIfPresent]
+     * operator (+) alias to [mapIfPresent]
      *
      * @see mapIfPresent
      */
     operator fun <R> plus(operation: (T) -> R): Maybe<R> = mapIfPresent(operation)
 
     /**
-     * operator alias to [map]
+     * operator (/) alias to [map]
      *
      * @see map
      */
     operator fun <R> div(operation: (T?) -> R?): Maybe<R> = map(operation)
 
+    /**
+     * operator (-) alias to [orDefault]
+     *
+     * @see orDefault
+     */
+    operator fun minus(default: () -> T): T = orDefault(default)
+
+    /**
+     * operator (-) alias to [orDefault]
+     *
+     * @see orDefault
+     */
+    operator fun minus(default: T): T = orDefault(default)
+
+
     override fun toString(): String = "Maybe($_value)"
+
     override fun equals(other: Any?): Boolean = when (other) {
         null -> false
         is Maybe<*> -> isPresent && other.isPresent && valueOrThrow == other.valueOrThrow
