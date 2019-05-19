@@ -22,4 +22,19 @@ inline infix fun <T> T?.ifNotNull(block: (T) -> Unit) {
     }
 }
 
+/**
+ * calls the block on the receiver if the receiver is not null
+ */
+inline infix fun <T> T?.use(block: T.() -> Unit) {
+    this?.block()
+}
+
+/**
+ * calls the block with the receiver as the parameter if the receiver is not null
+ */
+inline infix fun <T> T?.with(block: (T) -> Unit) {
+    if (this != null) {
+        block(this)
+    }
+}
 
