@@ -23,7 +23,7 @@ internal class TestMaybe {
     @Test
     fun testGetValue() {
         try {
-            emptyMaybe<Int>().value
+            emptyMaybe<Int>().valueOrThrow
             assert(false) { "Maybe with no value should raise MaybeValueNotSetException on .value being accessed" }
         } catch (e: MaybeValueNotSetException) {
 

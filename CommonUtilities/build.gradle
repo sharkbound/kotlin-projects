@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'CommonUtilities'
-version '1.0'
+version ''
 
 sourceCompatibility = 1.8
 
