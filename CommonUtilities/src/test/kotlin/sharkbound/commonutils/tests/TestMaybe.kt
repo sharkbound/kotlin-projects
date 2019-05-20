@@ -2,9 +2,9 @@ package sharkbound.commonutils.tests
 
 import org.junit.Assert
 import org.junit.Test
-import sharkbound.commonutils.exceptions.MaybeValueNotSetException
-import sharkbound.commonutils.maybeOf
+import sharkbound.commonutils.MaybeValueNotSetException
 import sharkbound.commonutils.emptyMaybe
+import sharkbound.commonutils.maybeOf
 
 internal class TestMaybe {
 

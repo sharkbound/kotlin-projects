@@ -2,9 +2,6 @@
 
 package sharkbound.commonutils
 
-import sharkbound.commonutils.exceptions.MaybeValueNotSetException
-import sharkbound.commonutils.extensions.ifNotNull
-import sharkbound.commonutils.extensions.ifNull
 import sharkbound.commonutils.extensions.toMaybe
 
 class Maybe<T>(value: T? = null) {
@@ -81,14 +78,14 @@ class Maybe<T>(value: T? = null) {
      * calls [ifNull] if the value is absent(null)
      */
     inline infix fun ifAbsent(ifNull: () -> Unit) {
-        valueOrNull ifNull ifNull
+        if (isAbsent) ifNull()
     }
 
     /**
      * calls [ifNotNull] if the value is present(not null)
      */
     inline infix fun ifPresent(ifNotNull: (T) -> Unit) {
-        valueOrNull ifNotNull ifNotNull
+        if (isPresent) ifNotNull(valueOrThrow)
     }
 
     /**
@@ -339,3 +336,10 @@ class Maybe<T>(value: T? = null) {
 fun <T> maybeOf(value: T): Maybe<T> = Maybe(value)
 fun <T> emptyMaybe(): Maybe<T> = Maybe()
 fun <T> emptyMaybe(type: T): Maybe<T> = Maybe()
+
+class MaybeValueNotSetException :
+    Throwable(
+        "Maybe has no value set, " +
+                "use <maybe>.valueOrNull or `<maybe> default <default>` / `<maybe>.default(<default>) " +
+                "to avoid this exception"
+    )
