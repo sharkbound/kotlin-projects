@@ -10,7 +10,7 @@ import java.lang.Exception
 inline fun <reified T : Throwable> suppressException(block: () -> Unit) {
     try {
         block()
-    } catch (ex: Exception) {
+    } catch (ex: Throwable) {
         if (ex !is T) {
             throw ex
         }
