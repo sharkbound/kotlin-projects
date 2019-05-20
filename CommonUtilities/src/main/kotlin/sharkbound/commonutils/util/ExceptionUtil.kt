@@ -17,10 +17,13 @@ inline fun <reified T : Throwable> suppressException(block: () -> Unit) {
     }
 }
 
+/**
+ * runs [block] and suppresses all exceptions that may be throw
+ */
 inline fun suppressExceptions(block: () -> Unit) {
     try {
         block()
-    } catch (ex: Exception) {
+    } catch (ex: Throwable) {
 
     }
 }
