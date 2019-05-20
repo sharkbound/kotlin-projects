@@ -268,21 +268,21 @@ class Maybe<T>(value: T? = null) {
 
     /**
      * if the value is present(not null) the current value is returned,
-     * else [default] is returned
+     * else [defaultValue] is returned
      *
-     * @return [valueOrThrow] if [valueOrThrow] is [isPresent] else [default]
+     * @return [valueOrThrow] if [valueOrThrow] is [isPresent] else [defaultValue]
      */
-    infix fun orDefault(default: T): T =
-        valueOrNull ?: default
+    infix fun default(defaultValue: T): T =
+        valueOrNull ?: defaultValue
 
     /**
      * if the value is present(not null) the current value is returned,
-     * else the return value from [default] is returned
+     * else the return value from [defaultValue] is returned
      *
-     * @return [valueOrThrow] if [valueOrThrow] is [isPresent] else [default]
+     * @return [valueOrThrow] if [valueOrThrow] is [isPresent] else [defaultValue]
      */
-    inline infix fun orDefault(default: () -> T): T =
-        valueOrNull ?: default()
+    inline infix fun default(defaultValue: () -> T): T =
+        valueOrNull ?: defaultValue()
 
     /**
      * operator (*) alias to [filter]
@@ -306,18 +306,18 @@ class Maybe<T>(value: T? = null) {
     operator fun <R> div(operation: (T?) -> R?): Maybe<R> = map(operation)
 
     /**
-     * operator (-) alias to [orDefault]
+     * operator (-) alias to [default]
      *
-     * @see orDefault
+     * @see default
      */
-    operator fun minus(default: () -> T): T = orDefault(default)
+    operator fun minus(default: () -> T): T = default(default)
 
     /**
-     * operator (-) alias to [orDefault]
+     * operator (-) alias to [default]
      *
-     * @see orDefault
+     * @see default
      */
-    operator fun minus(default: T): T = orDefault(default)
+    operator fun minus(default: T): T = default(default)
 
 
     override fun toString(): String = "Maybe($_value)"
