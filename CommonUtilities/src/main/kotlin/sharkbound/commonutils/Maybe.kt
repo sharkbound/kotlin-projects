@@ -2,8 +2,6 @@
 
 package sharkbound.commonutils
 
-import sharkbound.commonutils.extensions.toMaybe
-
 class Maybe<T>(value: T? = null) {
     private val _value: T? = value
     /**
@@ -343,3 +341,5 @@ class MaybeValueNotSetException :
                 "use <maybe>.valueOrNull or `<maybe> default <default>` / `<maybe>.default(<default>) " +
                 "to avoid this exception"
     )
+
+val <T> T?.toMaybe get() = Maybe(this)
