@@ -3,5 +3,5 @@
 import sharkbound.commonutils.Maybe
 
 private fun main() {
-    println(Maybe(1))
+    println(Maybe<Int>(null))
 }

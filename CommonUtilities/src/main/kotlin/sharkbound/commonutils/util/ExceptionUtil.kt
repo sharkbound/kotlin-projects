@@ -16,3 +16,11 @@ inline fun <reified T : Throwable> suppressException(block: () -> Unit) {
         }
     }
 }
+
+inline fun suppressExceptions(block: () -> Unit) {
+    try {
+        block()
+    } catch (ex: Exception) {
+
+    }
+}
