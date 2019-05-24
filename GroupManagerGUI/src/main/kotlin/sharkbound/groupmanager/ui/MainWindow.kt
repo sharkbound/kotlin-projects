@@ -23,17 +23,23 @@ class MainWindow : JFrame(MAIN_WINDOW_TITLE) {
     )
 
     init {
-        selector.addActionListener {}
-
         addAllComponents()
+        addHanders()
+        configure()
         display()
     }
 
+    private fun configure() {
+        selector.selectedItem = GROUP_INFO
+    }
+
     private fun addHanders() {
+        selector.addActionListener {
+            println(it)
+        }
     }
 
     private fun addAllComponents() {
-
         root.add(content, BorderLayout.CENTER)
         root.add(selector, BorderLayout.NORTH)
         add(root)
