@@ -60,7 +60,7 @@ fun JFrame.sendCloseEvent(source: Window = this) {
     dispatchEvent(WindowEvent(source, WindowEvent.WINDOW_CLOSING))
 }
 
-/**
+/**s
  * dispatches WindowEvent(source, WindowEvent.WINDOW_CLOSING) to the receiving dialog
  *
  * @param source the source of the close event

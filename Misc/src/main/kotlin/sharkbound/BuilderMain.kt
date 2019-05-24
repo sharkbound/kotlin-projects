@@ -1,4 +1,4 @@
-import javax.swing.JFrame
+package sharkbound
 
 fun main() {
     println(InfoBuilder {
