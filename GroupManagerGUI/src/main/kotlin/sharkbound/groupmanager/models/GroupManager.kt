@@ -3,7 +3,7 @@ package sharkbound.groupmanager.models
 import sharkbound.commonutils.extensions.closeAfter
 import sharkbound.commonutils.extensions.len
 import sharkbound.commonutils.toMaybe
-import sharkbound.groupmanager.constants.CONFIG_FILE
+import sharkbound.groupmanager.constants.Data
 import java.io.*
 import java.nio.file.Files
 import java.nio.file.Path
@@ -66,20 +66,20 @@ fun GroupManager.save() {
 }
 
 private fun saveGroupManager(manager: GroupManager) {
-    ObjectOutputStream(FileOutputStream(CONFIG_FILE)).closeAfter {
+    ObjectOutputStream(FileOutputStream(Data.CONFIG_FILE)).closeAfter {
         writeObject(manager)
     }
 }
 
 private fun createConfigFileIfNotExist() {
-    if (!Files.exists(Path.of(CONFIG_FILE))) {
+    if (!Files.exists(Path.of(Data.CONFIG_FILE))) {
         saveGroupManager(GroupManager())
     }
 }
 
 private fun loadGroupManagerFromConfigFile(): GroupManager {
     createConfigFileIfNotExist()
-    return with(ObjectInputStream(FileInputStream(CONFIG_FILE))) {
+    return with(ObjectInputStream(FileInputStream(Data.CONFIG_FILE))) {
         (readObject() as GroupManager).apply {
             close()
         }

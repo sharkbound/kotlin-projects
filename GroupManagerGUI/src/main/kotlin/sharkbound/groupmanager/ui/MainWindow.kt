@@ -1,42 +1,34 @@
 package sharkbound.groupmanager.ui
 
-import sharkbound.groupmanager.constants.*
+import sharkbound.groupmanager.constants.Data
 import java.awt.BorderLayout
 import java.awt.CardLayout
 import javax.swing.*
 
-class MainWindow : JFrame(MAIN_WINDOW_TITLE) {
+class MainWindow : JFrame(Data.MAIN_WINDOW_TITLE) {
     private val card = CardLayout()
     private val root = JPanel(BorderLayout())
     private val content = JPanel(card)
-    private val selector = JComboBox<String>(
-        arrayOf(
-            GROUP_INFO,
-            MEMBER_INFO,
-            EDIT_GROUP,
-            EDIT_MEMBER,
-            ADD_GROUP,
-            ADD_MEMBER,
-            REMOVE_GROUP,
-            REMOVE_MEMBER
-        )
-    )
+    private val selector = JComboBox<String>(Data.allPanelNames)
 
     init {
         addAllComponents()
-        addHanders()
+        addHandlers()
         configure()
         display()
     }
 
-    private fun configure() {
-        selector.selectedItem = GROUP_INFO
+    fun String.showCardPanel() {
+        card.show(content, this)
+        selector.selectedItem = this
     }
 
-    private fun addHanders() {
-        selector.addActionListener {
-            println(it)
-        }
+    private fun configure() {
+        selector.selectedItem = Data.GROUP_INFO
+        Data.ADD_MEMBER.showCardPanel()
+    }
+
+    private fun addHandlers() {
     }
 
     private fun addAllComponents() {
