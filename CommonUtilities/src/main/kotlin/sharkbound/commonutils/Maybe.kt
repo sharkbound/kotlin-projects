@@ -73,18 +73,21 @@ class Maybe<T>(value: T? = null) {
         isPresent && !predicate(valueOrThrow)
 
     /**
-     * calls [ifNull] if the value is absent(null)
+     * calls [ifNull] if the value is absent(null), then returns the current maybe (this)
+     *
+     * @return the current Maybe (this)
      */
-    inline infix fun ifAbsent(ifNull: () -> Unit) {
-        if (isAbsent) ifNull()
-    }
+    inline infix fun ifAbsent(ifNull: () -> Unit): Maybe<T> =
+        apply { if (isAbsent) ifNull() }
+
 
     /**
-     * calls [ifNotNull] if the value is present(not null)
+     * calls [ifNotNull] if the value is present(not null), returns the current maybe (this) afterwards
+     *
+     * @return the current Maybe instance
      */
-    inline infix fun ifPresent(ifNotNull: (T) -> Unit) {
-        if (isPresent) ifNotNull(valueOrThrow)
-    }
+    inline infix fun ifPresent(ifNotNull: (T) -> Unit): Maybe<T> =
+        apply { if (isPresent) ifNotNull(valueOrThrow) }
 
     /**
      * calls [block] with the value is present(not null) and it matches [other]
@@ -196,7 +199,7 @@ class Maybe<T>(value: T? = null) {
         if (isAbsent) {
             return default
         }
-        
+
         return try {
             operation(valueOrThrow) ?: return default
         } catch (e: Throwable) {
