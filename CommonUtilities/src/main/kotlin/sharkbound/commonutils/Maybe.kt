@@ -154,6 +154,57 @@ class Maybe<T>(value: T? = null) {
         operation(valueOrNull)?.toMaybe ?: emptyMaybe()
 
     /**
+     * tries to execute [operation], returns emptyMaybe if a error is raised, or it returns null
+     *
+     * @return emptyMaybe if value [isAbsent] or [operation] throws a exception / returns null
+     */
+    infix fun <R> tryMap(operation: (T) -> R?): Maybe<R> {
+        if (isAbsent) {
+            return emptyMaybe()
+        }
+
+        return try {
+            operation(valueOrThrow).toMaybe
+        } catch (e: Throwable) {
+            emptyMaybe()
+        }
+    }
+
+    /**
+     * tries to execute [operation], if operation throws a exception or return null, [default] is returned
+     *
+     * @return return from [operation] if it returns non-null, and does not throw any exceptions, else [default]
+     */
+    fun <R> tryOrDefault(operation: (T) -> R?, default: () -> R): R {
+        if (isAbsent) {
+            return default()
+        }
+
+        return try {
+            operation(valueOrThrow) ?: return default()
+        } catch (e: Throwable) {
+            default()
+        }
+    }
+
+    /**
+     * tries to execute [operation], if operation throws a exception or return null, [default] is returned
+     *
+     * @return return from [operation] if it returns non-null, and does not throw any exceptions, else [default]
+     */
+    fun <R> tryOrDefault(operation: (T) -> R?, default: R): R {
+        if (isAbsent) {
+            return default
+        }
+        
+        return try {
+            operation(valueOrThrow) ?: return default
+        } catch (e: Throwable) {
+            default
+        }
+    }
+
+    /**
      * applies [operation] to [valueOrNull], if it returns a non-null value, that value is returned as a maybe
      *
      * if [operation] returns null, [default] is called, and its value is returned as a new maybe

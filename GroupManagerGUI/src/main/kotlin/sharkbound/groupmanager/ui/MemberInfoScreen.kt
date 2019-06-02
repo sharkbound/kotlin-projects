@@ -7,5 +7,6 @@ import javax.swing.JPanel
 class MemberInfoScreen(mainWindow: MainWindow) : JPanel(BorderLayout()) {
     init {
         add(JButton("member info"), BorderLayout.CENTER)
+        //TODO implement this class
     }
 }
