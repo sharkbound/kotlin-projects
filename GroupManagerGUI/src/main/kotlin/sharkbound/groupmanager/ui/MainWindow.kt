@@ -36,7 +36,7 @@ class MainWindow : JFrame(Data.MAIN_WINDOW_TITLE) {
     private fun addHandlers() {
         root.registerKeyboardAction(
             { sendCloseEvent() },
-            KeyStroke.getKeyStroke(KeyEvent.VK_Q, KeyEvent.CTRL_DOWN_MASK),
+            KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0),
             JComponent.WHEN_IN_FOCUSED_WINDOW
         )
 

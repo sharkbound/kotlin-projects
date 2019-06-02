@@ -9,4 +9,6 @@ open class Member(
     open var phone: Phone,
     open var age: Int,
     open var type: UserType
-) : Serializable
+) : Serializable {
+    open override fun toString() = "${name.capitalize()} | $email | $phone | $type"
+}
