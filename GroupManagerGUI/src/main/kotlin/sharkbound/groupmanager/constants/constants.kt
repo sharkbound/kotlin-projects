@@ -23,7 +23,7 @@ object Data {
     val allPanelNames = Screen.values().asSequence().map { it.key }.toSet()
 }
 
-private val manager by lazy { GroupManager.load() }
+val manager by lazy { GroupManager.load() }
 
 fun session(block: GroupManager.() -> Unit): Unit =
     manager.saveAfter(block)

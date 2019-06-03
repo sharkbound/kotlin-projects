@@ -1,30 +1,29 @@
 package sharkbound.groupmanager.ui
 
+import sharkbound.commonutils.extensions.use
 import sharkbound.commonutils.util.centerFlowLayout
+import sharkbound.groupmanager.constants.manager
 import sharkbound.groupmanager.constants.session
-import sharkbound.groupmanager.enums.UserType
 import sharkbound.groupmanager.models.*
 import java.awt.BorderLayout
 import java.awt.Dimension
-import java.beans.Customizer
+import java.awt.event.*
 import javax.swing.*
 
 class GroupInfoScreen(mainWindow: MainWindow) : JPanel(BorderLayout()) {
-    val groupNameField = JTextField()
-    val search = JButton("search")
-    val nameLabel = JLabel()
-    val list = JList<Member>()
+    private val groupModel = DefaultListModel<Group>()
+    private val groupList = JList<Group>(groupModel)
+    private val nameLabel = JLabel()
+    private val memberList = JList<Member>()
 
     init {
         bindEvents()
+        reloadGroupList()
+
         add(JPanel().apply {
             layout = BoxLayout(this, BoxLayout.Y_AXIS)
             add(centerFlowLayout {
-                add(JLabel("ENTER GROUP NAME:"))
-                add(groupNameField.apply {
-                    preferredSize = Dimension(130, search.preferredSize.height)
-                })
-                add(search)
+                add(JScrollPane(groupList))
             })
         }, BorderLayout.NORTH)
 
@@ -39,26 +38,30 @@ class GroupInfoScreen(mainWindow: MainWindow) : JPanel(BorderLayout()) {
                 add(JLabel("members"))
             })
             add(centerFlowLayout {
-                add(JScrollPane(list))
+                add(JScrollPane(memberList))
             })
         }, BorderLayout.SOUTH)
     }
 
+    private fun reloadGroupList() {
+        groupModel.clear()
+        groupModel.addAll(manager.groups)
+    }
+
     private fun bindEvents() {
-        groupNameField.addActionListener {
-            search.doClick()
-        }
+        addComponentListener(object : ComponentAdapter() {
+            override fun componentShown(e: ComponentEvent?) {
+                reloadGroupList()
+            }
+        })
 
-        search.addActionListener {
+        groupList.addListSelectionListener {
             session {
-                val group = findGroup { name == groupNameField.text.trim() }.ifAbsent {
-                    JOptionPane.showMessageDialog(this@GroupInfoScreen, "that group could not be found")
-                    return@session
-                }.valueOrThrow
-
-                nameLabel.text = group.name
-                list.model = DefaultListModel<Member>().apply {
-                    addAll(group.members)
+                groupList.selectedValue.let {
+                    nameLabel.text = it.name
+                    memberList.model = DefaultListModel<Member>().apply {
+                        addAll(it.members)
+                    }
                 }
             }
         }

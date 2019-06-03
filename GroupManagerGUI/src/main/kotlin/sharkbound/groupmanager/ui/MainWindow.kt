@@ -51,6 +51,8 @@ class MainWindow : JFrame(Data.MAIN_WINDOW_TITLE) {
 
     private fun addAllComponents() {
         content.add(Screen.GROUP_INFO.key, GroupInfoScreen(this))
+        content.add(Screen.ADD_GROUP.key, AddGroupScreen(this))
+//        TODO: work on MemberInfoScreen
         content.add(Screen.MEMBER_INFO.key, MemberInfoScreen(this))
 
         root.add(content, BorderLayout.CENTER)
