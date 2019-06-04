@@ -30,7 +30,7 @@ class MainWindow : JFrame(Data.MAIN_WINDOW_TITLE) {
     }
 
     private fun configure() {
-        screen = Screen.GROUP_INFO
+        screen = Screen.ADD_GROUP
     }
 
     private fun addHandlers() {

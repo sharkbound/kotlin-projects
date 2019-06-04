@@ -2,6 +2,7 @@ package sharkbound.groupmanager.ui
 
 import sharkbound.commonutils.extensions.use
 import sharkbound.commonutils.util.centerFlowLayout
+import sharkbound.commonutils.util.vBoxLayout
 import sharkbound.groupmanager.constants.manager
 import sharkbound.groupmanager.constants.session
 import sharkbound.groupmanager.models.*
@@ -27,8 +28,7 @@ class GroupInfoScreen(mainWindow: MainWindow) : JPanel(BorderLayout()) {
             })
         }, BorderLayout.NORTH)
 
-        add(JPanel().apply {
-            layout = BoxLayout(this, BoxLayout.Y_AXIS)
+        add(vBoxLayout {
             add(centerFlowLayout {
                 add(JLabel("name:"))
                 add(nameLabel)
