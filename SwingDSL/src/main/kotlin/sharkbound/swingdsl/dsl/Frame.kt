@@ -1,6 +1,6 @@
 package sharkbound.swingdsl.dsl
 
-import java.awt.BorderLayout
+import java.awt.Dimension
 import java.awt.FlowLayout
 import java.awt.LayoutManager
 import java.awt.Point
@@ -48,6 +48,7 @@ class Frame(title: String = "", layout: LayoutManager? = null) : JFrame(title) {
             setLocationRelativeTo(null)
         }
 
+        root.preferredSize = Dimension(this.size.width, this.size.height)
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
         isVisible = true
     }

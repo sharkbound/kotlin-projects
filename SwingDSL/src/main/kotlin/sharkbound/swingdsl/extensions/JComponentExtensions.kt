@@ -35,3 +35,15 @@ fun <T : JComponent> T.place(
     bounds = Rectangle(x, y, width, height)
     this.preferredSize = preferredSize
 }
+
+/**
+ * makes the [JComponent] as small as possible, sets maxsize/prefsize to minsize
+ */
+fun JComponent.compact() {
+    preferredSize = minimumSize
+    maximumSize = minimumSize
+}
+
+fun JComponent.size(width: Int, height: Int) {
+    preferredSize = Dimension(width, height)
+}
