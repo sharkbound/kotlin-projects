@@ -16,14 +16,7 @@ fun main() {
         )
 
         root {
-            center {
-                useVBoxLayout()
-                spacer(0, 100) { bg(Color.red) }
-                centerFlowLayout {
-                    button("test1") {}
-                    compact()
-                }
-            }
+
         }
 
         display(size = 600 to 600)
