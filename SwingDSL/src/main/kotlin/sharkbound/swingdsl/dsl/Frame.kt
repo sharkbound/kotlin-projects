@@ -1,18 +1,19 @@
 package sharkbound.swingdsl.dsl
 
-import java.awt.Dimension
-import java.awt.FlowLayout
-import java.awt.LayoutManager
-import java.awt.Point
+import java.awt.*
 import javax.swing.JFrame
 import javax.swing.JPanel
 import javax.swing.WindowConstants
 
 class Frame(title: String = "", layout: LayoutManager? = null) : JFrame(title) {
-    val root = JPanel(FlowLayout())
+    val root = JPanel(BorderLayout())
 
     init {
         contentPane = root
+    }
+
+    fun root(block: JPanel.() -> Unit) {
+        root.block()
     }
 
     fun display(

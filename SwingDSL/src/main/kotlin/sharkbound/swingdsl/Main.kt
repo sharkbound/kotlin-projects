@@ -1,8 +1,7 @@
 package sharkbound.swingdsl
 
 import sharkbound.swingdsl.dsl.frame
-import sharkbound.swingdsl.extensions.sendCloseEvent
-import sharkbound.swingdsl.extensions.textField
+import sharkbound.swingdsl.extensions.*
 import java.awt.Color
 import java.awt.event.KeyEvent
 import javax.swing.JComponent
@@ -16,10 +15,13 @@ fun main() {
             JComponent.WHEN_IN_FOCUSED_WINDOW
         )
 
-        textField("TEXT") {
-            keyEvent {
-                keyPressed {
-                    text = ""
+        root {
+            center {
+                useVBoxLayout()
+                spacer(0, 100) { bg(Color.red) }
+                centerFlowLayout {
+                    button("test1") {}
+                    compact()
                 }
             }
         }

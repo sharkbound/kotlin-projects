@@ -1,11 +1,14 @@
 package sharkbound.swingdsl.extensions
 
+import sharkbound.swingdsl.builders.KeyEventBuilder
 import sharkbound.swingdsl.enums.JComponentKeyStrokeContext
+import java.awt.Color
 import java.awt.Dimension
 import java.awt.Rectangle
 import java.awt.event.ActionEvent
 import javax.swing.AbstractAction
 import javax.swing.JComponent
+import javax.swing.JTextField
 import javax.swing.KeyStroke
 
 inline fun JComponent.registerKeyStroke(
@@ -46,4 +49,17 @@ fun JComponent.compact() {
 
 fun JComponent.size(width: Int, height: Int) {
     preferredSize = Dimension(width, height)
+}
+
+
+fun JComponent.keyEvent(block: KeyEventBuilder<JComponent>.() -> Unit) {
+    KeyEventBuilder(this, block)
+}
+
+fun JComponent.bg(color: Color) {
+    background = color
+}
+
+fun JComponent.fg(color: Color) {
+    foreground = color
 }

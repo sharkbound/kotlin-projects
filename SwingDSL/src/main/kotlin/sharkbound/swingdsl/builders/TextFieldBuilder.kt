@@ -14,7 +14,7 @@ class TextFieldBuilder(val field: JTextField) {
     }
 
     fun height(height: Int) {
-        field.preferredSize = Dimension(field.preferredSize.height, height)
+        field.preferredSize = Dimension(field.preferredSize.width, height)
     }
 
     fun columns(columns: Int) {

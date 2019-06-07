@@ -1,9 +1,7 @@
 package sharkbound.swingdsl.extensions
 
 import sharkbound.swingdsl.builders.TextFieldBuilder
-import java.awt.Container
-import java.awt.Dimension
-import java.awt.FlowLayout
+import java.awt.*
 import java.awt.event.ActionEvent
 import javax.swing.*
 
@@ -120,3 +118,78 @@ inline fun Container.textField(
         .apply {
             this@textField.add(this, constraint)
         }
+
+inline fun Container.borderPanel(hGap: Int = 0, vGap: Int = 0, block: JPanel.() -> Unit): JPanel =
+    JPanel(BorderLayout(hGap, vGap)).apply {
+        block()
+        this@borderPanel.add(this)
+    }
+
+inline fun Container.south(layout: LayoutManager = FlowLayout(), block: JPanel.() -> Unit): JPanel =
+    JPanel(layout).apply {
+        block()
+        this@south.add(this, BorderLayout.SOUTH)
+    }
+
+inline fun Container.north(layout: LayoutManager = FlowLayout(), block: JPanel.() -> Unit): JPanel =
+    JPanel(layout).apply {
+        block()
+        this@north.add(this, BorderLayout.NORTH)
+    }
+
+inline fun Container.east(layout: LayoutManager = FlowLayout(), block: JPanel.() -> Unit): JPanel =
+    JPanel(layout).apply {
+        block()
+        this@east.add(this, BorderLayout.EAST)
+    }
+
+inline fun Container.west(layout: LayoutManager = FlowLayout(), block: JPanel.() -> Unit): JPanel =
+    JPanel(layout).apply {
+        block()
+        this@west.add(this, BorderLayout.WEST)
+    }
+
+inline fun Container.center(layout: LayoutManager = FlowLayout(), block: JPanel.() -> Unit): JPanel =
+    JPanel(layout).apply {
+        block()
+        this@center.add(this, BorderLayout.CENTER)
+    }
+
+fun Container.useBorderLayout(hGap: Int = 0, vGap: Int = 0) {
+    layout = BorderLayout(hGap, vGap)
+}
+
+fun Container.useCenterFlowLayout(hGap: Int = 0, vGap: Int = 0) {
+    layout = FlowLayout(FlowLayout.CENTER, hGap, vGap)
+}
+
+fun Container.useLeftFlowLayout(hGap: Int = 0, vGap: Int = 0) {
+    layout = FlowLayout(FlowLayout.LEFT, hGap, vGap)
+}
+
+fun Container.useRightFlowLayout(hGap: Int = 0, vGap: Int = 0) {
+    layout = FlowLayout(FlowLayout.RIGHT, hGap, vGap)
+}
+
+fun Container.panel(constraint: Any? = null, block: JPanel.() -> Unit): JPanel =
+    JPanel().apply {
+        block()
+        this@panel.add(this, constraint)
+    }
+
+inline fun Container.spacer(w: Int, h: Int, constraint: Any? = null, block: JPanel.() -> Unit = {}): JPanel =
+    JPanel().apply {
+        size(w, h)
+        minimumSize = Dimension(w, h)
+        block()
+        this@spacer.add(this, constraint)
+    }
+
+fun Container.useVBoxLayout() {
+    layout = BoxLayout(this, BoxLayout.Y_AXIS)
+}
+
+
+fun Container.useHBoxLayout() {
+    layout = BoxLayout(this, BoxLayout.X_AXIS)
+}
