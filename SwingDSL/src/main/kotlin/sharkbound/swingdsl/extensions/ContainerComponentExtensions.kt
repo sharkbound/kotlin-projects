@@ -72,3 +72,14 @@ fun Container.passwordField(
         }
         this@passwordField.add(this, constraint)
     }
+
+fun Container.textArea(
+    rows: Int = 0,
+    columns: Int = 0,
+    constraint: Any? = null,
+    block: JTextArea.() -> Unit
+): JTextArea =
+    JTextArea(rows, columns).apply {
+        block()
+        this@textArea.add(this, constraint)
+    }

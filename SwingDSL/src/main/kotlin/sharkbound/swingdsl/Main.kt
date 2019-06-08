@@ -2,14 +2,10 @@ package sharkbound.swingdsl
 
 import sharkbound.swingdsl.dsl.frame
 import sharkbound.swingdsl.extensions.*
-import sharkbound.swingdsl.util.createGridBagContraint
+import sharkbound.swingdsl.util.gridBagContraint
 import java.awt.Color
 import java.awt.event.KeyEvent
-import javax.swing.JButton
-import javax.swing.JComponent
-import javax.swing.JPanel
-import javax.swing.KeyStroke
-import javax.swing.text.JTextComponent
+import javax.swing.*
 
 fun main() {
     frame {
@@ -21,7 +17,8 @@ fun main() {
 
         root {
             gridBag {
-                textField {
+                textArea(constraint = gridBagContraint(1, 1)) {
+                    size(100, 10)
                 }
             }
         }

@@ -7,7 +7,6 @@ import java.awt.Dimension
 import java.awt.Rectangle
 import java.awt.event.ActionEvent
 import javax.swing.*
-import javax.swing.text.JTextComponent
 
 inline fun JComponent.registerKeyStroke(
     key: String,
@@ -74,14 +73,6 @@ fun JComponent.fg(color: Color) {
     foreground = color
 }
 
-fun JTextField.columns(columns: Int) {
-    this.columns = columns
-}
-
-fun JPasswordField.columns(columns: Int) {
-    this.columns = columns
-}
-
 inline fun <T : AbstractButton> T.action(crossinline action: T.(ActionEvent?) -> Unit) {
     addActionListener {
         action(it)
@@ -94,9 +85,46 @@ inline fun <T : JTextField> T.action(crossinline action: T.(ActionEvent?) -> Uni
     }
 }
 
-inline fun <T : JPasswordField> T.action(crossinline action: T.(ActionEvent?) -> Unit) {
-    addActionListener {
-        action(it)
-    }
+fun JTextField.columns(columns: Int) {
+    this.columns = columns
 }
 
+fun JTextArea.lineWrap(wrap: Boolean) {
+    lineWrap = wrap
+}
+
+fun JTextArea.columns(columns: Int) {
+    this.columns = columns
+}
+
+fun JTextArea.rows(rows: Int) {
+    this.rows = rows
+}
+
+fun JTextArea.tabSize(size: Int) {
+    tabSize = size
+}
+
+fun JComponent.maxSize(w: Int, h: Int) {
+    maximumSize = Dimension(w, h)
+}
+
+fun JComponent.maxWidth(w: Int) {
+    maximumSize = Dimension(w, maximumSize.height)
+}
+
+fun JComponent.maxHeight(h: Int) {
+    maximumSize = Dimension(maximumSize.width, h)
+}
+
+fun JComponent.minSize(w: Int, h: Int) {
+    minimumSize = Dimension(w, h)
+}
+
+fun JComponent.minWidth(w: Int) {
+    minimumSize = Dimension(w, minimumSize.height)
+}
+
+fun JComponent.minHeight(h: Int) {
+    minimumSize = Dimension(minimumSize.width, h)
+}

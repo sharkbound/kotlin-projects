@@ -9,7 +9,7 @@ import java.awt.Insets
  *
  * @return [GridBagConstraints] with the same values as passed to the function
  */
-fun createGridBagContraint(
+fun gridBagContraint(
     x: Int = 0,
     y: Int = 0,
     weightX: Double = 1.0,
