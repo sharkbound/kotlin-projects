@@ -88,3 +88,13 @@ inline fun <reified T : JComponent, C : Container> C.add(constraint: Any? = null
     getComponent().apply {
         this@add.add(this, constraint)
     }
+
+inline fun Container.label(
+    text: String? = null,
+    constraint: Any? = null,
+    block: JLabel.() -> Unit
+): JLabel =
+    JLabel(text).apply {
+        block()
+        this@label.add(this, constraint)
+    }

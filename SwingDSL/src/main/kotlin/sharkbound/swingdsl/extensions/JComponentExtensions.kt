@@ -137,3 +137,36 @@ fun <T> JList<T>.itemSelected(block: JList<T>.(ListSelectionEvent, T) -> Unit) {
         }
     }
 }
+
+fun JLabel.text(text: String) {
+    this.text = text
+}
+
+fun JLabel.hLeftAlign() {
+    horizontalAlignment = JLabel.LEFT
+}
+
+fun JLabel.hRightAlign() {
+    horizontalAlignment = JLabel.RIGHT
+}
+
+fun JLabel.hCenterAlign() {
+    horizontalAlignment = JLabel.CENTER
+}
+
+fun JLabel.vTopAlign() {
+    verticalAlignment = JLabel.TOP
+}
+
+fun JLabel.vBottomAlign() {
+    verticalAlignment = JLabel.BOTTOM
+}
+
+fun JLabel.vCenterAlign() {
+    verticalAlignment = JLabel.CENTER
+}
+
+fun JLabel.center() {
+    hCenterAlign()
+    vCenterAlign()
+}
