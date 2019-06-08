@@ -4,10 +4,12 @@ import sharkbound.swingdsl.builders.KeyEventBuilder
 import sharkbound.swingdsl.enums.JComponentKeyStrokeContext
 import java.awt.Color
 import java.awt.Dimension
+import java.awt.Font
 import java.awt.Rectangle
 import java.awt.event.ActionEvent
 import javax.swing.*
 import javax.swing.event.ListSelectionEvent
+import javax.swing.text.JTextComponent
 
 inline fun JComponent.registerKeyStroke(
     key: String,
@@ -92,6 +94,10 @@ fun JTextField.columns(columns: Int) {
 
 fun JTextArea.lineWrap(wrap: Boolean) {
     lineWrap = wrap
+}
+
+fun JTextArea.text(text: String) {
+    this.text = text
 }
 
 fun JTextArea.columns(columns: Int) {
@@ -186,3 +192,33 @@ fun <T> DefaultListModel<T>.addAllItems(vararg items: T): List<T> {
     items.forEach { addItem(it) }
     return items.toList()
 }
+
+fun JTextField.text(text: String) {
+    this.text = text
+}
+
+fun JTextField.leftAlign() {
+    horizontalAlignment = JTextField.LEFT
+}
+
+fun JTextField.rightAlign() {
+    horizontalAlignment = JTextField.RIGHT
+}
+
+fun JTextField.centerAlign() {
+    horizontalAlignment = JTextField.CENTER
+}
+
+fun JTextField.center() {
+    centerAlign()
+}
+
+fun JTextComponent.font(name: String, style: Int, size: Int): Font =
+    Font(name, style, size).apply {
+        this@font.font = this
+    }
+
+fun JLabel.font(name: String, style: Int, size: Int): Font =
+    Font(name, style, size).apply {
+        this@font.font = this
+    }
