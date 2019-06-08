@@ -170,3 +170,19 @@ fun JLabel.center() {
     hCenterAlign()
     vCenterAlign()
 }
+
+inline fun <T> JList<T>.model(block: DefaultListModel<T>.() -> Unit): DefaultListModel<T> =
+    DefaultListModel<T>().apply {
+        block()
+        this@model.model = this
+    }
+
+fun <T> DefaultListModel<T>.addItem(item: T): T {
+    add(this.size(), item)
+    return item
+}
+
+fun <T> DefaultListModel<T>.addAllItems(vararg items: T): List<T> {
+    items.forEach { addItem(it) }
+    return items.toList()
+}

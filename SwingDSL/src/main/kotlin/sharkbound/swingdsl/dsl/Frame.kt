@@ -6,7 +6,7 @@ import javax.swing.JPanel
 import javax.swing.WindowConstants
 
 class Frame(title: String = "", layout: LayoutManager? = null) : JFrame(title) {
-    val root = JPanel(BorderLayout())
+    val root = JPanel(layout ?: BorderLayout())
 
     init {
         contentPane = root

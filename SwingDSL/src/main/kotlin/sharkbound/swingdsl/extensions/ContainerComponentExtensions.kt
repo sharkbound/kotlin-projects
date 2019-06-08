@@ -98,3 +98,15 @@ inline fun Container.label(
         block()
         this@label.add(this, constraint)
     }
+
+inline fun <T> Container.list(constraint: Any? = null, block: JList<T>.() -> Unit): JList<T> =
+    JList<T>().apply {
+        block()
+        this@list.add(this, constraint)
+    }
+
+inline fun Container.scrollPane(constraint: Any? = null, block: JScrollPane.() -> JComponent): JScrollPane =
+    JScrollPane().apply {
+        setViewportView(block())
+        this@scrollPane.add(this, constraint)
+    }
