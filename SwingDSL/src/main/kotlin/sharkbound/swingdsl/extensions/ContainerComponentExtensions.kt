@@ -83,3 +83,8 @@ fun Container.textArea(
         block()
         this@textArea.add(this, constraint)
     }
+
+inline fun <reified T : JComponent, C : Container> C.add(constraint: Any? = null, getComponent: C.() -> T): T =
+    getComponent().apply {
+        this@add.add(this, constraint)
+    }

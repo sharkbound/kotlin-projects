@@ -1,6 +1,7 @@
 package sharkbound.swingdsl
 
 import sharkbound.swingdsl.dsl.frame
+import sharkbound.swingdsl.enums.GridBagFill
 import sharkbound.swingdsl.extensions.*
 import sharkbound.swingdsl.util.gridBagContraint
 import java.awt.Color
@@ -16,11 +17,7 @@ fun main() {
         )
 
         root {
-            gridBag {
-                textArea(constraint = gridBagContraint(1, 1)) {
-                    size(100, 10)
-                }
-            }
+
         }
 
         display(size = 600 to 600)

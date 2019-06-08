@@ -7,6 +7,7 @@ import java.awt.Dimension
 import java.awt.Rectangle
 import java.awt.event.ActionEvent
 import javax.swing.*
+import javax.swing.event.ListSelectionEvent
 
 inline fun JComponent.registerKeyStroke(
     key: String,
@@ -127,4 +128,12 @@ fun JComponent.minWidth(w: Int) {
 
 fun JComponent.minHeight(h: Int) {
     minimumSize = Dimension(minimumSize.width, h)
+}
+
+fun <T> JList<T>.itemSelected(block: JList<T>.(ListSelectionEvent, T) -> Unit) {
+    addListSelectionListener {
+        if (it != null && !it.valueIsAdjusting) {
+            block(it, selectedValue)
+        }
+    }
 }
