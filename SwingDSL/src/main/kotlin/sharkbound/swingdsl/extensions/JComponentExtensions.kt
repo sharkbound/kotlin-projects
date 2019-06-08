@@ -6,10 +6,8 @@ import java.awt.Color
 import java.awt.Dimension
 import java.awt.Rectangle
 import java.awt.event.ActionEvent
-import javax.swing.AbstractAction
-import javax.swing.JComponent
-import javax.swing.JTextField
-import javax.swing.KeyStroke
+import javax.swing.*
+import javax.swing.text.JTextComponent
 
 inline fun JComponent.registerKeyStroke(
     key: String,
@@ -51,10 +49,22 @@ fun JComponent.size(width: Int, height: Int) {
     preferredSize = Dimension(width, height)
 }
 
-
-fun JComponent.keyEvent(block: KeyEventBuilder<JComponent>.() -> Unit) {
-    KeyEventBuilder(this, block)
+fun JComponent.size(size: Dimension) {
+    preferredSize = Dimension(size)
 }
+
+fun JComponent.width(w: Int) {
+    size(w, preferredSize.height)
+}
+
+fun JComponent.height(h: Int) {
+    size(preferredSize.width, h)
+}
+
+
+fun <T : JComponent> T.keyEvent(block: KeyEventBuilder<T>.() -> Unit): KeyEventBuilder<T> =
+    KeyEventBuilder(this, block)
+
 
 fun JComponent.bg(color: Color) {
     background = color
@@ -63,3 +73,30 @@ fun JComponent.bg(color: Color) {
 fun JComponent.fg(color: Color) {
     foreground = color
 }
+
+fun JTextField.columns(columns: Int) {
+    this.columns = columns
+}
+
+fun JPasswordField.columns(columns: Int) {
+    this.columns = columns
+}
+
+inline fun <T : AbstractButton> T.action(crossinline action: T.(ActionEvent?) -> Unit) {
+    addActionListener {
+        action(it)
+    }
+}
+
+inline fun <T : JTextField> T.action(crossinline action: T.(ActionEvent?) -> Unit) {
+    addActionListener {
+        action(it)
+    }
+}
+
+inline fun <T : JPasswordField> T.action(crossinline action: T.(ActionEvent?) -> Unit) {
+    addActionListener {
+        action(it)
+    }
+}
+
