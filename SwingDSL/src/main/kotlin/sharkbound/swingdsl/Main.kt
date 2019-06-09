@@ -8,6 +8,7 @@ import sharkbound.swingdsl.util.style
 import java.awt.Color
 import java.awt.Font
 import java.awt.event.KeyEvent
+import java.awt.font.TextAttribute
 import javax.swing.*
 
 lateinit var field: JTextField
@@ -39,7 +40,12 @@ fun main() {
                 entered = label(constraint = gridBagContraint(fill = GridBagFill.BOTH)) {
                     center()
                     fg(Color.blue)
-                    font("source code pro", style(bold = true, italic = true), 40)
+                    font = Font(Font("source code pro", style(bold = true, italic = true), 40).attributes.let {
+                        val map = it as MutableMap<TextAttribute, Any?>
+                        map[TextAttribute.STRIKETHROUGH] = TextAttribute.STRIKETHROUGH_ON
+                        map
+                    })
+
                 }
             }
 
