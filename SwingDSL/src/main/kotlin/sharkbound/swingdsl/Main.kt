@@ -1,14 +1,14 @@
 package sharkbound.swingdsl
 
 import sharkbound.swingdsl.dsl.frame
-import sharkbound.swingdsl.enums.BoldWeight
 import sharkbound.swingdsl.enums.GridBagFill
 import sharkbound.swingdsl.enums.Underline
 import sharkbound.swingdsl.extensions.*
 import sharkbound.swingdsl.util.buildFont
 import sharkbound.swingdsl.util.gridBagContraint
+import sharkbound.swingdsl.util.gridFillBoth
+import sharkbound.swingdsl.util.useSystemLookAndFeel
 import java.awt.Color
-import java.awt.GradientPaint
 import java.awt.event.KeyEvent
 import javax.swing.*
 
@@ -17,6 +17,7 @@ lateinit var entered: JLabel
 lateinit var setTextBtn: JButton
 
 fun main() {
+    useSystemLookAndFeel()
     frame {
         root.registerKeyboardAction(
             { sendCloseEvent() },
@@ -25,36 +26,45 @@ fun main() {
         )
 
         root {
-            north {
-                useGridBagLayout()
-                field = textField(constraint = gridBagContraint(fill = GridBagFill.BOTH)) {
-                    columns(10)
-                    center()
-                    action {
-                        setTextBtn.doClick()
+            tabPane {
+                tab("test typer") {
+                    north {
+                        useGridBagLayout()
+                        field = textField(constraint = gridBagContraint(fill = GridBagFill.BOTH)) {
+                            columns(10)
+                            leftAlign()
+                            action {
+                                setTextBtn.doClick()
+                            }
+                        }
+                    }
+
+                    center {
+                        useGridBagLayout()
+                        entered = label(constraint = gridFillBoth()) {
+                            center()
+                            text("long text to test styles")
+                            font = buildFont {
+                                size = 30
+                                fg = Color.yellow
+                                bg = Color.gray
+                                underline = Underline.GRAY
+                            }
+                        }
+                    }
+
+                    south {
+                        setTextBtn = button("set text") {
+                            entered.text(field.text)
+                        }
                     }
                 }
-            }
 
-            center {
-                useGridBagLayout()
-                entered = label(constraint = gridBagContraint(fill = GridBagFill.BOTH)) {
-                    center()
-                    text("long text to test styles")
-                    font = buildFont {
-                        strikeThrough = true
-                        bold = BoldWeight.EXTRA
-                        name = "Source Code Pro"
-                        size = 30
-                        underline = Underline.DASHED
-                        italic = true
+                tab("button") {
+                    useGridBagLayout()
+                    button(":D", constraint = gridFillBoth()) {
+                        selectedIndex = 0
                     }
-                }
-            }
-
-            south {
-                setTextBtn = button("set text") {
-                    entered.text(field.text)
                 }
             }
         }

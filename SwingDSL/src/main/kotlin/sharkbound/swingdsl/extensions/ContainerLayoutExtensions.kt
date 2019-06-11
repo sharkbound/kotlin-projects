@@ -1,8 +1,11 @@
 package sharkbound.swingdsl.extensions
 
+import sharkbound.swingdsl.enums.TabLayout
+import sharkbound.swingdsl.enums.TabPlacement
 import java.awt.*
 import javax.swing.BoxLayout
 import javax.swing.JPanel
+import javax.swing.JTabbedPane
 
 /**
  * creates a Y_AXIS aligned JPanel with BoxLayout, then adds it to the [Container]
@@ -165,4 +168,15 @@ fun Container.gridBag(contraint: Any? = null, block: JPanel.() -> Unit): JPanel 
     JPanel(GridBagLayout()).apply {
         block()
         this@gridBag.add(this, contraint)
+    }
+
+fun Container.tabPane(
+    tabPlacement: TabPlacement = TabPlacement.TOP,
+    tabLayout: TabLayout = TabLayout.WRAP,
+    contraint: Any? = null,
+    block: JTabbedPane.() -> Unit
+): JTabbedPane =
+    JTabbedPane(tabPlacement.alignment, tabLayout.value).apply {
+        block()
+        this@tabPane.add(this, contraint)
     }

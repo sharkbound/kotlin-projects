@@ -2,10 +2,7 @@ package sharkbound.swingdsl.extensions
 
 import sharkbound.swingdsl.builders.KeyEventBuilder
 import sharkbound.swingdsl.enums.JComponentKeyStrokeContext
-import java.awt.Color
-import java.awt.Dimension
-import java.awt.Font
-import java.awt.Rectangle
+import java.awt.*
 import java.awt.event.ActionEvent
 import javax.swing.*
 import javax.swing.event.ListSelectionEvent
@@ -222,3 +219,19 @@ fun JLabel.font(name: String, style: Int, size: Int): Font =
     Font(name, style, size).apply {
         this@font.font = this
     }
+
+inline fun JTabbedPane.tab(
+    title: String,
+    tip: String = "",
+    icon: Icon? = null,
+    layout: LayoutManager = FlowLayout(),
+    block: JPanel.() -> Unit
+): JPanel =
+    JPanel(layout).apply {
+        block()
+        addTab(title, icon, this, tip)
+    }
+
+// broken
+//fun <T : JComponent> T.fillParent(parent: JComponent): T =
+//    apply { preferredSize = parent.size }
