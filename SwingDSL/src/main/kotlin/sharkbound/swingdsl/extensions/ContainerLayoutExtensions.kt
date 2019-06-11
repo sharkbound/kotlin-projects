@@ -3,6 +3,7 @@ package sharkbound.swingdsl.extensions
 import sharkbound.swingdsl.enums.SplitPaneOrientation
 import sharkbound.swingdsl.enums.TabLayout
 import sharkbound.swingdsl.enums.TabPlacement
+import sharkbound.swingdsl.wrappers.CardLayoutWrapper
 import java.awt.*
 import javax.swing.BoxLayout
 import javax.swing.JPanel
@@ -197,4 +198,15 @@ inline fun Container.splitPane(
     JSplitPane(orientation.value, continuousRedraw).apply {
         block()
         this@splitPane.add(this, constraint)
+    }
+
+inline fun Container.cardPane(
+    constraint: Any? = null,
+    hGap: Int = 0,
+    vGap: Int = 0,
+    block: CardLayoutWrapper.() -> Unit
+): CardLayoutWrapper =
+    CardLayoutWrapper(hGap, vGap).apply {
+        block()
+        this@cardPane.add(this, constraint)
     }

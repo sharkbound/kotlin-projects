@@ -232,6 +232,18 @@ inline fun JTabbedPane.tab(
         addTab(title, icon, this, tip)
     }
 
+inline fun <T : JComponent> JTabbedPane.tabFrom(
+    title: String,
+    tip: String = "",
+    icon: Icon? = null,
+    layout: LayoutManager = FlowLayout(),
+    block: () -> T
+): T =
+    block().apply {
+        block()
+        addTab(title, icon, this, tip)
+    }
+
 
 inline fun JSplitPane.left(layout: LayoutManager? = null, block: JPanel.() -> Unit): JPanel =
     JPanel(layout ?: FlowLayout()).apply {

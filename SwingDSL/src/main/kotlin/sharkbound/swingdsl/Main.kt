@@ -7,13 +7,11 @@ import sharkbound.swingdsl.util.buildFont
 import sharkbound.swingdsl.util.gridBagContraint
 import sharkbound.swingdsl.util.gridFillBoth
 import sharkbound.swingdsl.util.useSystemLookAndFeel
+import sharkbound.swingdsl.wrappers.CardLayoutWrapper
 import java.awt.Color
 import java.awt.event.KeyEvent
 import javax.swing.*
 
-lateinit var field: JTextField
-lateinit var entered: JLabel
-lateinit var setTextBtn: JButton
 
 fun main() {
     useSystemLookAndFeel()
@@ -24,16 +22,34 @@ fun main() {
             JComponent.WHEN_IN_FOCUSED_WINDOW
         )
 
+        var card: CardLayoutWrapper? = null
         root {
-            tabPane(TabPlacement.valueOf("BOTTOM")) {
-                splitPane {
-                    left {
-                        useGridBagLayout()
-                        button("LEFT", constraint = gridFillBoth()) {}
+            borderPanel {
+                center {
+                    card = cardPane {
+                        vBoxLayout(constraint = "1") {
+                            centerFlowLayout {
+                                label("name: ") { }
+                                textField() { columns(10) }
+                            }
+                        }
+                        vBoxLayout(constraint = "2") {
+                            centerFlowLayout {
+                                label("age: ") { }
+                                textField() { columns(10) }
+                            }
+                        }
                     }
-                    right {
-                        useGridBagLayout()
-                        button("RIGHT", constraint = gridFillBoth()) {}
+                }
+                north {
+                    list<String> {
+                        size(300, 50)
+                        model {
+                            addAllItems("1", "2")
+                        }
+                        itemSelected { _, value ->
+                            card?.current = value
+                        }
                     }
                 }
             }
