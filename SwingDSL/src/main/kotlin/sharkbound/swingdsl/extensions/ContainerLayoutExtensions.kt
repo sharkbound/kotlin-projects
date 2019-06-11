@@ -5,6 +5,7 @@ import sharkbound.swingdsl.enums.TabPlacement
 import java.awt.*
 import javax.swing.BoxLayout
 import javax.swing.JPanel
+import javax.swing.JSplitPane
 import javax.swing.JTabbedPane
 
 /**
@@ -180,3 +181,7 @@ fun Container.tabPane(
         block()
         this@tabPane.add(this, contraint)
     }
+
+// TODO: implement this
+fun Container.splitPane(): JSplitPane =
+    JSplitPane()
