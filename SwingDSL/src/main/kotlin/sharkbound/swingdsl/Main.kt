@@ -1,14 +1,15 @@
 package sharkbound.swingdsl
 
 import sharkbound.swingdsl.dsl.frame
+import sharkbound.swingdsl.enums.BoldWeight
 import sharkbound.swingdsl.enums.GridBagFill
+import sharkbound.swingdsl.enums.Underline
 import sharkbound.swingdsl.extensions.*
+import sharkbound.swingdsl.util.buildFont
 import sharkbound.swingdsl.util.gridBagContraint
-import sharkbound.swingdsl.util.style
 import java.awt.Color
-import java.awt.Font
+import java.awt.GradientPaint
 import java.awt.event.KeyEvent
-import java.awt.font.TextAttribute
 import javax.swing.*
 
 lateinit var field: JTextField
@@ -39,13 +40,15 @@ fun main() {
                 useGridBagLayout()
                 entered = label(constraint = gridBagContraint(fill = GridBagFill.BOTH)) {
                     center()
-                    fg(Color.blue)
-                    font = Font(Font("source code pro", style(bold = true, italic = true), 40).attributes.let {
-                        val map = it as MutableMap<TextAttribute, Any?>
-                        map[TextAttribute.STRIKETHROUGH] = TextAttribute.STRIKETHROUGH_ON
-                        map
-                    })
-
+                    text("long text to test styles")
+                    font = buildFont {
+                        strikeThrough = true
+                        bold = BoldWeight.EXTRA
+                        name = "Source Code Pro"
+                        size = 30
+                        underline = Underline.DASHED
+                        italic = true
+                    }
                 }
             }
 
