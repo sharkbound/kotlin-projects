@@ -1,8 +1,7 @@
 package sharkbound.swingdsl
 
 import sharkbound.swingdsl.dsl.frame
-import sharkbound.swingdsl.enums.GridBagFill
-import sharkbound.swingdsl.enums.Underline
+import sharkbound.swingdsl.enums.*
 import sharkbound.swingdsl.extensions.*
 import sharkbound.swingdsl.util.buildFont
 import sharkbound.swingdsl.util.gridBagContraint
@@ -26,44 +25,15 @@ fun main() {
         )
 
         root {
-            tabPane {
-                tab("test typer") {
-                    north {
+            tabPane(TabPlacement.valueOf("BOTTOM")) {
+                splitPane {
+                    left {
                         useGridBagLayout()
-                        field = textField(constraint = gridBagContraint(fill = GridBagFill.BOTH)) {
-                            columns(10)
-                            leftAlign()
-                            action {
-                                setTextBtn.doClick()
-                            }
-                        }
+                        button("LEFT", constraint = gridFillBoth()) {}
                     }
-
-                    center {
+                    right {
                         useGridBagLayout()
-                        entered = label(constraint = gridFillBoth()) {
-                            center()
-                            text("long text to test styles")
-                            font = buildFont {
-                                size = 30
-                                fg = Color.yellow
-                                bg = Color.gray
-                                underline = Underline.GRAY
-                            }
-                        }
-                    }
-
-                    south {
-                        setTextBtn = button("set text") {
-                            entered.text(field.text)
-                        }
-                    }
-                }
-
-                tab("button") {
-                    useGridBagLayout()
-                    button(":D", constraint = gridFillBoth()) {
-                        selectedIndex = 0
+                        button("RIGHT", constraint = gridFillBoth()) {}
                     }
                 }
             }

@@ -232,6 +232,15 @@ inline fun JTabbedPane.tab(
         addTab(title, icon, this, tip)
     }
 
-// broken
-//fun <T : JComponent> T.fillParent(parent: JComponent): T =
-//    apply { preferredSize = parent.size }
+
+inline fun JSplitPane.left(layout: LayoutManager? = null, block: JPanel.() -> Unit): JPanel =
+    JPanel(layout ?: FlowLayout()).apply {
+        block()
+        leftComponent = this
+    }
+
+inline fun JSplitPane.right(layout: LayoutManager? = null, block: JPanel.() -> Unit): JPanel =
+    JPanel(layout ?: FlowLayout()).apply {
+        block()
+        rightComponent = this
+    }

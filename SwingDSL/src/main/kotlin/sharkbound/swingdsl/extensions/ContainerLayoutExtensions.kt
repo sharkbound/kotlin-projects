@@ -1,5 +1,6 @@
 package sharkbound.swingdsl.extensions
 
+import sharkbound.swingdsl.enums.SplitPaneOrientation
 import sharkbound.swingdsl.enums.TabLayout
 import sharkbound.swingdsl.enums.TabPlacement
 import java.awt.*
@@ -123,6 +124,11 @@ inline fun Container.west(layout: LayoutManager = FlowLayout(), block: JPanel.()
     }
 }
 
+inline fun <T : LayoutManager, C : Container> C.layout(block: C.() -> T): T =
+    block().apply {
+        this@layout.layout = this
+    }
+
 inline fun Container.center(layout: LayoutManager = FlowLayout(), block: JPanel.() -> Unit): JPanel {
     ensureLayout { BorderLayout() }
     return JPanel(layout).apply {
@@ -165,23 +171,30 @@ fun Container.useGridBagLayout() {
     ensureLayout { GridBagLayout() }
 }
 
-fun Container.gridBag(contraint: Any? = null, block: JPanel.() -> Unit): JPanel =
+inline fun Container.gridBag(contraint: Any? = null, block: JPanel.() -> Unit): JPanel =
     JPanel(GridBagLayout()).apply {
         block()
         this@gridBag.add(this, contraint)
     }
 
-fun Container.tabPane(
+inline fun Container.tabPane(
     tabPlacement: TabPlacement = TabPlacement.TOP,
     tabLayout: TabLayout = TabLayout.WRAP,
-    contraint: Any? = null,
+    constraint: Any? = null,
     block: JTabbedPane.() -> Unit
 ): JTabbedPane =
     JTabbedPane(tabPlacement.alignment, tabLayout.value).apply {
         block()
-        this@tabPane.add(this, contraint)
+        this@tabPane.add(this, constraint)
     }
 
-// TODO: implement this
-fun Container.splitPane(): JSplitPane =
-    JSplitPane()
+inline fun Container.splitPane(
+    orientation: SplitPaneOrientation = SplitPaneOrientation.HORIZONTAL,
+    continuousRedraw: Boolean = true,
+    constraint: Any? = null,
+    block: JSplitPane.() -> Unit
+): JSplitPane =
+    JSplitPane(orientation.value, continuousRedraw).apply {
+        block()
+        this@splitPane.add(this, constraint)
+    }
