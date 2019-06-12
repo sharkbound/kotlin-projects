@@ -190,6 +190,7 @@ fun <T> DefaultListModel<T>.addAllItems(vararg items: T): List<T> {
     return items.toList()
 }
 
+
 fun JTextField.text(text: String) {
     this.text = text
 }
@@ -256,3 +257,26 @@ inline fun JSplitPane.right(layout: LayoutManager? = null, block: JPanel.() -> U
         block()
         rightComponent = this
     }
+
+
+inline fun <T> JComboBox<T>.model(block: DefaultComboBoxModel<T>.() -> Unit): DefaultComboBoxModel<T> =
+    DefaultComboBoxModel<T>().apply {
+        block()
+        this@model.model = this
+    }
+
+fun <T> DefaultComboBoxModel<T>.addItem(item: T): T {
+    addElement(item)
+    return item
+}
+
+fun <T> DefaultComboBoxModel<T>.addAllItems(vararg items: T): List<T> {
+    items.forEach { addElement(it) }
+    return items.toList()
+}
+
+inline fun <reified T> JComboBox<T>.itemSelected(crossinline block: JComboBox<T>.(ActionEvent, T?) -> Unit) {
+    addActionListener {
+        block(it, selectedItem as? T)
+    }
+}

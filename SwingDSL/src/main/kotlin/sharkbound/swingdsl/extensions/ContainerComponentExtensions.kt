@@ -110,3 +110,9 @@ inline fun Container.scrollPane(constraint: Any? = null, block: JScrollPane.() -
         setViewportView(block())
         this@scrollPane.add(this, constraint)
     }
+
+inline fun <T> Container.comboBox(constraint: Any? = null, block: JComboBox<T>.() -> Unit): JComboBox<T> =
+    JComboBox<T>().apply {
+        block()
+        this@comboBox.add(this, constraint)
+    }
