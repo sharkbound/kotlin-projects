@@ -1,7 +1,7 @@
 package sharkbound.swingdsl.extensions
 
-import sharkbound.swingdsl.builders.KeyEventBuilder
 import sharkbound.swingdsl.enums.JComponentKeyStrokeContext
+import sharkbound.swingdsl.wrappers.*
 import java.awt.*
 import java.awt.event.ActionEvent
 import javax.swing.*
@@ -61,8 +61,8 @@ fun JComponent.height(h: Int) {
 }
 
 
-fun <T : JComponent> T.keyEvent(block: KeyEventBuilder<T>.() -> Unit): KeyEventBuilder<T> =
-    KeyEventBuilder(this, block)
+fun <T : JComponent> T.keyEvent(block: KeyEventWrapper<T>.() -> Unit): KeyEventWrapper<T> =
+    KeyEventWrapper(this).apply(block)
 
 
 fun JComponent.bg(color: Color) {
@@ -279,4 +279,37 @@ inline fun <reified T> JComboBox<T>.itemSelected(crossinline block: JComboBox<T>
     addActionListener {
         block(it, selectedItem as? T)
     }
+}
+
+val JComboBox<*>.textLabel: JLabel
+    get() = renderer as JLabel
+
+inline fun <T : JComponent> T.componentListener(block: ComponentEventWrapper<T>.() -> Unit): ComponentEventWrapper<T> =
+    ComponentEventWrapper(this).apply(block)
+
+
+inline fun <T : JComponent> T.mouseListener(block: MouseEventWrapper<T>.() -> Unit): MouseEventWrapper<T> =
+    MouseEventWrapper(this).apply(block)
+
+inline fun <T : JComponent> T.mouseMotionListener(block: MouseMotionEventWrapper<T>.() -> Unit): MouseMotionEventWrapper<T> =
+    MouseMotionEventWrapper(this).apply(block)
+
+inline fun <T : JComponent> T.focusListener(block: FocusEventWrapper<T>.() -> Unit): FocusEventWrapper<T> =
+    FocusEventWrapper(this).apply(block)
+
+fun <T : JTextComponent> T.placeHolderText(placeholder: String) {
+    focusListener {
+        gained {
+            if (text == placeholder) {
+                text = ""
+            }
+        }
+
+        lost {
+            if (text.isNullOrEmpty()) {
+                text = placeholder
+            }
+        }
+    }
+    text = placeholder
 }

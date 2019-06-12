@@ -1,15 +1,11 @@
-package sharkbound.swingdsl.builders
+package sharkbound.swingdsl.wrappers
 
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 import javax.swing.JComponent
 
-class KeyEventBuilder<T : JComponent>(val parent: T, init: KeyEventBuilder<T>.() -> Unit) {
-    init {
-        init()
-    }
-
-    fun keyTyped(block: T.(KeyEvent?) -> Unit) {
+class KeyEventWrapper<T : JComponent>(val parent: T) {
+    inline fun keyTyped(crossinline block: T.(KeyEvent?) -> Unit) {
         parent.addKeyListener(object : KeyAdapter() {
             override fun keyTyped(e: KeyEvent?) {
                 parent.block(e)
@@ -17,7 +13,7 @@ class KeyEventBuilder<T : JComponent>(val parent: T, init: KeyEventBuilder<T>.()
         })
     }
 
-    fun keyPressed(block: T.(KeyEvent?) -> Unit) {
+    inline fun keyPressed(crossinline block: T.(KeyEvent?) -> Unit) {
         parent.addKeyListener(object : KeyAdapter() {
             override fun keyPressed(e: KeyEvent?) {
                 parent.block(e)
@@ -25,7 +21,7 @@ class KeyEventBuilder<T : JComponent>(val parent: T, init: KeyEventBuilder<T>.()
         })
     }
 
-    fun keyReleased(block: T.(KeyEvent?) -> Unit) {
+    inline fun keyReleased(crossinline block: T.(KeyEvent?) -> Unit) {
         parent.addKeyListener(object : KeyAdapter() {
             override fun keyReleased(e: KeyEvent?) {
                 parent.block(e)

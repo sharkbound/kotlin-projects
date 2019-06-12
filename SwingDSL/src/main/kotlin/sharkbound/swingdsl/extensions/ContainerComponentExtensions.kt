@@ -116,3 +116,15 @@ inline fun <T> Container.comboBox(constraint: Any? = null, block: JComboBox<T>.(
         block()
         this@comboBox.add(this, constraint)
     }
+
+inline fun Container.toggleButton(
+    text: String,
+    selected: Boolean = false,
+    constraint: Any? = null,
+    icon: Icon? = null,
+    block: JToggleButton.() -> Unit
+): JToggleButton =
+    JToggleButton(text, icon, selected).apply {
+        block()
+        this@toggleButton.add(this, constraint)
+    }
