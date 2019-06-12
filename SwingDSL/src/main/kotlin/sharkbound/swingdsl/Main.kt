@@ -19,9 +19,7 @@ fun main() {
         )
 
         root {
-            vBoxLayout {
-
-            }
+            
         }
 
         display(size = 600 to 600)

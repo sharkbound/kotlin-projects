@@ -11,14 +11,14 @@ fun Container.button(
     size: Pair<Int, Int>? = null,
     icon: Icon? = null,
     constraint: Any? = null,
-    action: ActionEvent?.() -> Unit
+    block: JButton.() -> Unit
 ): JButton =
     JButton(text).apply {
         size?.apply {
             preferredSize = Dimension(first, second)
         }
+        block()
         this.icon = icon
-        addActionListener(action)
         this@button.add(this, constraint)
     }
 
