@@ -5,10 +5,7 @@ import sharkbound.swingdsl.enums.TabLayout
 import sharkbound.swingdsl.enums.TabPlacement
 import sharkbound.swingdsl.wrappers.CardLayoutWrapper
 import java.awt.*
-import javax.swing.BoxLayout
-import javax.swing.JPanel
-import javax.swing.JSplitPane
-import javax.swing.JTabbedPane
+import javax.swing.*
 
 /**
  * creates a Y_AXIS aligned JPanel with BoxLayout, then adds it to the [Container]
@@ -172,10 +169,10 @@ fun Container.useGridBagLayout() {
     ensureLayout { GridBagLayout() }
 }
 
-inline fun Container.gridBag(contraint: Any? = null, block: JPanel.() -> Unit): JPanel =
+inline fun Container.gridBag(constraint: Any? = null, block: JPanel.() -> Unit): JPanel =
     JPanel(GridBagLayout()).apply {
         block()
-        this@gridBag.add(this, contraint)
+        this@gridBag.add(this, constraint)
     }
 
 inline fun Container.tabPane(

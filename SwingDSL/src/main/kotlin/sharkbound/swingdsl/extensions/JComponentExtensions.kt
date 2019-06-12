@@ -237,7 +237,6 @@ inline fun <T : JComponent> JTabbedPane.tabFrom(
     title: String,
     tip: String = "",
     icon: Icon? = null,
-    layout: LayoutManager = FlowLayout(),
     block: () -> T
 ): T =
     block().apply {

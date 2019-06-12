@@ -24,11 +24,11 @@ fun Container.button(
 
 
 inline fun Container.textField(
-    initalText: String = "",
+    initialText: String = "",
     constraint: Any? = null,
     block: JTextField.() -> Unit
 ): JTextField =
-    JTextField(initalText)
+    JTextField(initialText)
         .apply {
             block()
             this@textField.add(this, constraint)
@@ -54,11 +54,14 @@ inline fun Container.spacer(w: Int, h: Int, constraint: Any? = null, block: JPan
         this@spacer.add(this, constraint)
     }
 
-fun Container.hSpacer(w: Int = 0, block: JPanel.() -> Unit = {}): JPanel =
-    spacer(w, 0).apply(block)
+fun Container.spacer(constraint: Any? = null, block: JPanel.() -> Unit = {}): JPanel =
+    panel(constraint, block)
 
-fun Container.vSpacer(h: Int = 0, block: JPanel.() -> Unit = {}): JPanel =
-    spacer(0, h).apply(block)
+fun Container.hSpacer(w: Int = 0, constraint: Any? = null, block: JPanel.() -> Unit = {}): JPanel =
+    spacer(w, 0, constraint).apply(block)
+
+fun Container.vSpacer(h: Int = 0, constraint: Any? = null, block: JPanel.() -> Unit = {}): JPanel =
+    spacer(0, h, constraint).apply(block)
 
 fun Container.passwordField(
     columns: Int? = null,
@@ -88,6 +91,7 @@ inline fun <reified T : JComponent, C : Container> C.add(constraint: Any? = null
     getComponent().apply {
         this@add.add(this, constraint)
     }
+
 
 inline fun Container.label(
     text: String? = null,
@@ -122,9 +126,30 @@ inline fun Container.toggleButton(
     selected: Boolean = false,
     constraint: Any? = null,
     icon: Icon? = null,
+    groupID: Any? = null,
     block: JToggleButton.() -> Unit
 ): JToggleButton =
     JToggleButton(text, icon, selected).apply {
         block()
+        groupID?.let {
+            addToGroup(groupID, selected)
+        }
         this@toggleButton.add(this, constraint)
+    }
+
+
+inline fun Container.radioButton(
+    text: String,
+    selected: Boolean = false,
+    constraint: Any? = null,
+    icon: Icon? = null,
+    groupID: Any? = null,
+    block: JRadioButton.() -> Unit
+): JRadioButton =
+    JRadioButton(text, icon, selected).apply {
+        groupID?.let {
+            addToGroup(groupID, selected)
+        }
+        block()
+        this@radioButton.add(this, constraint)
     }

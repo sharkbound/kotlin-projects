@@ -1,13 +1,12 @@
 package sharkbound.swingdsl
 
 import sharkbound.swingdsl.dsl.frame
-import sharkbound.swingdsl.enums.*
 import sharkbound.swingdsl.extensions.*
 import sharkbound.swingdsl.util.*
-import sharkbound.swingdsl.wrappers.CardLayoutWrapper
 import java.awt.Color
 import java.awt.event.*
 import javax.swing.*
+import javax.swing.border.LineBorder
 
 
 fun main() {
@@ -20,6 +19,9 @@ fun main() {
         )
 
         root {
+            vBoxLayout {
+
+            }
         }
 
         display(size = 600 to 600)
