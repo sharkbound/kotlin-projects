@@ -5,8 +5,13 @@ import sharkbound.swingdsl.extensions.*
 import sharkbound.swingdsl.util.*
 import java.awt.Color
 import java.awt.event.*
+import java.util.*
 import javax.swing.*
 import javax.swing.border.LineBorder
+import javax.swing.table.DefaultTableColumnModel
+import javax.swing.table.DefaultTableModel
+import javax.swing.table.JTableHeader
+import javax.swing.table.TableColumn
 
 
 fun main() {
@@ -19,7 +24,15 @@ fun main() {
         )
 
         root {
-            
+            scrollPane {
+                table {
+                    model {
+                        addColumns("Name", "Age", "Gender")
+                        addRow(1, 2, 3)
+                        addRow(1, 2, 3)
+                    }
+                }
+            }
         }
 
         display(size = 600 to 600)

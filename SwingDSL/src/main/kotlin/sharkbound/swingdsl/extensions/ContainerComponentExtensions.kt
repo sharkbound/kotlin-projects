@@ -153,3 +153,9 @@ inline fun Container.radioButton(
         block()
         this@radioButton.add(this, constraint)
     }
+
+inline fun Container.table(constraint: Any? = null, block: JTable.() -> Unit): JTable =
+    JTable().apply {
+        block()
+        this@table.add(this, constraint)
+    }

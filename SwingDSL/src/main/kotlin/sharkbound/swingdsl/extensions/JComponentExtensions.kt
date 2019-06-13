@@ -6,6 +6,9 @@ import java.awt.*
 import java.awt.event.ActionEvent
 import javax.swing.*
 import javax.swing.event.ListSelectionEvent
+import javax.swing.event.TableModelEvent
+import javax.swing.table.DefaultTableModel
+import javax.swing.table.TableModel
 import javax.swing.text.JTextComponent
 
 inline fun JComponent.registerKeyStroke(
@@ -311,4 +314,26 @@ fun <T : JTextComponent> T.placeHolderText(placeholder: String) {
         }
     }
     text = placeholder
+}
+
+fun <T : JTable> T.model(block: DefaultTableModel.() -> Unit): DefaultTableModel =
+    DefaultTableModel().apply {
+        block()
+        this@model.model = this
+    }
+
+fun DefaultTableModel.addColumns(vararg columns: Any): List<Any> {
+    columns.forEach { addColumn(it) }
+    return columns.toList()
+}
+
+fun DefaultTableModel.addRow(vararg values: Any): List<Any> {
+    addRow(values)
+    return values.toList()
+}
+
+inline fun DefaultTableModel.dataChanged(crossinline block: DefaultTableModel.(TableModelEvent) -> Unit) {
+    addTableModelListener {
+        block(it)
+    }
 }
