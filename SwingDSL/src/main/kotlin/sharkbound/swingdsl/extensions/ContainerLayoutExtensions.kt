@@ -45,8 +45,8 @@ inline fun Container.hBoxLayout(
  * left aligned flow layout
  */
 inline fun Container.leftFlowLayout(
-    hGap: Int = 2,
-    vGap: Int = 2,
+    hGap: Int = 0,
+    vGap: Int = 0,
     size: Pair<Int, Int>? = null,
     constraint: Any? = null,
     block: JPanel.() -> Unit
@@ -60,8 +60,8 @@ inline fun Container.leftFlowLayout(
     }
 
 inline fun Container.rightFlowLayout(
-    hGap: Int = 2,
-    vGap: Int = 2,
+    hGap: Int = 0,
+    vGap: Int = 0,
     size: Pair<Int, Int>? = null,
     constraint: Any? = null,
     block: JPanel.() -> Unit
@@ -75,8 +75,8 @@ inline fun Container.rightFlowLayout(
     }
 
 inline fun Container.centerFlowLayout(
-    hGap: Int = 2,
-    vGap: Int = 2,
+    hGap: Int = 0,
+    vGap: Int = 0,
     size: Pair<Int, Int>? = null,
     constraint: Any? = null,
     block: JPanel.() -> Unit
@@ -89,7 +89,7 @@ inline fun Container.centerFlowLayout(
         this@centerFlowLayout.add(this, constraint)
     }
 
-fun createFlowLayout(align: Int, hGap: Int = 2, vGap: Int = 2): JPanel =
+fun createFlowLayout(align: Int, hGap: Int = 0, vGap: Int = 0): JPanel =
     JPanel(FlowLayout(align, hGap, vGap))
 
 inline fun Container.south(layout: LayoutManager = FlowLayout(), block: JPanel.() -> Unit): JPanel {

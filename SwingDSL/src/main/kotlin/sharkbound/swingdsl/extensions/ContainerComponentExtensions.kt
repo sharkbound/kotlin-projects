@@ -11,7 +11,7 @@ fun Container.button(
     size: Pair<Int, Int>? = null,
     icon: Icon? = null,
     constraint: Any? = null,
-    block: JButton.() -> Unit
+    block: JButton.() -> Unit = {}
 ): JButton =
     JButton(text).apply {
         size?.apply {
@@ -26,7 +26,7 @@ fun Container.button(
 inline fun Container.textField(
     initialText: String = "",
     constraint: Any? = null,
-    block: JTextField.() -> Unit
+    block: JTextField.() -> Unit = {}
 ): JTextField =
     JTextField(initialText)
         .apply {
@@ -96,7 +96,7 @@ inline fun <reified T : JComponent, C : Container> C.add(constraint: Any? = null
 inline fun Container.label(
     text: String? = null,
     constraint: Any? = null,
-    block: JLabel.() -> Unit
+    block: JLabel.() -> Unit = {}
 ): JLabel =
     JLabel(text).apply {
         block()
