@@ -5,6 +5,7 @@ import java.awt.Container
 import java.awt.Dimension
 import java.awt.event.ActionEvent
 import javax.swing.*
+import javax.swing.tree.TreeNode
 
 fun Container.button(
     text: String,
@@ -34,13 +35,13 @@ inline fun Container.textField(
             this@textField.add(this, constraint)
         }
 
-inline fun Container.borderPanel(hGap: Int = 0, vGap: Int = 0, block: JPanel.() -> Unit): JPanel =
+inline fun Container.borderPanel(hGap: Int = 0, vGap: Int = 0, block: JPanel.() -> Unit = {}): JPanel =
     JPanel(BorderLayout(hGap, vGap)).apply {
         block()
         this@borderPanel.add(this)
     }
 
-fun Container.panel(constraint: Any? = null, block: JPanel.() -> Unit): JPanel =
+fun Container.panel(constraint: Any? = null, block: JPanel.() -> Unit = {}): JPanel =
     JPanel().apply {
         block()
         this@panel.add(this, constraint)
@@ -66,7 +67,7 @@ fun Container.vSpacer(h: Int = 0, constraint: Any? = null, block: JPanel.() -> U
 fun Container.passwordField(
     columns: Int? = null,
     constraint: Any? = null,
-    block: JPasswordField.() -> Unit
+    block: JPasswordField.() -> Unit = {}
 ): JPasswordField =
     JPasswordField().apply {
         block()
@@ -80,7 +81,7 @@ fun Container.textArea(
     rows: Int = 0,
     columns: Int = 0,
     constraint: Any? = null,
-    block: JTextArea.() -> Unit
+    block: JTextArea.() -> Unit = {}
 ): JTextArea =
     JTextArea(rows, columns).apply {
         block()
@@ -103,7 +104,7 @@ inline fun Container.label(
         this@label.add(this, constraint)
     }
 
-inline fun <T> Container.list(constraint: Any? = null, block: JList<T>.() -> Unit): JList<T> =
+inline fun <T> Container.list(constraint: Any? = null, block: JList<T>.() -> Unit = {}): JList<T> =
     JList<T>().apply {
         block()
         this@list.add(this, constraint)
@@ -115,7 +116,7 @@ inline fun Container.scrollPane(constraint: Any? = null, block: JScrollPane.() -
         this@scrollPane.add(this, constraint)
     }
 
-inline fun <T> Container.comboBox(constraint: Any? = null, block: JComboBox<T>.() -> Unit): JComboBox<T> =
+inline fun <T> Container.comboBox(constraint: Any? = null, block: JComboBox<T>.() -> Unit = {}): JComboBox<T> =
     JComboBox<T>().apply {
         block()
         this@comboBox.add(this, constraint)
@@ -154,8 +155,11 @@ inline fun Container.radioButton(
         this@radioButton.add(this, constraint)
     }
 
-inline fun Container.table(constraint: Any? = null, block: JTable.() -> Unit): JTable =
+inline fun Container.table(constraint: Any? = null, block: JTable.() -> Unit = {}): JTable =
     JTable().apply {
         block()
         this@table.add(this, constraint)
     }
+
+inline fun Container.tree(root: TreeNode? = null, constraint: Any? = null, block: JTree.() -> Unit): JTree =
+    JTree()
