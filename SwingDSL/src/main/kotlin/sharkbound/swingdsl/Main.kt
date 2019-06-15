@@ -29,7 +29,7 @@ fun main() {
                     }
                 }
                 centerFlowLayout {
-                    toggleButton("add", groupID = 1, selected = true) { action { card.current = "add" } }
+                    toggleButton("add", groupID = 1, selected = true)
                     radioButton("remove", groupID = 1) { action { card.current = "remove" } }
                 }
                 card = cardPane {

@@ -144,7 +144,7 @@ inline fun Container.radioButton(
     constraint: Any? = null,
     icon: Icon? = null,
     groupID: Any? = null,
-    block: JRadioButton.() -> Unit
+    block: JRadioButton.() -> Unit = {}
 ): JRadioButton =
     JRadioButton(text, icon, selected).apply {
         groupID?.let {
