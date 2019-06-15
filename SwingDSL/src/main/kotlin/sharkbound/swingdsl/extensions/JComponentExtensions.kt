@@ -1,6 +1,5 @@
 package sharkbound.swingdsl.extensions
 
-import sharkbound.swingdsl.TreeNodeDSL
 import sharkbound.swingdsl.enums.JComponentKeyStrokeContext
 import sharkbound.swingdsl.wrappers.*
 import java.awt.*
@@ -181,7 +180,7 @@ fun JLabel.center() {
     vCenterAlign()
 }
 
-inline fun <T> JList<T>.model(block: DefaultListModel<T>.() -> Unit): DefaultListModel<T> =
+inline fun <T> JList<T>.model(block: DefaultListModel<T>.() -> Unit = {}): DefaultListModel<T> =
     DefaultListModel<T>().apply {
         block()
         this@model.model = this
@@ -350,24 +349,29 @@ fun JTree.showRoot() {
     isRootVisible = true
 }
 
-inline fun JTree.node(
+inline fun JTree.rootNode(
     value: Any? = null,
     allowsChildren: Boolean = true,
     block: DefaultMutableTreeNode.() -> Unit = {}
 ): DefaultMutableTreeNode =
     DefaultMutableTreeNode(value, allowsChildren).apply {
         block()
-        (this@node.model as DefaultTreeModel).setRoot(this)
+        (this@rootNode.model as DefaultTreeModel).setRoot(this)
     }
 
 inline fun DefaultMutableTreeNode.node(
     value: Any,
+    tree: JTree? = null,
+    expandToNode: Boolean = true,
     allowsChildren: Boolean = true,
     block: DefaultMutableTreeNode.() -> Unit = {}
 ): DefaultMutableTreeNode =
     DefaultMutableTreeNode(value, allowsChildren).apply {
         block()
         this@node.add(this)
+        if (expandToNode && tree != null) {
+            expandParents(tree)
+        }
     }
 
 fun DefaultMutableTreeNode.expandAllChildren(tree: JTree) {
@@ -377,19 +381,26 @@ fun DefaultMutableTreeNode.expandAllChildren(tree: JTree) {
     for (child in children().asSequence().map { it as DefaultMutableTreeNode }) {
         child.expandAllChildren(tree)
     }
-    tree.expandPath(TreePath(path))
+    tree.expandPath(treePath)
 }
+
+fun DefaultMutableTreeNode.expandParents(tree: JTree): DefaultMutableTreeNode {
+    if (parent != null) {
+        tree.expandPath(parent.asMutable.treePath)
+    }
+    return this
+}
+
 
 fun DefaultMutableTreeNode.collapseAllChildren(tree: JTree) {
     if (isLeaf) {
         return
     }
-    for (child in children().asSequence().map { it as DefaultMutableTreeNode }) {
+    for (child in children().asSequence().map { it.asMutable }) {
         child.collapseAllChildren(tree)
     }
-    tree.collapsePath(TreePath(path))
+    tree.collapsePath(treePath)
 }
-
 
 fun JTree.expandAllChildren() {
     (model.root as DefaultMutableTreeNode).expandAllChildren(this)
@@ -399,5 +410,8 @@ fun JTree.collapseAllChildren() {
     (model.root as DefaultMutableTreeNode).collapseAllChildren(this)
 }
 
+val TreeNode.asMutable: DefaultMutableTreeNode
+    get() = this as DefaultMutableTreeNode
 
-
+val DefaultMutableTreeNode.treePath: TreePath
+    get() = TreePath(path)

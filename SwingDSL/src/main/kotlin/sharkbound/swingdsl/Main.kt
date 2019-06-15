@@ -5,21 +5,11 @@ import sharkbound.swingdsl.enums.BoldWeight
 import sharkbound.swingdsl.extensions.*
 import sharkbound.swingdsl.util.*
 import sharkbound.swingdsl.wrappers.CardLayoutWrapper
-import java.awt.CardLayout
-import java.awt.Color
-import java.awt.event.*
-import java.util.*
+import java.awt.PopupMenu
 import javax.swing.*
-import javax.swing.border.LineBorder
-import javax.swing.table.DefaultTableColumnModel
-import javax.swing.table.DefaultTableModel
-import javax.swing.table.JTableHeader
-import javax.swing.table.TableColumn
 import javax.swing.tree.DefaultMutableTreeNode
 
 private lateinit var card: CardLayoutWrapper
-private lateinit var rootNode: DefaultMutableTreeNode
-private lateinit var tree: JTree
 private lateinit var entry: JTextField
 
 fun main() {
@@ -44,17 +34,12 @@ fun main() {
                         }
                         button("add item") {
                             action {
-                                rootNode.node(entry.text)
+
                             }
                         }
                     }
                     panel(constraint = "remove") {
 
-                    }
-                }
-                gridBag {
-                    tree = tree(constraint = gridFillBoth()) {
-                        rootNode = node("items")
                     }
                 }
             }
