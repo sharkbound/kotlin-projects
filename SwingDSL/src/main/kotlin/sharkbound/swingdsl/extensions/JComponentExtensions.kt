@@ -415,3 +415,18 @@ val TreeNode.asMutable: DefaultMutableTreeNode
 
 val DefaultMutableTreeNode.treePath: TreePath
     get() = TreePath(path)
+
+
+inline fun <T : JComponent> T.popupMenu(id: Any, label: String? = null, block: JPopupMenu.() -> Unit): JPopupMenu =
+    JPopupMenu(label).apply {
+        componentToPopupMenuID[this@popupMenu] = id
+        idToPopupMenu[id] = this
+        block()
+    }
+
+fun JComponent.showMenu(pos: Point? = null) {
+    getPopupMenu(this).apply {
+        location = pos ?: MouseInfo.getPointerInfo().location
+        isVisible = true
+    }
+}
