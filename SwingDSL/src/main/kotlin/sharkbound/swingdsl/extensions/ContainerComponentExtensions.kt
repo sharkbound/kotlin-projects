@@ -127,7 +127,7 @@ inline fun Container.toggleButton(
     constraint: Any? = null,
     icon: Icon? = null,
     groupID: Any? = null,
-    block: JToggleButton.() -> Unit
+    block: JToggleButton.() -> Unit = {}
 ): JToggleButton =
     JToggleButton(text, icon, selected).apply {
         block()
