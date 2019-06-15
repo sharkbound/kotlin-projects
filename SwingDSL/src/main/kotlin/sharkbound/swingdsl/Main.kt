@@ -15,8 +15,12 @@ import javax.swing.table.DefaultTableColumnModel
 import javax.swing.table.DefaultTableModel
 import javax.swing.table.JTableHeader
 import javax.swing.table.TableColumn
+import javax.swing.tree.DefaultMutableTreeNode
 
 private lateinit var card: CardLayoutWrapper
+private lateinit var rootNode: DefaultMutableTreeNode
+private lateinit var tree: JTree
+private lateinit var entry: JTextField
 
 fun main() {
     useSystemLookAndFeel()
@@ -29,23 +33,29 @@ fun main() {
                     }
                 }
                 centerFlowLayout {
-                    toggleButton("add", groupID = 1, selected = true)
-                    radioButton("remove", groupID = 1) { action { card.current = "remove" } }
+                    toggleButton("add", groupID = 1, selected = true) { action { card.current = "add" } }
+                    toggleButton("remove", groupID = 1) { action { card.current = "remove" } }
                 }
                 card = cardPane {
                     centerFlowLayout(constraint = "add") {
-                        textField {
+                        entry = textField {
                             columns(40)
                             placeHolderText("enter item name")
                         }
-                        button("add")
+                        button("add item") {
+                            action {
+                                rootNode.node(entry.text)
+                            }
+                        }
                     }
                     panel(constraint = "remove") {
 
                     }
                 }
                 gridBag {
-
+                    tree = tree(constraint = gridFillBoth()) {
+                        rootNode = node("items")
+                    }
                 }
             }
         }

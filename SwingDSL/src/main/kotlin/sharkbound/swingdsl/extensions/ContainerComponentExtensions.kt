@@ -161,5 +161,13 @@ inline fun Container.table(constraint: Any? = null, block: JTable.() -> Unit = {
         this@table.add(this, constraint)
     }
 
-inline fun Container.tree(root: TreeNode? = null, constraint: Any? = null, block: JTree.() -> Unit): JTree =
-    JTree()
+inline fun Container.tree(
+    root: TreeNode? = null,
+    askAllowsChildren: Boolean = false,
+    constraint: Any? = null,
+    block: JTree.() -> Unit = {}
+): JTree =
+    JTree(root, askAllowsChildren).apply {
+        block()
+        this@tree.add(this, constraint)
+    }

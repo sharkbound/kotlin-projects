@@ -1,5 +1,6 @@
 package sharkbound.swingdsl.extensions
 
+import sharkbound.swingdsl.TreeNodeDSL
 import sharkbound.swingdsl.enums.JComponentKeyStrokeContext
 import sharkbound.swingdsl.wrappers.*
 import java.awt.*
@@ -8,8 +9,11 @@ import javax.swing.*
 import javax.swing.event.ListSelectionEvent
 import javax.swing.event.TableModelEvent
 import javax.swing.table.DefaultTableModel
-import javax.swing.table.TableModel
 import javax.swing.text.JTextComponent
+import javax.swing.tree.DefaultMutableTreeNode
+import javax.swing.tree.DefaultTreeModel
+import javax.swing.tree.TreeNode
+import javax.swing.tree.TreePath
 
 inline fun JComponent.registerKeyStroke(
     key: String,
@@ -337,3 +341,63 @@ inline fun DefaultTableModel.dataChanged(crossinline block: DefaultTableModel.(T
         block(it)
     }
 }
+
+fun JTree.hideRoot() {
+    isRootVisible = false
+}
+
+fun JTree.showRoot() {
+    isRootVisible = true
+}
+
+inline fun JTree.node(
+    value: Any? = null,
+    allowsChildren: Boolean = true,
+    block: DefaultMutableTreeNode.() -> Unit = {}
+): DefaultMutableTreeNode =
+    DefaultMutableTreeNode(value, allowsChildren).apply {
+        block()
+        (this@node.model as DefaultTreeModel).setRoot(this)
+    }
+
+inline fun DefaultMutableTreeNode.node(
+    value: Any,
+    allowsChildren: Boolean = true,
+    block: DefaultMutableTreeNode.() -> Unit = {}
+): DefaultMutableTreeNode =
+    DefaultMutableTreeNode(value, allowsChildren).apply {
+        block()
+        this@node.add(this)
+    }
+
+fun DefaultMutableTreeNode.expandAllChildren(tree: JTree) {
+    if (isLeaf) {
+        return
+    }
+    for (child in children().asSequence().map { it as DefaultMutableTreeNode }) {
+        child.expandAllChildren(tree)
+    }
+    tree.expandPath(TreePath(path))
+}
+
+fun DefaultMutableTreeNode.collapseAllChildren(tree: JTree) {
+    if (isLeaf) {
+        return
+    }
+    for (child in children().asSequence().map { it as DefaultMutableTreeNode }) {
+        child.collapseAllChildren(tree)
+    }
+    tree.collapsePath(TreePath(path))
+}
+
+
+fun JTree.expandAllChildren() {
+    (model.root as DefaultMutableTreeNode).expandAllChildren(this)
+}
+
+fun JTree.collapseAllChildren() {
+    (model.root as DefaultMutableTreeNode).collapseAllChildren(this)
+}
+
+
+
