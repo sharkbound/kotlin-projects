@@ -1,17 +1,16 @@
 package sharkbound.swingdsl.dsl
 
-import sharkbound.swingdsl.extensions.toDimension
 import java.awt.*
 import javax.swing.JDialog
 import javax.swing.JPanel
 import javax.swing.WindowConstants
 
 class CustomDialog(
-    owner: Window,
+    var dialogOwner: Window? = null,
     title: String = "",
     layout: LayoutManager? = null,
     private val type: ModalityType = ModalityType.APPLICATION_MODAL
-) : JDialog(owner, title, type) {
+) : JDialog(dialogOwner, title, type) {
     val root = JPanel(layout ?: BorderLayout())
 
     init {
@@ -62,7 +61,7 @@ class CustomDialog(
 }
 
 inline fun <W : Window> dialog(
-    owner: W,
+    owner: W? = null,
     center: Boolean = true,
     position: Pair<Int, Int>? = null,
     pack: Boolean = false,
@@ -71,11 +70,15 @@ inline fun <W : Window> dialog(
     title: String = "",
     layout: LayoutManager? = null,
     type: Dialog.ModalityType = Dialog.ModalityType.APPLICATION_MODAL,
-    block: CustomDialog.(W) -> Unit
+    show: Boolean = true,
+    disposeOnClose: Boolean = true,
+    block: CustomDialog.(W?) -> Unit
 ): CustomDialog {
     val modal = CustomDialog(owner, title, layout, type).apply {
         block(owner)
     }
-    modal.display(center, position, size, pack, undecorated)
+    if (show) {
+        modal.display(center, position, size, pack, undecorated)
+    }
     return modal
 }

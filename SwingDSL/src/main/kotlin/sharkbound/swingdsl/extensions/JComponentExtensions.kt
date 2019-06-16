@@ -50,6 +50,16 @@ fun JComponent.compact() {
     maximumSize = minimumSize
 }
 
+fun JComponent.compactHeight() {
+    preferredSize = Dimension(preferredSize.width, minimumSize.height)
+    maximumSize = Dimension(preferredSize.width, minimumSize.height)
+}
+
+fun JComponent.compactWidth() {
+    preferredSize = Dimension(minimumSize.width, preferredSize.height)
+    maximumSize = Dimension(minimumSize.width, preferredSize.height)
+}
+
 fun JComponent.size(width: Int, height: Int) {
     preferredSize = Dimension(width, height)
 }
