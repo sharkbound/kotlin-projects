@@ -1,10 +1,10 @@
 package sharkbound.swingdsl
 
+import sharkbound.swingdsl.dsl.dialog
 import sharkbound.swingdsl.dsl.frame
 import sharkbound.swingdsl.extensions.*
 import sharkbound.swingdsl.util.*
 import sharkbound.swingdsl.wrappers.CardLayoutWrapper
-import java.awt.event.MouseEvent
 import javax.swing.*
 
 private lateinit var card: CardLayoutWrapper
@@ -15,7 +15,10 @@ fun main() {
     frame {
         root {
             gridBag {
-                button(":D") {
+                button("open") {
+                    action {
+
+                    }
                 }
             }
         }
