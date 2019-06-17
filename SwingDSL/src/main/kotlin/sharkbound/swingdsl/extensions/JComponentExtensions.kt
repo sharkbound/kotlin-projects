@@ -1,5 +1,6 @@
 package sharkbound.swingdsl.extensions
 
+import sharkbound.swingdsl.TreeNodeDSL
 import sharkbound.swingdsl.enums.JComponentKeyStrokeContext
 import sharkbound.swingdsl.wrappers.*
 import java.awt.*
@@ -329,7 +330,7 @@ fun <T : JTextComponent> T.placeHolderText(placeholder: String) {
     text = placeholder
 }
 
-fun <T : JTable> T.model(block: DefaultTableModel.() -> Unit): DefaultTableModel =
+fun <T : JTable> T.model(block: DefaultTableModel.() -> Unit = {}): DefaultTableModel =
     DefaultTableModel().apply {
         block()
         this@model.model = this
@@ -427,16 +428,42 @@ val DefaultMutableTreeNode.treePath: TreePath
     get() = TreePath(path)
 
 
-inline fun <T : JComponent> T.popupMenu(id: Any, label: String? = null, block: JPopupMenu.() -> Unit): JPopupMenu =
+inline fun <T : JComponent> T.popupMenu(id: Any, label: String? = null, block: JPopupMenu.() -> Unit = {}): JPopupMenu =
     JPopupMenu(label).apply {
         componentToPopupMenuID[this@popupMenu] = id
         idToPopupMenu[id] = this
         block()
     }
 
-fun JComponent.showMenu(pos: Point? = null) {
+fun JComponent.showMenu(pos: Pair<Int, Int>? = null) {
     getPopupMenu(this).apply {
-        location = pos ?: MouseInfo.getPointerInfo().location
+        location = pos?.toPoint ?: MouseInfo.getPointerInfo().location
         isVisible = true
     }
 }
+
+inline fun JMenuBar.menu(title: String, block: JMenu.() -> Unit = {}): JMenu =
+    JMenu(title).apply {
+        block()
+        this@menu.add(this)
+    }
+
+inline fun JMenu.subMenu(title: String, block: JMenu.() -> Unit = {}): JMenu =
+    JMenu(title).apply {
+        block()
+        this@subMenu.add(this)
+    }
+
+inline fun JMenu.item(
+    title: String,
+    icon: Icon? = null,
+    noinline action: (JMenuItem.(ActionEvent?) -> Unit)? = null,
+    block: JMenuItem.() -> Unit = {}
+): JMenuItem =
+    JMenuItem(title, icon).apply {
+        block()
+        action?.let {
+            addActionListener { action(it) }
+        }
+        this@item.add(this)
+    }

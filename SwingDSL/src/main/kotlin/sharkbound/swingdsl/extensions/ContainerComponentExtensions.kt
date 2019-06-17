@@ -7,16 +7,22 @@ import java.awt.event.ActionEvent
 import javax.swing.*
 import javax.swing.tree.TreeNode
 
-fun Container.button(
+inline fun Container.button(
     text: String,
     size: Pair<Int, Int>? = null,
     icon: Icon? = null,
+    noinline action: (JButton.(ActionEvent?) -> Unit)? = null,
     constraint: Any? = null,
     block: JButton.() -> Unit = {}
 ): JButton =
     JButton(text).apply {
         size?.apply {
             preferredSize = Dimension(first, second)
+        }
+        action?.let {
+            addActionListener {
+                action(it)
+            }
         }
         block()
         this.icon = icon
@@ -41,7 +47,7 @@ inline fun Container.borderPanel(hGap: Int = 0, vGap: Int = 0, block: JPanel.() 
         this@borderPanel.add(this)
     }
 
-fun Container.panel(constraint: Any? = null, block: JPanel.() -> Unit = {}): JPanel =
+inline fun Container.panel(constraint: Any? = null, block: JPanel.() -> Unit = {}): JPanel =
     JPanel().apply {
         block()
         this@panel.add(this, constraint)
@@ -55,16 +61,16 @@ inline fun Container.spacer(w: Int, h: Int, constraint: Any? = null, block: JPan
         this@spacer.add(this, constraint)
     }
 
-fun Container.spacer(constraint: Any? = null, block: JPanel.() -> Unit = {}): JPanel =
+inline fun Container.spacer(constraint: Any? = null, block: JPanel.() -> Unit = {}): JPanel =
     panel(constraint, block)
 
-fun Container.hSpacer(w: Int = 0, constraint: Any? = null, block: JPanel.() -> Unit = {}): JPanel =
+inline fun Container.hSpacer(w: Int = 0, constraint: Any? = null, block: JPanel.() -> Unit = {}): JPanel =
     spacer(w, 0, constraint).apply(block)
 
-fun Container.vSpacer(h: Int = 0, constraint: Any? = null, block: JPanel.() -> Unit = {}): JPanel =
+inline fun Container.vSpacer(h: Int = 0, constraint: Any? = null, block: JPanel.() -> Unit = {}): JPanel =
     spacer(0, h, constraint).apply(block)
 
-fun Container.passwordField(
+inline fun Container.passwordField(
     columns: Int? = null,
     constraint: Any? = null,
     block: JPasswordField.() -> Unit = {}
@@ -77,7 +83,7 @@ fun Container.passwordField(
         this@passwordField.add(this, constraint)
     }
 
-fun Container.textArea(
+inline fun Container.textArea(
     rows: Int = 0,
     columns: Int = 0,
     constraint: Any? = null,
@@ -128,12 +134,18 @@ inline fun Container.toggleButton(
     constraint: Any? = null,
     icon: Icon? = null,
     groupID: Any? = null,
+    noinline action: (JToggleButton.(ActionEvent?) -> Unit)? = null,
     block: JToggleButton.() -> Unit = {}
 ): JToggleButton =
     JToggleButton(text, icon, selected).apply {
         block()
         groupID?.let {
             addToGroup(groupID, selected)
+        }
+        action?.let {
+            addActionListener {
+                action(it)
+            }
         }
         this@toggleButton.add(this, constraint)
     }
@@ -145,11 +157,17 @@ inline fun Container.radioButton(
     constraint: Any? = null,
     icon: Icon? = null,
     groupID: Any? = null,
+    noinline action: (JRadioButton.(ActionEvent?) -> Unit)? = null,
     block: JRadioButton.() -> Unit = {}
 ): JRadioButton =
     JRadioButton(text, icon, selected).apply {
         groupID?.let {
             addToGroup(groupID, selected)
+        }
+        action?.let {
+            addActionListener {
+                action(it)
+            }
         }
         block()
         this@radioButton.add(this, constraint)

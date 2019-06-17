@@ -8,14 +8,22 @@ import javax.swing.JPopupMenu
 
 val idToPopupMenu = mutableMapOf<Any, JPopupMenu>()
 val componentToPopupMenuID = mutableMapOf<JComponent, Any>()
-fun getPopupMenu(id: Any): JPopupMenu =
-    if (id is JComponent)
-        idToPopupMenu.getValue(componentToPopupMenuID.getValue(id))
-    else
-        idToPopupMenu.getValue(id)
+
+fun getPopupMenu(id: Any): JPopupMenu = findPopupMenu(id)!!
+fun findPopupMenu(id: Any): JPopupMenu? {
+    if (id is JComponent) {
+        return idToPopupMenu[componentToPopupMenuID[id] ?: return null]
+    }
+    return idToPopupMenu[id]
+}
+
 
 val JComponent.popupMenu: JPopupMenu
     get() = getPopupMenu(this)
+
+val JComponent.hasPopupMenu: Boolean
+    get() = this in componentToPopupMenuID
+
 
 inline fun JPopupMenu.item(
     label: String,

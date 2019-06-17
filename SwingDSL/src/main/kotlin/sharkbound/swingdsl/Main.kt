@@ -1,35 +1,23 @@
 package sharkbound.swingdsl
 
-import sharkbound.swingdsl.dsl.Frame
-import sharkbound.swingdsl.dsl.dialog
 import sharkbound.swingdsl.dsl.frame
 import sharkbound.swingdsl.extensions.*
-import sharkbound.swingdsl.util.*
+import sharkbound.swingdsl.util.useSystemLookAndFeel
 import sharkbound.swingdsl.wrappers.CardLayoutWrapper
-import javax.swing.*
+import javax.swing.JTextField
 
 private lateinit var card: CardLayoutWrapper
 private lateinit var entry: JTextField
 
 fun main() {
-    val dialog = dialog<Frame>(show = false) {
-        root {
-            vBoxLayout {
-                textField { columns(20); compactHeight() }
-                textField { columns(20); compactHeight() }
-            }
-        }
-    }
     useSystemLookAndFeel()
-    frame {
 
+    frame {
         root {
             gridBag {
-                button("open") {
-                    action {
-                        dialog.display(size = 400 to 400)
-                    }
-                }
+                button("open", action = {
+                    println(":D")
+                })
             }
         }
 

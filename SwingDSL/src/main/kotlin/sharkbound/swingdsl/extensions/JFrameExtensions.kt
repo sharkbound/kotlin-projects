@@ -5,6 +5,7 @@ import java.awt.*
 import java.awt.event.WindowEvent
 import java.lang.IllegalArgumentException
 import javax.swing.JFrame
+import javax.swing.JMenuBar
 
 /**
  * makes the frame visible
@@ -68,3 +69,9 @@ fun JFrame.sendCloseEvent(source: Window = this) {
 fun Dialog.sendCloseEvent(source: Window = this) {
     dispatchEvent(WindowEvent(source, WindowEvent.WINDOW_CLOSING))
 }
+
+fun JFrame.menuBar(block: JMenuBar.() -> Unit): JMenuBar =
+    JMenuBar().apply {
+        block()
+        this@menuBar.jMenuBar = this
+    }
