@@ -19,10 +19,23 @@ object FilePaths {
     val config = Path.of("groups.json")
 }
 
+object Menus {
+    const val groupInfo = "group info"
+    const val memberInfo = "member info"
+    const val addGroup = "add group"
+    val all = listOf(groupInfo, addGroup)
+}
+
 @UnstableDefault
 val mgr by lazy {
     if (Files.exists(FilePaths.config))
         json.parse(Manager.serializer(), Files.readString(FilePaths.config))
     else
         Manager()
+}
+
+@UnstableDefault
+inline fun saveAfter(block: Manager.() -> Unit) {
+    mgr.block()
+    mgr.save()
 }

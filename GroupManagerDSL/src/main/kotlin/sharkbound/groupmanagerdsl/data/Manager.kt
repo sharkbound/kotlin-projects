@@ -39,14 +39,17 @@ class Manager(val groups: MutableList<UserGroup> = mutableListOf()) {
     fun findMemberByName(name: String): Maybe<Member> =
         findMember { it.name == name }
 
-    fun add(group: UserGroup): Boolean =
+    fun add(group: UserGroup): UserGroup {
         groups.add(group)
+        return group
+    }
 
-    fun remove(group: UserGroup): Boolean =
+    fun remove(group: UserGroup): UserGroup {
         groups.remove(group)
+        return group
+    }
 
-    operator fun iterator(): MutableIterator<UserGroup> =
-        groups.iterator()
+    operator fun iterator() = groups.iterator()
 
     operator fun contains(value: Any): Boolean = when (value) {
         is String -> groupMatches { it.name == value }

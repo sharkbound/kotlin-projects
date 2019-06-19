@@ -1,8 +1,7 @@
 import kotlinx.serialization.UnstableDefault
-import sharkbound.groupmanagerdsl.mgr
+import sharkbound.groupmanagerdsl.MenuLauncher
 
 @UnstableDefault
 fun main() {
-    println(mgr)
-    println(mgr)
+    MenuLauncher().start()
 }
