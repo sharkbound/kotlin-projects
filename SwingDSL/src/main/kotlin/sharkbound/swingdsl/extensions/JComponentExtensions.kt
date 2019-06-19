@@ -1,6 +1,5 @@
 package sharkbound.swingdsl.extensions
 
-import sharkbound.swingdsl.TreeNodeDSL
 import sharkbound.swingdsl.enums.JComponentKeyStrokeContext
 import sharkbound.swingdsl.wrappers.*
 import java.awt.*
@@ -300,21 +299,21 @@ inline fun <reified T> JComboBox<T>.itemSelected(crossinline block: JComboBox<T>
 val JComboBox<*>.textLabel: JLabel
     get() = renderer as JLabel
 
-inline fun <T : JComponent> T.componentListener(block: ComponentEventWrapper<T>.() -> Unit): ComponentEventWrapper<T> =
+inline fun <T : JComponent> T.componentEvent(block: ComponentEventWrapper<T>.() -> Unit): ComponentEventWrapper<T> =
     ComponentEventWrapper(this).apply(block)
 
 
-inline fun <T : JComponent> T.mouseListener(block: MouseEventWrapper<T>.() -> Unit): MouseEventWrapper<T> =
+inline fun <T : JComponent> T.mouseEvent(block: MouseEventWrapper<T>.() -> Unit): MouseEventWrapper<T> =
     MouseEventWrapper(this).apply(block)
 
-inline fun <T : JComponent> T.mouseMotionListener(block: MouseMotionEventWrapper<T>.() -> Unit): MouseMotionEventWrapper<T> =
+inline fun <T : JComponent> T.mouseMotionEvent(block: MouseMotionEventWrapper<T>.() -> Unit): MouseMotionEventWrapper<T> =
     MouseMotionEventWrapper(this).apply(block)
 
-inline fun <T : JComponent> T.focusListener(block: FocusEventWrapper<T>.() -> Unit): FocusEventWrapper<T> =
+inline fun <T : JComponent> T.focusEvent(block: FocusEventWrapper<T>.() -> Unit): FocusEventWrapper<T> =
     FocusEventWrapper(this).apply(block)
 
 fun <T : JTextComponent> T.placeHolderText(placeholder: String) {
-    focusListener {
+    focusEvent {
         gained {
             if (text == placeholder) {
                 text = ""

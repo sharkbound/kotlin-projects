@@ -41,7 +41,7 @@ inline fun JPopupMenu.item(
             this.action(it)
         }
         if (hideMenuAfterClick) {
-            mouseListener {
+            mouseEvent {
                 released {
                     this@item.isVisible = false
                 }
