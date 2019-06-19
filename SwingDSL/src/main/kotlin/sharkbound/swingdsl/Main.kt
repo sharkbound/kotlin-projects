@@ -1,7 +1,8 @@
 package sharkbound.swingdsl
 
 import sharkbound.swingdsl.dsl.frame
-import sharkbound.swingdsl.extensions.*
+import sharkbound.swingdsl.extensions.button
+import sharkbound.swingdsl.extensions.gridBag
 import sharkbound.swingdsl.util.useSystemLookAndFeel
 import sharkbound.swingdsl.wrappers.CardLayoutWrapper
 import javax.swing.JTextField
