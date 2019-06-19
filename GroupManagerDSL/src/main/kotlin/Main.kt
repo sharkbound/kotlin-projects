@@ -5,4 +5,5 @@ import sharkbound.groupmanagerdsl.mgr
 fun main() {
     println(mgr)
     println(mgr)
+    println(mgr)
 }
