@@ -32,7 +32,7 @@ class AddMemberDialog(val group: UserGroup) {
                         placeHolderText("enter member name to add")
                         keyEvent {
                             keyReleased {
-                                fg(if (text in group) Color.red else Color(0x008E15))
+                                fg(if (text.trim() in group) Color.red else Color(0x008E15))
                             }
                         }
                         action {
