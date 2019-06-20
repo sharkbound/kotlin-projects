@@ -5,48 +5,64 @@ import sharkbound.groupmanagerdsl.data.Member
 import sharkbound.groupmanagerdsl.data.UserGroup
 import sharkbound.groupmanagerdsl.saveAfter
 import sharkbound.swingdsl.dsl.dialog
-import sharkbound.swingdsl.enums.BoldWeight
 import sharkbound.swingdsl.extensions.*
-import sharkbound.swingdsl.util.buildFont
-import sharkbound.swingdsl.util.gridFillBoth
 import java.awt.Color
-import javax.swing.JFrame
-import javax.swing.JOptionPane
-import javax.swing.JTextField
+import java.awt.event.KeyEvent
+import javax.swing.*
 
 @UnstableDefault
 class AddMemberDialog(val group: UserGroup) {
     lateinit var nameField: JTextField
+    lateinit var ageField: JTextField
 
     init {
         dialog<JFrame>(pack = true) {
+            root.registerKeyboardAction(
+                { isVisible = false },
+                KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
+                JComponent.WHEN_IN_FOCUSED_WINDOW
+            )
+            root.registerKeyboardAction(
+                { tryAddMember() },
+                KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
+                JComponent.WHEN_IN_FOCUSED_WINDOW
+            )
             root {
                 vBoxLayout {
-                    label("member name", constraint = gridFillBoth(x = 0, y = 0, width = 2)) {
-                        hCenterAlign()
-                        font = buildFont {
-                            bold = BoldWeight.DEMI
-                        }
-                    }
                     nameField = textField {
-                        placeHolderText("enter member name to add")
+                        placeHolderText("enter member name")
                         keyEvent {
                             keyReleased {
                                 fg(if (text.trim() in group) Color.red else Color(0x008E15))
                             }
                         }
-                        action {
-                            if (text in group) {
-                                JOptionPane.showMessageDialog(this, "member $text is already in this group")
-                            } else {
-                                saveAfter {
-                                    group.add(Member(text, -1))
-                                    JOptionPane.showMessageDialog(this@textField, "added member $text")
-                                }
+                    }
+                    ageField = textField { placeHolderText("enter member age") }
+                    centerFlowLayout {
+                        button("add member") {
+                            action {
+                                tryAddMember()
                             }
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private fun tryAddMember() {
+        val name = nameField.text.trim()
+        if (name in group) {
+            JOptionPane.showMessageDialog(null, "member $name is already in this group")
+        } else if (ageField.text.toIntOrNull() == null || ageField.text.toInt() < 1 || ageField.text.isBlank()) {
+            JOptionPane.showMessageDialog(
+                null,
+                "age ${ageField.text} is not a valid age, must be >= 1, and be a valid integer"
+            )
+        } else {
+            saveAfter {
+                group.add(Member(name, ageField.text.toInt()))
+                JOptionPane.showMessageDialog(null, "added member $name")
             }
         }
     }

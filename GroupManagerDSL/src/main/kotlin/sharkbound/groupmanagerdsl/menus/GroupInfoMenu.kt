@@ -72,13 +72,15 @@ class GroupInfoMenu : JPanel() {
                     JOptionPane.showMessageDialog(rootPane, "you must have a group selected to add members to it")
                 } else {
                     AddMemberDialog(currentGroup!!)
+                    clearMembersListTable()
+                    populateMembersList(currentGroup!!)
                 }
             })
         }
     }
 
     private fun clearMembersListTable() {
-        (0 until memberTableModel.rowCount).forEach {
+        (memberTableModel.rowCount - 1 downTo 0).forEach {
             memberTableModel.removeRow(it)
         }
     }
