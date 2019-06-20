@@ -17,19 +17,24 @@ class AddGroupMenu : JPanel() {
     lateinit var groupName: JTextField
 
     init {
-        useGridBagLayout()
-        label("name", gridFillBoth(x = 0, y = 0)) { hCenterAlign() }
-        groupName = textField(constraint = gridFillBoth(x = 0, y = 1)) {
-            action {
-                if (text in mgr) {
-                    JOptionPane.showMessageDialog(this@AddGroupMenu, "group $text already exists")
-                } else if (groupName.text.trim().isNotBlank()) {
-                    saveAfter {
-                        add(UserGroup(groupName.text.trim()))
-                        JOptionPane.showMessageDialog(this@AddGroupMenu, "added group ${groupName.text}")
+        north {
+            useVBoxLayout()
+            centerFlowLayout {
+                label("name", gridFillBoth(x = 0, y = 0, weightY = 0.0))
+            }
+            groupName = textField {
+                action {
+                    if (text in mgr) {
+                        JOptionPane.showMessageDialog(null, "group $text already exists")
+                    } else if (groupName.text.trim().isNotBlank()) {
+                        saveAfter {
+                            add(UserGroup(groupName.text.trim()))
+                            JOptionPane.showMessageDialog(null, "added group ${groupName.text}")
+                        }
                     }
                 }
             }
+
         }
     }
 }

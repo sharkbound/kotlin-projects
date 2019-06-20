@@ -14,38 +14,23 @@ import javax.swing.JLabel
 
 @UnstableDefault
 class MenuLauncher {
-
-    lateinit var card: CardLayoutWrapper
-    lateinit var currentMenu: JComboBox<String>
     val frame: Frame
 
     init {
         useSystemLookAndFeel()
         frame = frame {
             root {
-                north {
-                    useGridBagLayout()
-                    currentMenu = comboBox(constraint = gridFillBoth()) {
-                        (renderer as JLabel).hCenterAlign()
-                        model {
-                            addAll(Menus.all)
-                        }
-                        itemSelected { _, v ->
-                            card.current = v
-                        }
+                tabPane {
+                    tab("group info") {
+                        add { GroupInfoMenu() }
                     }
-                }
-                center {
-                    card = cardPane {
-                        add(Menus.groupInfo) { GroupInfoMenu() }
-                        add(Menus.addGroup) { AddGroupMenu() }
+                    tab("add group") {
+                        useGridBagLayout()
+                        add(gridFillBoth()) { AddGroupMenu() }
                     }
                 }
             }
         }
-
-        currentMenu.selectedItem = Menus.groupInfo
-        card.current = Menus.groupInfo
     }
 
     fun start() {
