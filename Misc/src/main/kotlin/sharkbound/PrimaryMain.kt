@@ -1,4 +1,4 @@
 package sharkbound
 
-fun main() {
+suspend fun main() {
 }

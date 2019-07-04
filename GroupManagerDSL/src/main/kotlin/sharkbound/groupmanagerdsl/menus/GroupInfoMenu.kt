@@ -54,7 +54,7 @@ class GroupInfoMenu : JPanel() {
                 label("member count", gridFillBoth(x = 1, y = 0))
                 groupMemberCount =
                     textField(constraint = gridFillBoth(x = 1, y = 1)) { isEditable = false; centerAlign() }
-
+                
                 scrollPane(constraint = gridFillBoth(x = 0, y = 2, width = 2)) {
                     memberTable = table() {
                         memberTableModel = model {
