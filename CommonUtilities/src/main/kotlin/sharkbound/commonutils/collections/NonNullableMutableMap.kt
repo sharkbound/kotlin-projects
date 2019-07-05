@@ -6,6 +6,8 @@ open class NonNullableMutableMap<K, V> : LinkedHashMap<K, V>() {
      */
     override fun get(key: K): V =
         super.get(key) ?: throw NoSuchElementException("missing key: $key")
+
+    fun orNull(key: K): V? = super.get(key)
 }
 
 fun <K, V> nonNullableMutableMapOf(vararg pairs: Pair<K, V>): NonNullableMutableMap<K, V> =
