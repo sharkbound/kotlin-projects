@@ -1,8 +1,6 @@
 package sharkbound.swingdsl.extensions
 
-import java.awt.BorderLayout
-import java.awt.Container
-import java.awt.Dimension
+import java.awt.*
 import java.awt.event.ActionEvent
 import javax.swing.*
 import javax.swing.tree.TreeNode
@@ -188,4 +186,14 @@ inline fun Container.tree(
     JTree(root, askAllowsChildren).apply {
         block()
         this@tree.add(this, constraint)
+    }
+
+inline fun Container.canvas(
+    constraint: Any? = null,
+    graphics: GraphicsConfiguration? = null,
+    block: Canvas.() -> Unit
+): Canvas =
+    Canvas().also {
+        it.block()
+        add(it, constraint)
     }

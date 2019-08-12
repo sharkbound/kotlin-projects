@@ -466,3 +466,7 @@ inline fun JMenu.item(
         }
         this@item.add(this)
     }
+
+fun Graphics.fillCircle(x: Int, y: Int, radius: Int) {
+    fillOval(x, y, radius, radius)
+}

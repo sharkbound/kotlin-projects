@@ -1,6 +1,8 @@
 package sharkbound.swingdsl.extensions
 
+import java.awt.Color
 import java.awt.Dimension
+import java.awt.Graphics
 import java.awt.Point
 import java.awt.event.MouseEvent
 
@@ -19,3 +21,9 @@ val MouseEvent?.isMiddleClick: Boolean
 val MouseEvent?.isLeftClick: Boolean
     get() = this != null && button == MouseEvent.BUTTON1
 
+inline fun Graphics.withColor(color: Color, block: Graphics.() -> Unit) {
+    val prevColor = this.color
+    this.color = color
+    block()
+    this.color = prevColor
+}
