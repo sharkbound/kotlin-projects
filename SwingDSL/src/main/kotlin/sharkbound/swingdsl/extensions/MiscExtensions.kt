@@ -27,3 +27,9 @@ inline fun Graphics.withColor(color: Color, block: Graphics.() -> Unit) {
     block()
     this.color = prevColor
 }
+
+fun Graphics.fillBackground(size: Dimension, color: Color) {
+    withColor(color) {
+        fillRect(0, 0, size.width, size.height)
+    }
+}

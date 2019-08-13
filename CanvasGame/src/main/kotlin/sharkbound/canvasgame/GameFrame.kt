@@ -1,9 +1,6 @@
 package sharkbound.canvasgame
 
-import sharkbound.swingdsl.extensions.fillCircle
-import sharkbound.swingdsl.extensions.mouseMotionEvent
-import sharkbound.swingdsl.extensions.sendCloseEvent
-import sharkbound.swingdsl.extensions.withColor
+import sharkbound.swingdsl.extensions.*
 import java.awt.Color
 import java.awt.Graphics
 import java.awt.event.KeyEvent
@@ -43,13 +40,19 @@ class GameFrame(val frame: JFrame) : JPanel() {
     override fun paint(g: Graphics?) {
         g?.apply {
             withColor(Color.white) {
-                fillRect(0, 0, 600, 600)
+                fillRect(0, 0, size.width, size.height)
             }
             withColor(Color.black) {
                 fillCircle(mx - 25, my - 25, 50)
             }
             withColor(Color.green) {
-                g.drawPolyline(points.map { it.first }.toIntArray(), points.map { it.second }.toIntArray(), points.size)
+                if (points.isNotEmpty()) {
+                    g.drawPolyline(
+                        points.map { it.first }.toIntArray() + intArrayOf(points.first().first),
+                        points.map { it.second }.toIntArray() + intArrayOf(points.first().second),
+                        points.size + 1
+                    )
+                }
             }
         }
     }
