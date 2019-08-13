@@ -29,28 +29,22 @@ class GameFrame(val frame: JFrame) : JPanel() {
                     this@GameFrame.repaint()
                 }
             }
-            moved {
-                it?.apply {
-                    println(x to y)
-                }
-            }
         }
     }
 
     override fun paint(g: Graphics?) {
         g?.apply {
-            withColor(Color.white) {
-                fillRect(0, 0, size.width, size.height)
-            }
+            println("paint")
+            fillBackground(size, Color.black)
             withColor(Color.black) {
                 fillCircle(mx - 25, my - 25, 50)
             }
             withColor(Color.green) {
                 if (points.isNotEmpty()) {
                     g.drawPolyline(
-                        points.map { it.first }.toIntArray() + intArrayOf(points.first().first),
-                        points.map { it.second }.toIntArray() + intArrayOf(points.first().second),
-                        points.size + 1
+                        points.map { it.first }.toIntArray(),
+                        points.map { it.second }.toIntArray(),
+                        points.size
                     )
                 }
             }

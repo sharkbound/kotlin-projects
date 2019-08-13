@@ -75,3 +75,10 @@ fun JFrame.menuBar(block: JMenuBar.() -> Unit): JMenuBar =
         block()
         this@menuBar.jMenuBar = this
     }
+
+inline fun <T : JFrame> T.repaintLoop(getDelay: T.() -> Long) {
+    while (true) {
+        repaint()
+        Thread.sleep(getDelay())
+    }
+}

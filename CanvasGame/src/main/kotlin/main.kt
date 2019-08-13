@@ -14,5 +14,10 @@ fun main() {
             add(gridFillBoth()) { GameFrame(this@frame) }
         }
         showFrame(JFrameCloseOperation.EXIT_ON_CLOSE, Dimension(600, 600), center = true)
+
+        while (true) {
+            repaint()
+            Thread.sleep(10)
+        }
     }
 }
