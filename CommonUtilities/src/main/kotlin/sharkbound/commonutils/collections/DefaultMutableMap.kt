@@ -2,6 +2,7 @@ package sharkbound.commonutils.collections
 
 class DefaultMutableMap<K, V>(val default: (K) -> V) : LinkedHashMap<K, V>() {
     override fun get(key: K): V = super.get(key) ?: default(key)
+
     fun orNull(key: K): V? = super.get(key)
 }
 
