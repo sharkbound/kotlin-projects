@@ -2,10 +2,7 @@ package sharkbound.canvasgame
 
 import sharkbound.commonutils.extensions.len
 import sharkbound.swingdsl.extensions.*
-import java.awt.BasicStroke
-import java.awt.Color
-import java.awt.Graphics
-import java.awt.Graphics2D
+import java.awt.*
 import java.awt.event.KeyEvent
 import java.awt.event.MouseWheelEvent
 import javax.swing.JComponent
@@ -23,6 +20,7 @@ class GameFrame(val frame: JFrame) : JPanel() {
 
 
     init {
+        button("!")
         registerKeyboardAction(
             { frame.sendCloseEvent() },
             KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0),
@@ -55,11 +53,13 @@ class GameFrame(val frame: JFrame) : JPanel() {
 
     override fun paint(g: Graphics?) {
         (g as? Graphics2D)?.apply {
-            stroke = BasicStroke(lineWidth)
             fillBackground(size, Color.black)
+            stroke = BasicStroke(lineWidth)
+
             withColor(Color.black) {
                 fillCircle(mx - 25, my - 25, 50)
             }
+
             withColor(Color.green) {
                 for (line in lines) {
                     drawPolyline(line.map { it.first }.toIntArray(), line.map { it.second }.toIntArray(), line.len)
