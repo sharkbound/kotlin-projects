@@ -21,7 +21,7 @@ class MouseMotionEventWrapper<T : JComponent>(val parent: T) {
     }
 
     inline fun mouseWheel(crossinline block: T.(MouseWheelEvent?) -> Unit) {
-        parent.addMouseMotionListener(object : MouseAdapter() {
+        parent.addMouseWheelListener(object : MouseAdapter() {
             override fun mouseWheelMoved(e: MouseWheelEvent?) {
                 parent.block(e)
             }
