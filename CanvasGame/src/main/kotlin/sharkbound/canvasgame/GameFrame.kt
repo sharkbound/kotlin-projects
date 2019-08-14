@@ -1,5 +1,7 @@
 package sharkbound.canvasgame
 
+import sharkbound.commonutils.extensions.clamp
+import sharkbound.commonutils.extensions.clampTo
 import sharkbound.commonutils.extensions.len
 import sharkbound.swingdsl.extensions.*
 import java.awt.*
@@ -37,9 +39,7 @@ class GameFrame(val frame: JFrame) : JPanel() {
         }
         mouseMotionEvent {
             mouseWheel {
-                lineWidth += if (it!!.preciseWheelRotation < 0) 1 else -1
-                if (lineWidth < 0)
-                    lineWidth = 1f
+                lineWidth = (lineWidth + if (it!!.preciseWheelRotation < 0) 1f else -1f).clampTo(1f, 15f)
             }
             dragged {
                 it?.apply {
