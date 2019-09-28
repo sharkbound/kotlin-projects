@@ -178,7 +178,7 @@ class Maybe<T>(value: T? = null) {
      *
      * @return return from [operation] if it returns non-null, and does not throw any exceptions, else [default]
      */
-    fun <R> tryOrDefault(operation: (T) -> R?, default: () -> R): R {
+    inline fun <R> tryOrDefault(operation: (T) -> R?, default: () -> R): R {
         if (isAbsent) {
             return default()
         }
@@ -195,7 +195,7 @@ class Maybe<T>(value: T? = null) {
      *
      * @return return from [operation] if it returns non-null, and does not throw any exceptions, else [default]
      */
-    fun <R> tryOrDefault(operation: (T) -> R?, default: R): R {
+    inline fun <R> tryOrDefault(operation: (T) -> R?, default: R): R {
         if (isAbsent) {
             return default
         }
@@ -387,7 +387,6 @@ class Maybe<T>(value: T? = null) {
 
 fun <T> maybeOf(value: T): Maybe<T> = Maybe(value)
 fun <T> emptyMaybe(): Maybe<T> = Maybe()
-fun <T> emptyMaybe(type: T): Maybe<T> = Maybe()
 
 class MaybeValueNotSetException :
     Throwable(
