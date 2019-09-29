@@ -1,12 +1,10 @@
 package sharkbound.canvasgame
 
-import sharkbound.commonutils.extensions.clamp
 import sharkbound.commonutils.extensions.clampTo
 import sharkbound.commonutils.extensions.len
 import sharkbound.swingdsl.extensions.*
 import java.awt.*
 import java.awt.event.KeyEvent
-import java.awt.event.MouseWheelEvent
 import javax.swing.JComponent
 import javax.swing.JFrame
 import javax.swing.JPanel
@@ -17,12 +15,11 @@ class GameFrame(val frame: JFrame) : JPanel() {
     var mx: Int = 0
     var my: Int = 0
     val lines = mutableListOf<List<Pair<Int, Int>>>()
-    val line = mutableListOf<Pair<Int, Int>>()
+    val currentLine = mutableListOf<Pair<Int, Int>>()
     var lineWidth = 1f
 
 
     init {
-        button("!")
         registerKeyboardAction(
             { frame.sendCloseEvent() },
             KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0),
@@ -30,11 +27,11 @@ class GameFrame(val frame: JFrame) : JPanel() {
         )
         mouseEvent {
             released {
-                lines += line.toList()
-                line.clear()
+                lines += currentLine.toList()
+                currentLine.clear()
             }
             pressed {
-                line.clear()
+                currentLine.clear()
             }
         }
         mouseMotionEvent {
@@ -45,7 +42,7 @@ class GameFrame(val frame: JFrame) : JPanel() {
                 it?.apply {
                     mx = x
                     my = y
-                    line += x to y
+                    currentLine += x to y
                 }
             }
         }
@@ -64,7 +61,11 @@ class GameFrame(val frame: JFrame) : JPanel() {
                 for (line in lines) {
                     drawPolyline(line.map { it.first }.toIntArray(), line.map { it.second }.toIntArray(), line.len)
                 }
-                drawPolyline(line.map { it.first }.toIntArray(), line.map { it.second }.toIntArray(), line.len)
+                drawPolyline(
+                    currentLine.map { it.first }.toIntArray(),
+                    currentLine.map { it.second }.toIntArray(),
+                    currentLine.len
+                )
             }
         }
     }
