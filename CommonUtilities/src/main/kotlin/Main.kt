@@ -1,6 +1,6 @@
 @file:JvmName("KotlinCommonUtilTestingMain")
 
-private fun main() {
+fun main() {
 
 }
 
