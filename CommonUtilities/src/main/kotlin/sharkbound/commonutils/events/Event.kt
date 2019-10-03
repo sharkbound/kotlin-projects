@@ -4,18 +4,21 @@ import sharkbound.commonutils.extensions.len
 import kotlin.concurrent.thread
 
 class Event<T> {
-    private val subscribers = mutableListOf<(T) -> Unit>()
+    val subscribers = mutableListOf<(T) -> Unit>()
     val subscriberCount get() = subscribers.len
 
-    fun add(func: (T) -> Unit) {
-        subscribers += func
+    fun add(func: (T) -> Unit): Event<T> = apply {
+        subscribers.add(func)
     }
 
-    fun remove(func: (T) -> Unit) {
-        if (func in subscribers) {
-            subscribers -= func
+    fun remove(func: (T) -> Unit): Event<T> = apply {
+        if (contains(func)) {
+            subscribers.remove(func)
         }
     }
+
+    operator fun contains(func: (T) -> Unit): Boolean =
+        func in subscribers
 
     operator fun invoke(arg: T, threaded: Boolean = false) {
         fun trigger() {
@@ -31,7 +34,12 @@ class Event<T> {
         }
     }
 
-    operator fun plusAssign(func: (T) -> Unit) = add(func)
-    operator fun minusAssign(func: (T) -> Unit) = remove(func)
+    operator fun plusAssign(func: (T) -> Unit) {
+        add(func)
+    }
+
+    operator fun minusAssign(func: (T) -> Unit) {
+        remove(func)
+    }
 }
 
