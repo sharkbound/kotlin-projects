@@ -38,3 +38,14 @@ inline infix fun <T> T?.with(block: (T) -> Unit) {
     }
 }
 
+inline infix fun <T> T?.orElse(defaultIfNull: () -> T): T =
+    this ?: defaultIfNull()
+
+infix fun <T> T?.orElse(defaultIfNull: T): T =
+    this ?: defaultIfNull
+
+inline infix fun <T> T?.orElseNull(defaultIfNull: () -> T?): T? =
+    this ?: defaultIfNull()
+
+infix fun <T> T?.orElseNull(defaultIfNull: T?): T? =
+    this ?: defaultIfNull

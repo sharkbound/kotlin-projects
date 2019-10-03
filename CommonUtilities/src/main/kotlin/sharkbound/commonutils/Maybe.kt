@@ -2,6 +2,8 @@
 
 package sharkbound.commonutils
 
+import java.lang.Exception
+
 class Maybe<T>(value: T? = null) {
     private val _value: T? = value
     /**
@@ -147,6 +149,27 @@ class Maybe<T>(value: T? = null) {
         if (isAbsent) operation().toMaybe else emptyMaybe()
 
     /**
+     * if the value is absent, a new maybe is returned with the value from calling [default]
+     *
+     * if the value is present, the current maybe (this) is returned
+     *
+     * @return current maybe (this) if [isPresent] else a new maybe with the value from [default]
+     */
+    inline infix fun defaultIfAbsent(default: () -> T): Maybe<T> =
+        if (isAbsent) default().toMaybe else this
+
+
+    /**
+     * if the value is absent, a new maybe is returned with the value from [default]
+     *
+     * if the value is present, the current maybe (this) is returned
+     *
+     * @return current maybe (this) if [isPresent] else a new maybe with the value from [default]
+     */
+    infix fun defaultIfAbsent(default: T): Maybe<T> =
+        if (isAbsent) default.toMaybe else this
+
+    /**
      * returns a new maybe from the result of calling [operation] with [valueOrNull]
      *
      * if [operation] returns null, a empty maybe is returned
@@ -168,7 +191,7 @@ class Maybe<T>(value: T? = null) {
 
         return try {
             operation(valueOrThrow).toMaybe
-        } catch (e: Throwable) {
+        } catch (e: Exception) {
             emptyMaybe()
         }
     }
@@ -185,7 +208,7 @@ class Maybe<T>(value: T? = null) {
 
         return try {
             operation(valueOrThrow) ?: return default()
-        } catch (e: Throwable) {
+        } catch (e: Exception) {
             default()
         }
     }
@@ -202,7 +225,7 @@ class Maybe<T>(value: T? = null) {
 
         return try {
             operation(valueOrThrow) ?: return default
-        } catch (e: Throwable) {
+        } catch (e: Exception) {
             default
         }
     }
@@ -385,11 +408,11 @@ class Maybe<T>(value: T? = null) {
 
 }
 
-fun <T> maybeOf(value: T): Maybe<T> = Maybe(value)
+fun <T> maybeOf(value: T?): Maybe<T> = Maybe(value)
 fun <T> emptyMaybe(): Maybe<T> = Maybe()
 
 class MaybeValueNotSetException :
-    Throwable(
+    Exception(
         "Maybe has no value set, " +
                 "use <maybe>.valueOrNull or `<maybe> default <default>` / `<maybe>.default(<default>) " +
                 "to avoid this exception"
