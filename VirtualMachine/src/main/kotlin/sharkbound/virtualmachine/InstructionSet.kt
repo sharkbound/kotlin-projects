@@ -5,50 +5,81 @@ import sharkbound.virtualmachine.instructions.*
 class InstructionSet {
     val instructions = mutableListOf<Instruction>()
 
+
+    fun Instruction.append() {
+        instructions.add(this)
+    }
+
+    fun printLine() {
+        PrintLine().append()
+    }
+
     fun printLine(value: Any) {
-        instructions.add(Push(value))
-        instructions.add(PrintLine())
+        Push(value).append()
+        this.printLine()
+    }
+
+
+    fun print() {
+        Print().append()
     }
 
     fun print(value: Any) {
-        instructions.add(Push(value))
-        instructions.add(Print())
+        Push(value).append()
+        this.print()
     }
 
     fun push(value: Any) {
-        instructions.add(Push(value))
+        Push(value).append()
     }
 
     fun label(name: String) {
-        instructions.add(Label(name))
+        Label(name).append()
     }
 
     fun jump(label: String) {
-        instructions.add(Jump(label))
+        Jump(label).append()
     }
 
     fun jumpIfTrue(label: String) {
-        instructions.add(JumpIfTrue(label))
+        JumpIfTrue(label).append()
     }
 
     fun jumpIfFalse(label: String) {
-        instructions.add(JumpIfFalse(label))
+        JumpIfFalse(label).append()
     }
 
     fun branch(labelTrue: String, labelFalse: String) {
-        instructions.add(Branch(labelTrue, labelFalse))
+        Branch(labelTrue, labelFalse).append()
     }
 
     fun pushRandom(vararg options: Any) {
-        instructions.add(PushRandom(options.toList()))
+        PushRandom(options.toList()).append()
     }
 
     fun duplicate() {
-        instructions.add(Duplicate())
+        Duplicate().append()
     }
 
     fun exit() {
-        instructions.add(Exit())
+        Exit().append()
+    }
+
+    fun store(variableName: String) {
+        Store(variableName).append()
+    }
+
+    fun store(variableName: String, value: Any) {
+        Push(value).append()
+        Store(variableName).append()
+    }
+
+    fun load(variableName: String) {
+        Load(variableName).append()
+    }
+
+    fun sleep(millis: Long) {
+        Sleep(millis).append()
     }
 
     companion object {

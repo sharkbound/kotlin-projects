@@ -3,13 +3,13 @@ package sharkbound.virtualmachine
 import sharkbound.commonutils.collections.NonNullableMutableMap
 import sharkbound.commonutils.extensions.len
 import sharkbound.virtualmachine.instructions.Instruction
-import sharkbound.virtualmachine.instructions.Jump
 import sharkbound.virtualmachine.instructions.Label
 import java.util.*
 
 class VirtualMachine {
     val stack = ArrayDeque<Any>()
     val labels = NonNullableMutableMap<String, Int>()
+    val variables = NonNullableMutableMap<String, Any>()
     var ptr = 0
 
     fun pop() =
@@ -26,6 +26,14 @@ class VirtualMachine {
         ptr = addr
     }
 
+    fun store(variableName: String, value: Any) {
+        variables[variableName] = value
+    }
+
+    fun load(variableName: String) {
+        stack.push(variables[variableName])
+    }
+
     companion object {
         fun run(instructions: List<Instruction>) {
             with(VirtualMachine()) {
@@ -38,15 +46,12 @@ class VirtualMachine {
                 while (ptr >= 0 && ptr < instructions.len) {
                     val op = instructions[ptr]
                     op.execute(this)
-
-                    if (op !is Jump) {
-                        ptr += 1
-                    }
+                    ptr += 1
                 }
             }
         }
 
-        fun buildAndRun(block: InstructionSet.() -> Unit) {
+        inline fun execute(block: InstructionSet.() -> Unit) {
             run(InstructionSet.build(block))
         }
     }

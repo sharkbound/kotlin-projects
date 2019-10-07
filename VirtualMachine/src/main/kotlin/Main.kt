@@ -1,16 +1,12 @@
 import sharkbound.virtualmachine.VirtualMachine
 
 fun main() {
-    VirtualMachine.buildAndRun {
+    VirtualMachine.execute {
+        store("number", 1)
         label("1")
-        printLine("label 1")
-        pushRandom(true, false)
-        duplicate()
-        branch("1", "2")
-
-        label("2")
-        printLine("label 2")
-        pushRandom(true, false)
-        jumpIfTrue("1")
+        load("number")
+        printLine()
+        sleep(1000)
+        jump("1")
     }
 }
