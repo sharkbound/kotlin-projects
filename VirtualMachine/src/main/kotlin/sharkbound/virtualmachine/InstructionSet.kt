@@ -1,4 +1,6 @@
-package sharkbound.virtualmachine.instructions
+package sharkbound.virtualmachine
+
+import sharkbound.virtualmachine.instructions.*
 
 class InstructionSet {
     val instructions = mutableListOf<Instruction>()

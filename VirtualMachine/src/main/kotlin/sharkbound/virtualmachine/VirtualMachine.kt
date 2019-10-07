@@ -45,5 +45,9 @@ class VirtualMachine {
                 }
             }
         }
+
+        fun buildAndRun(block: InstructionSet.() -> Unit) {
+            run(InstructionSet.build(block))
+        }
     }
 }
