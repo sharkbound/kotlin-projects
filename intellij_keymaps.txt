@@ -51,6 +51,7 @@ ctrl + ctrl                 : run anything (run configurations/gradle or maven t
 ctrl + alt + shift + insert : create scratch file (temporary file to test code)
 ctrl + alt + f12 			: show in explorer
 ctrl + H                    : find subclasses of selected type
+ctrl + alt + B              : find implementations
 
 
 GIT
