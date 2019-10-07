@@ -5,6 +5,7 @@ fun main() {
         label("1")
         printLine("label 1")
         pushRandom(true, false)
+        duplicate()
         branch("1", "2")
 
         label("2")

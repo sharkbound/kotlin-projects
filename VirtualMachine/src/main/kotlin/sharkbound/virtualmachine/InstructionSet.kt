@@ -43,6 +43,10 @@ class InstructionSet {
         instructions.add(PushRandom(options.toList()))
     }
 
+    fun duplicate() {
+        instructions.add(Duplicate())
+    }
+
     fun exit() {
         instructions.add(Exit())
     }
