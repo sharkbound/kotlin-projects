@@ -1,18 +1,20 @@
 package sharkbound
 
+import org.json.JSONObject
+
 fun main() {
-//    JSONObject(
-//        """
-//        {
-//          "name": {
-//              "last": "james",
-//              "first":"john"
-//          }
-//        }
-//    """.trimIndent()
-//    ).let {
-//        println(it.path<String>("name", "first"))
-//    }
+    val obj = JSONObject(
+        """
+        {
+          "name": {
+              "last": "james",
+              "first":"john"
+          }
+        }
+    """.trimIndent()
+    )
+
+    println(obj.path<String>("name", "first"))
 
 }
 
