@@ -5,7 +5,6 @@ fun main() {
     createMenu {
         scene {
             id = "main"
-
             command {
                 name = "test"
                 execute {
@@ -37,7 +36,9 @@ fun main() {
             }
             command {
                 name = "goback"
-                execute { it.mgr.gotoPrevious() }
+                execute {
+                    it.mgr.gotoPrevious()
+                }
             }
         }
     }.run("main")

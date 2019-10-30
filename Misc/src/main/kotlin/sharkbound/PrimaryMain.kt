@@ -1,20 +1,9 @@
 package sharkbound
 
-import org.json.JSONObject
-
 fun main() {
-    val obj = JSONObject(
-        """
-        {
-          "name": {
-              "last": "james",
-              "first":"john"
-          }
-        }
-    """.trimIndent()
-    )
-
-    println(obj.path<String>("name", "first"))
-
+    val numbers = 1..10
+    println(numbers.fold(0) { acc, i ->
+        acc + i
+    })
 }
 
