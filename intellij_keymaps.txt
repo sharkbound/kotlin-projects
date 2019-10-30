@@ -21,6 +21,7 @@ RUNNING
 shift + f10                 : run last run configuration / file
 ctrl + shift + f10          : run current file (if it has a valid entry point) 
 shift + f9                  : debug last run configuration / file 
+ctrl + alt + W              : run scratch file 
                                 
 CODE                     
 ctrl + B                    : jump to source for symbol / function under cursor
