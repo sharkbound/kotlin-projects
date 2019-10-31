@@ -35,7 +35,4 @@ data class Person(val name: String, val features: Int = 0) {
 fun main() {
     val people = (1..10).map { Person.random() }
     println(people)
-    for (_i in 1..10) {
-        println(Person.bits.sample(2))
-    }
 }
