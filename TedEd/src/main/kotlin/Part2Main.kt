@@ -6,14 +6,22 @@ object Features {
     const val GLASSES = 1 shl 2
 }
 
+
 val reConsecutive = """(\w)\1""".toRegex()
+val names = listOf(
+    "jimmy",
+    "skillar",
+    "alaster",
+    "kali",
+    "olsta"
+)
 
 data class Person(val name: String, val features: Int = 0) {
     val vowels = name.sumBy { if (it.toLowerCase() in "aeiouy") 1 else 0 }
     val hasConsecutive = reConsecutive.findAll(name).sumBy { 1 } != 0
 
     companion object {
-        fun random() = Person()
+        fun random() = Person(names)
     }
 }
 

@@ -1,5 +1,8 @@
 @file:JvmName("KotlinCommonUtilTestingMain")
 
-fun main() {
+import sharkbound.commonutils.extensions.choices
+import sharkbound.commonutils.extensions.sample
 
+fun main() {
+    
 }

@@ -24,3 +24,9 @@ fun randBoolean(): Boolean = rand.nextBoolean()
  * @throws IllegalArgumentException if min is greater than or equal to max
  */
 fun randDouble(min: Double, max: Double): Double = rand.nextDouble(min, max + 1)
+
+
+/**
+ * gets a random [Int] between 0(inclusive) and [max](exclusive)
+ */
+fun randRange(max: Int) = rand.nextInt(max)
