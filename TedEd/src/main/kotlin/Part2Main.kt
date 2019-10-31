@@ -1,3 +1,7 @@
+import sharkbound.commonutils.extensions.choice
+import sharkbound.commonutils.extensions.choices
+import sharkbound.commonutils.extensions.sample
+
 infix fun Int.has(other: Int) = and(other) == other
 
 object Features {
@@ -21,10 +25,17 @@ data class Person(val name: String, val features: Int = 0) {
     val hasConsecutive = reConsecutive.findAll(name).sumBy { 1 } != 0
 
     companion object {
-        fun random() = Person(names)
+        val bits = listOf(1, 2, 4).toList()
+        fun random(): Person {
+            return Person(names.choice(), bits.sample(2).sum())
+        }
     }
 }
 
 fun main() {
-    println(Person("jimm").hasConsecutive)
+    val people = (1..10).map { Person.random() }
+    println(people)
+    for (_i in 1..10) {
+        println(Person.bits.sample(2))
+    }
 }

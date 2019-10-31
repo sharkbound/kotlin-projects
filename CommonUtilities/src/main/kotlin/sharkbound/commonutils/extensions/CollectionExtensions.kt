@@ -25,10 +25,12 @@ inline fun <T> Sequence<T>.forEachApply(operation: T.() -> Unit) =
     iterator().forEachApply(operation)
 
 fun <T> Collection<T>.choice(): T = elementAt(rand.nextInt(len))
+
 fun <T> Collection<T>.choices(count: Int): List<T> = (1..count).map { choice() }.toList()
+
 fun <T> Collection<T>.sample(count: Int): List<T> {
     require(count <= len) { "count must be <= the length of the collection" }
-    if (count == len - 1) {
+    if (count == len) {
         return shuffled()
     }
 
