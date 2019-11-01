@@ -24,7 +24,7 @@ inline fun <T> Iterable<T>.forEachApply(operation: T.() -> Unit) =
 inline fun <T> Sequence<T>.forEachApply(operation: T.() -> Unit) =
     iterator().forEachApply(operation)
 
-fun <T> Collection<T>.choice(): T = elementAt(rand.nextInt(len))
+fun <T> Collection<T>.choice(): T = elementAt(randRange(len))
 
 fun <T> Collection<T>.choices(count: Int): List<T> = (1..count).map { choice() }.toList()
 
