@@ -2,12 +2,6 @@ package sharkbound.commonutils.extensions
 
 import kotlin.math.pow
 
-fun <T : Comparable<T>> T.clampTo(min: T, max: T): T =
-    minOf(max, maxOf(this, min))
-
-fun <T : Comparable<T>> clamp(value: T, min: T, max: T): T =
-    minOf(max, maxOf(value, min))
-
 infix fun Byte.pow(power: Int) = toDouble().pow(power).toByte()
 
 @ExperimentalUnsignedTypes
