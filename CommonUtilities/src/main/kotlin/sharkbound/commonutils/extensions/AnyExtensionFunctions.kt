@@ -1,5 +1,7 @@
 package sharkbound.commonutils.extensions
 
+import sharkbound.commonutils.util.randBoolean
+
 /**
  * if the receiver is null, the block is called
  *
@@ -49,3 +51,5 @@ inline infix fun <T> T?.orElseNull(defaultIfNull: () -> T?): T? =
 
 infix fun <T> T?.orElseNull(defaultIfNull: T?): T? =
     this ?: defaultIfNull
+
+infix fun <T> T.choice(other: T): T = if (randBoolean()) this else other
