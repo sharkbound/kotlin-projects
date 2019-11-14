@@ -25,8 +25,10 @@ inline fun <T> Sequence<T>.forEachApply(operation: T.() -> Unit) =
     iterator().forEachApply(operation)
 
 fun <T> Collection<T>.choice(): T = elementAt(randRange(len))
+fun <T> Array<out T>.choice(): T = this[randRange(len)]
 
 fun <T> Collection<T>.choices(count: Int): List<T> = (1..count).map { choice() }.toList()
+inline fun <reified T> Array<out T>.choices(count: Int): Array<T> = (1..count).map { choice() }.toTypedArray()
 
 fun <T> Collection<T>.sample(count: Int): List<T> {
     require(count <= len) { "count must be <= the length of the collection" }

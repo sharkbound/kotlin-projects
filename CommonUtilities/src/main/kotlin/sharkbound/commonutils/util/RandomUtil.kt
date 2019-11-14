@@ -1,5 +1,6 @@
 package sharkbound.commonutils.util
 
+import sharkbound.commonutils.extensions.choice
 import sharkbound.commonutils.rand
 
 /**
@@ -30,3 +31,13 @@ fun randDouble(min: Double, max: Double): Double = rand.nextDouble(min, max + 1)
  * gets a random [Int] between 0(inclusive) and [max](exclusive)
  */
 fun randRange(max: Int) = rand.nextInt(max)
+
+/**
+ * gets a random value from the array passed in
+ */
+fun <T> choice(vararg values: T): T =
+    values.choice()
+
+
+fun <T> choice(count: Int, vararg values: T): T =
+    values.choice()

@@ -19,7 +19,7 @@ open class Team(val name: String) {
     }
 
     open fun fight(other: Team) =
-        listOf(this, other).choice().also { if (it.name == this.name) wins++ }
+        (this choice other).apply { wins++ }
 }
 
 class Game {
