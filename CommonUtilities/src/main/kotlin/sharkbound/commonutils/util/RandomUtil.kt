@@ -1,6 +1,7 @@
 package sharkbound.commonutils.util
 
 import sharkbound.commonutils.extensions.choice
+import sharkbound.commonutils.extensions.choices
 import sharkbound.commonutils.rand
 
 /**
@@ -39,5 +40,5 @@ fun <T> choice(vararg values: T): T =
     values.choice()
 
 
-fun <T> choice(count: Int, vararg values: T): T =
-    values.choice()
+inline fun <reified T> choices(count: Int, vararg values: T): Array<out T> =
+    values.choices(count)
