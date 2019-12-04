@@ -5,8 +5,9 @@ plugins {
 
 group 'sharkbound.consolemenudsl'
 
+apply plugin: 'application'
 sourceCompatibility = 1.8
-
+mainClassName = 'consolemenudsl.MainKt'
 repositories {
     mavenCentral()
 }

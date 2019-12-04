@@ -1,10 +1,12 @@
+package consolemenudsl
+
 import consolemenudsl.dsl.createMenu
 import sharkbound.commonutils.util.pause
 
 fun main() {
     createMenu {
         scene {
-            id = "main"
+            id = "consolemenudsl.main"
             command {
                 name = "test"
                 execute {
@@ -41,5 +43,5 @@ fun main() {
                 }
             }
         }
-    }.run("main")
+    }.run("consolemenudsl.main")
 }

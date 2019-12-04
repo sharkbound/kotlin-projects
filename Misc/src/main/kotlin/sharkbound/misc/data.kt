@@ -1,7 +1,9 @@
 package sharkbound.misc
 
+import sharkbound.commonutils.collections.DefaultMutableMap
 import sharkbound.commonutils.collections.nonNullableMutableMapOf
 import sharkbound.commonutils.extensions.choice
+import sharkbound.commonutils.util.choices
 
 open class Team(val name: String) {
     open var score: Int = 1
@@ -27,10 +29,9 @@ class Game {
 
     infix fun addTeam(team: Team) {
         teams[team.name] = team
-
     }
 
     fun bestOf3(team1: String, team2: String): Team {
-
+        val wins = DefaultMutableMap<Team, Int> { 0 }
     }
 }
