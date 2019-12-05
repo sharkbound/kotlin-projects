@@ -1,5 +1,5 @@
 package sharkbound.aoc
 
-import java.nio.file.Paths
+import java.io.File
 
-fun read(day: Int) =
+fun read(day: Int) = File("inputs/day$day.txt").readText()
