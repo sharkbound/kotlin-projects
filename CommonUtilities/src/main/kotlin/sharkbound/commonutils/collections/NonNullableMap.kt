@@ -1,6 +1,5 @@
 package sharkbound.commonutils.collections
 
-import java.lang.RuntimeException
 import java.util.function.BiFunction
 
 open class NonNullableMap<K, V> : LinkedHashMap<K, V>() {
