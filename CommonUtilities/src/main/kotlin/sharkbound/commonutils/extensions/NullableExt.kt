@@ -1,8 +1,8 @@
 package sharkbound.commonutils.extensions
 
 val Boolean?.isTrue
-    get() = this != null && this
+    get() = this == true
 
 
 val Boolean?.isFalse
-    get() = this != null && !this
+    get() = this == false
