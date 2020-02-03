@@ -7,7 +7,7 @@ class Counter<T>(val collection: Collection<T>) {
 
     init {
         collection.forEach {
-            counts.compute(it) { k_, value -> (value ?: 0) + 1 }
+            counts.compute(it) { _, value -> (value ?: 0) + 1 }
             if (it !in sorted) {
                 sorted += it
             }
