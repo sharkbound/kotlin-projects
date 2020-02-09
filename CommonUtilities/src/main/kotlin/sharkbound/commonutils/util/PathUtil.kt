@@ -1,7 +1,7 @@
 package sharkbound.commonutils.util
 
-import java.nio.file.Path
+import java.nio.file.Paths
 
-fun toPath(path: String) = Path.of(path)
+fun toPath(path: String) = Paths.get(path)
 
 val String.asPath get() = toPath(this)
