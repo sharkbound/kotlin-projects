@@ -52,4 +52,5 @@ inline infix fun <T> T?.orElseNull(defaultIfNull: () -> T?): T? =
 infix fun <T> T?.orElseNull(defaultIfNull: T?): T? =
     this ?: defaultIfNull
 
-infix fun <T> T.choice(other: T): T = if (randBoolean()) this else other
+infix fun <T> T.choice(other: T): T =
+    if (randBoolean()) this else other
