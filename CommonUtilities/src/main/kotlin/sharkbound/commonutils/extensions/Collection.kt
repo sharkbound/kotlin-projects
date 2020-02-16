@@ -18,6 +18,10 @@ inline fun <T> Iterator<T>.forEachApply(operation: T.() -> Unit) {
     }
 }
 
+
+inline fun <T> Collection<T>.forEachApply(operation: T.() -> Unit) =
+    iterator().forEachApply(operation)
+
 inline fun <T> Iterable<T>.forEachApply(operation: T.() -> Unit) =
     iterator().forEachApply(operation)
 
