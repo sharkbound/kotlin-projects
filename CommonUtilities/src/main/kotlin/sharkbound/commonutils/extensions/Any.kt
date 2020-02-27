@@ -7,10 +7,11 @@ import sharkbound.commonutils.util.randBoolean
  *
  * @param block the function to call if the reciever is null
  */
-inline infix fun Any?.ifNull(block: () -> Unit) {
+inline infix fun <T> T?.ifNull(block: () -> Unit): T? {
     if (this == null) {
         block()
     }
+    return this
 }
 
 /**
@@ -18,26 +19,11 @@ inline infix fun Any?.ifNull(block: () -> Unit) {
  *
  * @param block the function to call if the receiver is not null, this function is passed the receiver as the only parameter
  */
-inline infix fun <T> T?.ifNotNull(block: (T) -> Unit) {
+inline infix fun <T> T?.ifNotNull(block: (T) -> Unit): T? {
     if (this != null) {
         block(this)
     }
-}
-
-/**
- * calls the block on the receiver if the receiver is not null
- */
-inline infix fun <T> T?.use(block: T.() -> Unit) {
-    this?.block()
-}
-
-/**
- * calls the block with the receiver as the parameter if the receiver is not null
- */
-inline infix fun <T> T?.with(block: (T) -> Unit) {
-    if (this != null) {
-        block(this)
-    }
+    return this
 }
 
 inline infix fun <T> T?.orElse(defaultIfNull: () -> T): T =
