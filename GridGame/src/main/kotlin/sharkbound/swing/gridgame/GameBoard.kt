@@ -3,13 +3,13 @@ package sharkbound.swing.gridgame
 import sharkbound.commonutils.rand
 import sharkbound.swingdsl.extensions.withColor
 import java.awt.*
+import java.awt.event.KeyEvent
 
 class GameBoard(val rows: Int, val cellsPerRow: Int, val gridColor: Color, var debugMode: Boolean = true) : Canvas() {
-    private var initialized = false
+    var initialized = false
     val cells = mutableListOf<Cell>()
     val cellWidth get() = width / cellsPerRow
     val cellHeight get() = height / rows
-
 
     data class Cell(val ratioX: Double, val ratioY: Double) {
         var x: Int = 0
@@ -38,7 +38,7 @@ class GameBoard(val rows: Int, val cellsPerRow: Int, val gridColor: Color, var d
         }
     }
 
-    private fun initializeCellsDebug() {
+    fun initializeCellsDebug() {
         if (!initialized) {
             repeat(10) {
                 cells.add(Cell(rand.nextDouble(), rand.nextDouble()))
@@ -48,7 +48,7 @@ class GameBoard(val rows: Int, val cellsPerRow: Int, val gridColor: Color, var d
         }
     }
 
-    private fun drawCell(cell: Cell, color: Color, graphics: Graphics2D) {
+    fun drawCell(cell: Cell, color: Color, graphics: Graphics2D) {
         graphics.color = color
         graphics.stroke = BasicStroke(.01f)
         graphics.fillRect(cell.x * cellWidth, cell.y * cellHeight, cellWidth, cellHeight)
