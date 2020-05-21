@@ -3,7 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.4-M1'
 }
 
-group 'sharkbound.misc'
+group 'org.example'
+version '1.0-SNAPSHOT'
 
 repositories {
     maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
