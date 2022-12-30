@@ -1,8 +1,9 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.7.21'
+    id 'application'
 }
 
-group = 'org.sharkbound.commonutilities'
+group = 'org.sharkbound'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -25,7 +26,6 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = '1.8'
 }
 
-jar {
-    // include sources in the built jar file
-    from sourceSets.main.allSource
+application {
+    mainClassName = 'MainKt'
 }
